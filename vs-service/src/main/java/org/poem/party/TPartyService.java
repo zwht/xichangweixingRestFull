@@ -77,7 +77,7 @@ public class TPartyService {
      * @param id
      * @return
      */
-    public TPartyVO getById(Long id) {
+    public TPartyVO getById(Long id, boolean add) {
         TPartyRecord s = this.partyDao.findById(id);
         TPartyVO tPartyVO = new TPartyVO();
         if (s != null) {
@@ -91,7 +91,12 @@ public class TPartyService {
             TUserRecord tUserRecord = this.userDao.findById(s.getUpdateUser());
             tPartyVO.setUpdateUser(tUserRecord.getName());
             tPartyVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
+            if (add){
+                s.setReadCount(s.getReadCount() == null ? 1 : s.getReadCount()  + 1L);
+                this.partyDao.update(s);
+            }
         }
+
         return tPartyVO;
     }
 

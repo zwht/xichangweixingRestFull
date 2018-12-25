@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * 工作动态
+ *
  * @author poem
  */
 @Service
@@ -40,11 +41,12 @@ public class TWorkDynamicsService {
 
     /**
      * 翻译
+     *
      * @param s
      * @param userMap
      * @return
      */
-    public TWorkDynamicsVO getTWorkDynamicsVO(TWorkDynamicsRecord s, Map<Long, String> userMap){
+    public TWorkDynamicsVO getTWorkDynamicsVO(TWorkDynamicsRecord s, Map<Long, String> userMap) {
         TWorkDynamicsVO tNewsVO = new TWorkDynamicsVO();
         tNewsVO.setId(String.valueOf(s.getId()));
         tNewsVO.setTitle(s.getTitle());
@@ -59,7 +61,9 @@ public class TWorkDynamicsService {
         tNewsVO.setUpdateUser(userMap.get(s.getUpdateUser()));
         return tNewsVO;
 
-    }    /**
+    }
+
+    /**
      * 查询
      *
      * @param tNewQueryVO
@@ -72,7 +76,7 @@ public class TWorkDynamicsService {
         if (StringUtils.isNotEmpty(tNewQueryVO.getTitle())) {
             conditions.add(TWorkDynamics.T_WORK_DYNAMICS.TITLE.like("%" + tNewQueryVO.getTitle() + "%"));
         }
-        if (tNewQueryVO.getStatus() != null ) {
+        if (tNewQueryVO.getStatus() != null) {
             conditions.add(TWorkDynamics.T_WORK_DYNAMICS.STATUS.eq(tNewQueryVO.getStatus()));
         }
         if (StringUtils.isNotEmpty(tNewQueryVO.getUpdateStartTime())) {
@@ -104,8 +108,12 @@ public class TWorkDynamicsService {
      * @param id
      * @return
      */
-    public TWorkDynamicsVO getById(Long id) {
+    public TWorkDynamicsVO getById(Long id, boolean add) {
         TWorkDynamicsRecord s = this.tWorkDynamicsDao.findById(id);
+        if (add) {
+            s.setReadCount(s.getReadCount() == null ? 0 : s.getReadCount() + 1);
+            this.tWorkDynamicsDao.update(s);
+        }
         Map<Long, String> userMap = userDao.getUseRMap();
         return getTWorkDynamicsVO(s, userMap);
     }

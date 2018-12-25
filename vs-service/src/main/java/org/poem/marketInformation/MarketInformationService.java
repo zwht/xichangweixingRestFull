@@ -112,10 +112,14 @@ public class MarketInformationService {
      * @param id
      * @return
      */
-    public MarketInformationVO getById(Long id) {
+    public MarketInformationVO getById(Long id, boolean add) {
         TMarketInformationRecord s = this.marketInformationDao.findById(id);
         Map<Long, String> userMap = userDao.getUseRMap();
         Map<Long, String> tindusMap = this.industryDao.mapIndustry();
+        if (add){
+            s.setReadCount( s.getReadCount() == null ? 1: s.getReadCount() + 1);
+            this.marketInformationDao.update(s);
+        }
         return getTWorkDynamicsVO(s, userMap, tindusMap);
     }
 

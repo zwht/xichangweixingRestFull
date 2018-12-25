@@ -41,7 +41,7 @@ public class TPartyController {
     @GetMapping("/getById/{id}")
     public ResultVO<TPartyVO> getById(@PathVariable(value = "id") Long id) {
         logger.info("TNewsController:getById" + JSONObject.toJSONString(id));
-        return new ResultVO<>(this.tNewsService.getById(id));
+        return new ResultVO<>(this.tNewsService.getById(id,false));
     }
 
     @ApiOperation(value = "下线", httpMethod = "POST")

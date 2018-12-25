@@ -42,7 +42,7 @@ public class TManagementRegulationController {
     @GetMapping("/getById/{id}")
     public ResultVO<TManagementRegulationVO> getById(@PathVariable(value = "id") Long id) {
         logger.info("MarketInformationController:getById" + JSONObject.toJSONString(id));
-        return new ResultVO<>(this.marketInformationService.getById(id));
+        return new ResultVO<>(this.marketInformationService.getById(id, false));
     }
 
     @ApiOperation(value = "下线", httpMethod = "POST")

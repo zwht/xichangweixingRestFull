@@ -41,7 +41,7 @@ public class TWorkDynamicsController {
     @GetMapping("/getById/{id}")
     public ResultVO<TWorkDynamicsVO> getById(@PathVariable(value = "id") Long id) {
         logger.info("TWorkDynamicsController:getById" + JSONObject.toJSONString(id));
-        return new ResultVO<>(this.tNewsService.getById(id));
+        return new ResultVO<>(this.tNewsService.getById(id,false));
     }
 
     @ApiOperation(value = "下线", httpMethod = "POST")

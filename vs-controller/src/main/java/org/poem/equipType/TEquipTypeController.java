@@ -3,6 +3,7 @@ package org.poem.equipType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.poem.authVO.ResultVO;
+import org.poem.config.annotation.ShiroOauthodIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author poem
  */
 @RestController
+@ShiroOauthodIgnore
 @RequestMapping("/v1/equipType")
 @Api(value = "/v1/equipType",tags = {"08-设备类型"})
 public class TEquipTypeController {

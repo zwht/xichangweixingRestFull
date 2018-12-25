@@ -172,7 +172,7 @@ public class TArmsService {
      * @param id
      * @return
      */
-    public ResultVO<TArmsVO> getById(Long id) {
+    public ResultVO<TArmsVO> getById(Long id , boolean add) {
         TArmsRecord pageDatum = this.tArmsDao.findById(id);
         if (pageDatum == null) {
             return new ResultVO<>(-1, null, "没有记录");
@@ -188,6 +188,10 @@ public class TArmsService {
         tArmsVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
         TUserRecord tUserRecord = this.userDao.findById(pageDatum.getUpdateUser());
         tArmsVO.setUpdateUser(tUserRecord.getName());
+        if (add){
+            pageDatum.setReadCount(pageDatum.getReadCount() == null ? 1:pageDatum.getReadCount()+1);
+            this.tArmsDao.update(pageDatum);
+        }
         return new ResultVO<>(tArmsVO);
     }
 }

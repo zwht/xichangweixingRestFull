@@ -68,7 +68,7 @@ public class TArmsController {
     @ApiOperation(value = "02-06-根据id查询", httpMethod = "GET")
     @GetMapping("/getById/{id}")
     public ResultVO<TArmsVO> getById(@PathVariable(value = "id") Long id) {
-        return this.tArmsService.getById(id);
+        return this.tArmsService.getById(id, false);
     }
 
     @ApiOperation(value = "02-07-保存或者更新", httpMethod = "GET")

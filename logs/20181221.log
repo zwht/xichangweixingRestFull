@@ -1,0 +1,803 @@
+12-21 15:15:44.343 [main] INFO  o.p.config.shiro.ShiroConfiguration - ShiroConfiguration.getLifecycleBeanPostProcessor()
+12-21 15:15:44.538 [main] INFO  o.p.config.shiro.ShiroConfiguration - 配置核心安全事务管理器: securityManager()
+12-21 15:15:44.538 [main] INFO  o.p.config.shiro.ShiroConfiguration - 配置自定义的权限登录器: shiroConfigRealm()
+12-21 15:15:44.603 [main] INFO  o.p.config.shiro.ShiroConfiguration - shiroconfiguration-shirFilter
+12-21 15:15:44.759 [main] INFO  org.reflections.Reflections - Reflections took 104 ms to scan 7 urls, producing 50 keys and 330 values 
+12-21 15:15:44.790 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/loginout
+12-21 15:15:44.790 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/login
+12-21 15:15:44.790 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/common
+12-21 15:15:44.790 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/**
+12-21 15:15:44.820 [main] INFO  org.reflections.Reflections - Reflections took 30 ms to scan 7 urls, producing 50 keys and 330 values 
+12-21 15:15:44.850 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/getAll/{pageSize}/{pageNumber}
+12-21 15:15:44.851 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getAllByQuery
+12-21 15:15:44.851 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/download
+12-21 15:15:44.851 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/saveOrUpdate
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/**
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/role/**
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/depart/getAllDepat
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplierType/getAll
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipType/**
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/getArms/{pageSize}/{pageNumber}
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/getById/{id}
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/addLink
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/getAllByQuery
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/getById/{id}
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/delete
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/delete
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/addAndUpdate
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/top
+12-21 15:15:44.852 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/addAndUpdate
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/updateUser
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/getById/{id}
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/**
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getAll
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/getAllByQuery
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/upload
+12-21 15:15:44.853 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/saveOrUpdate
+12-21 15:15:44.854 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/delete
+12-21 15:15:44.854 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/saveOrUpdate
+12-21 15:15:44.854 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/update
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/line
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/top
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/getAll/{pageSize}/{pageNumber}
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/line
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getById/{id}
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/top
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/**
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/**
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/push
+12-21 15:15:44.855 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/saveOrUpdate
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/addUser
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/**
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/getById/{id}
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/saveOrUpdate
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/top
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/push
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/updatePassword
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/getAllByQuery
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/getById/{id}
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/getById/{id}
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getById/{id}
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/industry/**
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/delete
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/top
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/**
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/saveOrUpdate
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/top
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/delete
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/line
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/getAllUser
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/**
+12-21 15:15:44.856 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/getById/{id}
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/top
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/getAllByQuery
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/push
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/dataDownload/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getAll
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/push
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/getById/{id}
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/downloadHead
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/subject/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/addAndUpdate
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/push
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getAllByQuery
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/getLinked
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/industry/getAll
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/getById/{id}
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/disableUser
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplierType/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/line
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/delete
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/**
+12-21 15:15:44.857 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/delete
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/line
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/saveOrUpdate
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/saveOrUpdate
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/uploadHead
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/line
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/saveOrUpdate
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/getById/{id}
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/getAllByQuery
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/getAllByQuery
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/getById/{id}
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/depart/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/saveOrUpdate
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/push
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/delete
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/delete
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/getAllByQuery
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/**
+12-21 15:15:44.858 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/getAll/{pageSize}/{pageNumber}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/push
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/addAndUpdate
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/**
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/delete
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/getById/{id}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/getById/{id}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/getAll/{pageSize}/{pageNumber}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/getById/{id}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/addAndUpdate
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/line
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/getById/{id}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/delete
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/**
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/**
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/getAll/{pageSize}/{pageNumber}
+12-21 15:15:44.859 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipType/getAll
+12-21 15:15:45.587 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8088"]
+12-21 15:15:45.599 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+12-21 15:15:45.600 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.34
+12-21 15:15:45.605 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/poem/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+12-21 15:15:45.722 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12-21 15:15:48.225 [main] INFO  o.p.config.shiro.ShiroConfiguration - ShiroConfiguration.ehCacheManager()
+12-21 15:15:53.902 [main] INFO  o.f.c.internal.util.VersionPrinter - Flyway Community Edition 5.1.4 by Boxfuse
+12-21 15:15:53.908 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+12-21 15:15:54.087 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+12-21 15:15:54.094 [main] INFO  o.f.c.i.database.DatabaseFactory - Database: jdbc:postgresql://192.168.55.102:5432/id_platform (PostgreSQL 10.3)
+12-21 15:15:54.171 [main] INFO  o.f.c.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.030s)
+12-21 15:15:54.192 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 0.1
+12-21 15:15:54.194 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+12-21 15:15:54.467 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+12-21 15:15:54.492 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+12-21 15:15:54.530 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+12-21 15:15:54.708 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: downloadUsingGET_1
+12-21 15:15:54.773 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+12-21 15:15:54.776 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.787 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_1
+12-21 15:15:54.788 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_1
+12-21 15:15:54.789 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_1
+12-21 15:15:54.794 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_1
+12-21 15:15:54.803 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+12-21 15:15:54.806 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.807 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_1
+12-21 15:15:54.820 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_2
+12-21 15:15:54.827 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_3
+12-21 15:15:54.833 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.834 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_2
+12-21 15:15:54.844 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.844 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_2
+12-21 15:15:54.845 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.846 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_2
+12-21 15:15:54.846 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.847 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_2
+12-21 15:15:54.854 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_1
+12-21 15:15:54.861 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_4
+12-21 15:15:54.864 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_3
+12-21 15:15:54.865 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_3
+12-21 15:15:54.866 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_3
+12-21 15:15:54.867 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_3
+12-21 15:15:54.872 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_2
+12-21 15:15:54.879 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_5
+12-21 15:15:54.882 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_4
+12-21 15:15:54.883 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_4
+12-21 15:15:54.884 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_4
+12-21 15:15:54.884 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_4
+12-21 15:15:54.886 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.887 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_3
+12-21 15:15:54.894 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_1
+12-21 15:15:54.897 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_5
+12-21 15:15:54.900 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_1
+12-21 15:15:54.905 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_3
+12-21 15:15:54.912 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_6
+12-21 15:15:54.914 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_6
+12-21 15:15:54.916 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_5
+12-21 15:15:54.917 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_5
+12-21 15:15:54.919 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_5
+12-21 15:15:54.921 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.922 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_4
+12-21 15:15:54.932 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_2
+12-21 15:15:54.934 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_7
+12-21 15:15:54.943 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_2
+12-21 15:15:54.947 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.948 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_5
+12-21 15:15:54.963 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_3
+12-21 15:15:54.969 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_8
+12-21 15:15:54.976 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_3
+12-21 15:15:54.990 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:54.991 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_6
+12-21 15:15:54.996 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_7
+12-21 15:15:55.007 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_4
+12-21 15:15:55.010 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_9
+12-21 15:15:55.015 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_4
+12-21 15:15:55.018 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:55.020 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_7
+12-21 15:15:55.030 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_5
+12-21 15:15:55.037 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_10
+12-21 15:15:55.041 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_5
+12-21 15:15:55.044 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:55.045 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_8
+12-21 15:15:55.050 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_8
+12-21 15:15:55.057 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_6
+12-21 15:15:55.059 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_11
+12-21 15:15:55.064 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_6
+12-21 15:15:55.066 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:55.066 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_9
+12-21 15:15:55.076 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_7
+12-21 15:15:55.078 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_12
+12-21 15:15:55.082 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_7
+12-21 15:15:55.098 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_13
+12-21 15:15:55.101 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 15:15:55.101 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_10
+12-21 15:15:55.108 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_8
+12-21 15:15:55.110 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_14
+12-21 15:15:55.113 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_8
+12-21 15:15:55.118 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_4
+12-21 15:15:55.125 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_9
+12-21 15:15:55.128 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_15
+12-21 15:15:55.129 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_6
+12-21 15:15:55.131 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_6
+12-21 15:15:55.132 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_6
+12-21 15:15:55.471 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8088"]
+12-21 15:15:55.498 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+12-21 15:15:55.528 [main] INFO  org.poem.Application - start success 1545376542906
+12-21 15:16:02.478 [http-nio-8088-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+12-21 15:16:02.529 [http-nio-8088-exec-1] INFO  o.a.s.s.m.AbstractValidatingSessionManager - Enabling session validation scheduler...
+12-21 15:16:03.604 [http-nio-8088-exec-4] WARN  i.s.m.p.AbstractSerializableParameter - Illegal DefaultValue null for parameter type integer
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:601)
+	at java.lang.Long.valueOf(Long.java:803)
+	at io.swagger.models.parameters.AbstractSerializableParameter.getExample(AbstractSerializableParameter.java:412)
+	at sun.reflect.GeneratedMethodAccessor135.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:687)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serializeContents(IndexedListSerializer.java:119)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:79)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:18)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeFields(MapSerializer.java:718)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:639)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:33)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:319)
+	at com.fasterxml.jackson.databind.ObjectMapper._configAndWriteValue(ObjectMapper.java:3905)
+	at com.fasterxml.jackson.databind.ObjectMapper.writeValueAsString(ObjectMapper.java:3219)
+	at springfox.documentation.spring.web.json.JsonSerializer.toJson(JsonSerializer.java:38)
+	at springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(Swagger2Controller.java:105)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+12-21 15:37:49.395 [Thread-72] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+12-21 15:37:49.413 [Thread-72] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+12-21 15:37:49.420 [Thread-72] INFO  o.a.s.s.m.AbstractValidatingSessionManager - Disabled session validation scheduler.
+12-21 16:59:53.007 [main] INFO  o.p.config.shiro.ShiroConfiguration - ShiroConfiguration.getLifecycleBeanPostProcessor()
+12-21 16:59:53.279 [main] INFO  o.p.config.shiro.ShiroConfiguration - 配置核心安全事务管理器: securityManager()
+12-21 16:59:53.280 [main] INFO  o.p.config.shiro.ShiroConfiguration - 配置自定义的权限登录器: shiroConfigRealm()
+12-21 16:59:53.343 [main] INFO  o.p.config.shiro.ShiroConfiguration - shiroconfiguration-shirFilter
+12-21 16:59:53.533 [main] INFO  org.reflections.Reflections - Reflections took 135 ms to scan 7 urls, producing 50 keys and 329 values 
+12-21 16:59:53.564 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/loginout
+12-21 16:59:53.564 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/login
+12-21 16:59:53.564 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/common
+12-21 16:59:53.564 [main] INFO  o.p.config.shiro.ShiroConfiguration - auth  path:/v1/auth/**
+12-21 16:59:53.601 [main] INFO  org.reflections.Reflections - Reflections took 36 ms to scan 7 urls, producing 50 keys and 329 values 
+12-21 16:59:53.628 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getAllByQuery
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/download
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/saveOrUpdate
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/**
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/role/**
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/depart/getAllDepat
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplierType/getAll
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipType/**
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/getArms/{pageSize}/{pageNumber}
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/getById/{id}
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/addLink
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/getAllByQuery
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/getById/{id}
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/top
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/delete
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/delete
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/addAndUpdate
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/top
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/addAndUpdate
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/updateUser
+12-21 16:59:53.629 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/getById/{id}
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/**
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getAll
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/getAllByQuery
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/upload
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/saveOrUpdate
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/delete
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/addAndUpdate
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/update
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/saveOrUpdate
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/line
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/top
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/line
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getById/{id}
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/top
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/**
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/**
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/push
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/push
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/saveOrUpdate
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/addUser
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/**
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/getById/{id}
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/line
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/saveOrUpdate
+12-21 16:59:53.630 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/top
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/push
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/updatePassword
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/getById/{id}
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/getAllByQuery
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/getById/{id}
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getById/{id}
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/industry/**
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/delete
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/top
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/saveOrUpdate
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/**
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/delete
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/line
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/top
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/getAllUser
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/**
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/getById/{id}
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/top
+12-21 16:59:53.631 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/getAllByQuery
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/push
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/dataDownload/**
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/push
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/getAll
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/**
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/getById/{id}
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/downloadHead
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/addAndUpdate
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/subject/**
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/push
+12-21 16:59:53.632 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/getAllByQuery
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/getLinked
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/industry/getAll
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/getById/{id}
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/user/disableUser
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplierType/**
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/**
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/line
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/delete
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/supplier/**
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/workDynamics/**
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/delete
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/link/line
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/saveOrUpdate
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/saveOrUpdate
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/uploadHead
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/line
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/saveOrUpdate
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/getById/{id}
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/**
+12-21 16:59:53.633 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/getAllByQuery
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/**
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/getAllByQuery
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/news/getById/{id}
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/**
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/depart/**
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/saveOrUpdate
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/push
+12-21 16:59:53.634 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityNotice/delete
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipment/delete
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/getAllByQuery
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/roomReservation/**
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/file/**
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/party/push
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/addAndUpdate
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/**
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/delete
+12-21 16:59:53.635 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityEvent/getById/{id}
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/getById/{id}
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/reports/getById/{id}
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/tenderOrgation/getById/{id}
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/line
+12-21 16:59:53.637 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/marketInformation/addAndUpdate
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/vehiclePick/getById/{id}
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/arms/delete
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/orderingMeals/**
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/qualityDeal/**
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/managementRegulation/getAll/{pageSize}/{pageNumber}
+12-21 16:59:53.638 [main] INFO  o.p.config.shiro.ShiroConfiguration - oauth  path:/v1/equipType/getAll
+12-21 16:59:54.516 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8088"]
+12-21 16:59:54.534 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+12-21 16:59:54.534 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.34
+12-21 16:59:54.541 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/poem/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+12-21 16:59:54.679 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12-21 16:59:57.387 [main] INFO  o.p.config.shiro.ShiroConfiguration - ShiroConfiguration.ehCacheManager()
+12-21 17:00:03.102 [main] INFO  o.f.c.internal.util.VersionPrinter - Flyway Community Edition 5.1.4 by Boxfuse
+12-21 17:00:03.106 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+12-21 17:00:03.261 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+12-21 17:00:03.267 [main] INFO  o.f.c.i.database.DatabaseFactory - Database: jdbc:postgresql://192.168.55.102:5432/id_platform (PostgreSQL 10.3)
+12-21 17:00:03.349 [main] INFO  o.f.c.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.039s)
+12-21 17:00:03.365 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 0.1
+12-21 17:00:03.367 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+12-21 17:00:03.664 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+12-21 17:00:03.688 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+12-21 17:00:03.726 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+12-21 17:00:03.947 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: downloadUsingGET_1
+12-21 17:00:04.007 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+12-21 17:00:04.010 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.023 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_1
+12-21 17:00:04.024 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_1
+12-21 17:00:04.025 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_1
+12-21 17:00:04.030 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_1
+12-21 17:00:04.040 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+12-21 17:00:04.043 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.043 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_1
+12-21 17:00:04.059 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_2
+12-21 17:00:04.065 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_3
+12-21 17:00:04.072 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.072 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_2
+12-21 17:00:04.082 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.083 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_2
+12-21 17:00:04.083 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.084 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_2
+12-21 17:00:04.085 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.085 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_2
+12-21 17:00:04.093 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_1
+12-21 17:00:04.101 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_4
+12-21 17:00:04.103 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_3
+12-21 17:00:04.104 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_3
+12-21 17:00:04.105 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_3
+12-21 17:00:04.106 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_3
+12-21 17:00:04.112 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_2
+12-21 17:00:04.118 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_5
+12-21 17:00:04.121 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_4
+12-21 17:00:04.122 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_4
+12-21 17:00:04.123 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_4
+12-21 17:00:04.124 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_4
+12-21 17:00:04.125 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.126 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_3
+12-21 17:00:04.133 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_1
+12-21 17:00:04.136 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_5
+12-21 17:00:04.139 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_1
+12-21 17:00:04.143 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_3
+12-21 17:00:04.151 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_6
+12-21 17:00:04.154 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_6
+12-21 17:00:04.156 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_5
+12-21 17:00:04.158 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_5
+12-21 17:00:04.160 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_5
+12-21 17:00:04.165 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.165 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_4
+12-21 17:00:04.176 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_2
+12-21 17:00:04.178 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_7
+12-21 17:00:04.181 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_2
+12-21 17:00:04.184 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.185 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_5
+12-21 17:00:04.194 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_3
+12-21 17:00:04.198 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_8
+12-21 17:00:04.205 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_3
+12-21 17:00:04.207 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.208 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_6
+12-21 17:00:04.215 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_7
+12-21 17:00:04.223 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_4
+12-21 17:00:04.226 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_9
+12-21 17:00:04.230 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_4
+12-21 17:00:04.238 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_4
+12-21 17:00:04.245 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_8
+12-21 17:00:04.249 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_10
+12-21 17:00:04.250 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_6
+12-21 17:00:04.251 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_6
+12-21 17:00:04.253 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_6
+12-21 17:00:04.256 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.256 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_7
+12-21 17:00:04.265 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_5
+12-21 17:00:04.267 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_11
+12-21 17:00:04.272 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_5
+12-21 17:00:04.274 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.274 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_8
+12-21 17:00:04.280 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_9
+12-21 17:00:04.284 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_6
+12-21 17:00:04.286 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_12
+12-21 17:00:04.291 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_6
+12-21 17:00:04.292 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.293 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_9
+12-21 17:00:04.300 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_7
+12-21 17:00:04.302 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_13
+12-21 17:00:04.306 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_7
+12-21 17:00:04.613 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_14
+12-21 17:00:04.618 [main] WARN  s.d.s.w.r.p.ParameterDataTypeReader - Trying to infer dataType java.lang.Long[]
+12-21 17:00:04.618 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_10
+12-21 17:00:04.626 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllByQueryUsingGET_8
+12-21 17:00:04.629 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_15
+12-21 17:00:04.633 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: saveOrUpdateUsingPOST_8
+12-21 17:00:04.637 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: addAndUpdateUsingPOST_5
+12-21 17:00:04.642 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_10
+12-21 17:00:04.644 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getByIdUsingGET_16
+12-21 17:00:04.645 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: lineUsingPOST_7
+12-21 17:00:04.646 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: pushUsingPOST_7
+12-21 17:00:04.647 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: topUsingPOST_7
+12-21 17:00:04.676 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8088"]
+12-21 17:00:04.700 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+12-21 17:00:04.731 [main] INFO  org.poem.Application - start success 1545382791298
+12-21 17:00:24.920 [http-nio-8088-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+12-21 17:00:24.968 [http-nio-8088-exec-1] INFO  o.a.s.s.m.AbstractValidatingSessionManager - Enabling session validation scheduler...
+12-21 17:00:26.086 [http-nio-8088-exec-1] WARN  i.s.m.p.AbstractSerializableParameter - Illegal DefaultValue null for parameter type integer
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:601)
+	at java.lang.Long.valueOf(Long.java:803)
+	at io.swagger.models.parameters.AbstractSerializableParameter.getExample(AbstractSerializableParameter.java:412)
+	at sun.reflect.GeneratedMethodAccessor135.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:687)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serializeContents(IndexedListSerializer.java:119)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:79)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:18)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeFields(MapSerializer.java:718)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:639)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:33)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:319)
+	at com.fasterxml.jackson.databind.ObjectMapper._configAndWriteValue(ObjectMapper.java:3905)
+	at com.fasterxml.jackson.databind.ObjectMapper.writeValueAsString(ObjectMapper.java:3219)
+	at springfox.documentation.spring.web.json.JsonSerializer.toJson(JsonSerializer.java:38)
+	at springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(Swagger2Controller.java:105)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+12-21 17:00:26.091 [http-nio-8088-exec-1] WARN  i.s.m.p.AbstractSerializableParameter - Illegal DefaultValue null for parameter type integer
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:601)
+	at java.lang.Long.valueOf(Long.java:803)
+	at io.swagger.models.parameters.AbstractSerializableParameter.getExample(AbstractSerializableParameter.java:412)
+	at sun.reflect.GeneratedMethodAccessor135.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:687)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serializeContents(IndexedListSerializer.java:119)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:79)
+	at com.fasterxml.jackson.databind.ser.impl.IndexedListSerializer.serialize(IndexedListSerializer.java:18)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeFields(MapSerializer.java:718)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:639)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serialize(MapSerializer.java:33)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:727)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:719)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:155)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:319)
+	at com.fasterxml.jackson.databind.ObjectMapper._configAndWriteValue(ObjectMapper.java:3905)
+	at com.fasterxml.jackson.databind.ObjectMapper.writeValueAsString(ObjectMapper.java:3219)
+	at springfox.documentation.spring.web.json.JsonSerializer.toJson(JsonSerializer.java:38)
+	at springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(Swagger2Controller.java:105)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+12-21 17:05:11.684 [Thread-74] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+12-21 17:05:11.691 [Thread-74] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+12-21 17:05:11.693 [Thread-74] INFO  o.a.s.s.m.AbstractValidatingSessionManager - Disabled session validation scheduler.

@@ -50,7 +50,7 @@ public class TManagementRegulationService {
      * @return
      */
     public TManagementRegulationVO getTWorkDynamicsVO(TManagementRegulationRecord s, Map<Long, String> userMap,
-                                                  Map<Long, String> deparMap) {
+                                                      Map<Long, String> deparMap) {
         TManagementRegulationVO tNewsVO = new TManagementRegulationVO();
         tNewsVO.setId(String.valueOf(s.getId()));
         tNewsVO.setTitle(s.getTitle());
@@ -112,10 +112,14 @@ public class TManagementRegulationService {
      * @param id
      * @return
      */
-    public TManagementRegulationVO getById(Long id) {
+    public TManagementRegulationVO getById(Long id, boolean add) {
         TManagementRegulationRecord s = this.tManagementRegulationDao.findById(id);
         Map<Long, String> userMap = userDao.getUseRMap();
         Map<Long, String> tindusMap = this.tDepartDao.getDepartMap();
+        if (add) {
+            s.setReadCount(s.getReadCount() == null ? 1 : s.getReadCount() + 1);
+            this.tManagementRegulationDao.update(s);
+        }
         return getTWorkDynamicsVO(s, userMap, tindusMap);
     }
 
