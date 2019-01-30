@@ -40,7 +40,38 @@ public class DateUtils {
         if (StringUtils.isEmpty(datetime)) {
             return null;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = dateFormat.parse(datetime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+        return date == null ? null : new Timestamp(date.getTime());
+    }
+
+
+    public static Timestamp formatTimestampDateTime(String datetime) {
+        if (StringUtils.isEmpty(datetime)) {
+            return null;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_TIME_PATTERN);
+        Date date = null;
+        try {
+            date = dateFormat.parse(datetime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+        return date == null ? null : new Timestamp(date.getTime());
+    }
+
+    public static Timestamp formatTimestampM(String datetime) {
+        if (StringUtils.isEmpty(datetime)) {
+            return null;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         Date date = null;
         try {
             date = dateFormat.parse(datetime);

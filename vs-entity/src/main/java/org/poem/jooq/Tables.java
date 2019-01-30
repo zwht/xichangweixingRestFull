@@ -6,34 +6,47 @@ package org.poem.jooq;
 
 import javax.annotation.Generated;
 
+import org.poem.jooq.tables.CAdminDivision;
 import org.poem.jooq.tables.FlywaySchemaHistory;
 import org.poem.jooq.tables.TArms;
+import org.poem.jooq.tables.TArmsAttachment;
 import org.poem.jooq.tables.TDataDownload;
 import org.poem.jooq.tables.TDepart;
+import org.poem.jooq.tables.TDivision;
 import org.poem.jooq.tables.TEquipType;
 import org.poem.jooq.tables.TEquipment;
 import org.poem.jooq.tables.TFile;
 import org.poem.jooq.tables.TIndustry;
 import org.poem.jooq.tables.TLink;
 import org.poem.jooq.tables.TManagementRegulation;
+import org.poem.jooq.tables.TManagementRegulationAttachment;
 import org.poem.jooq.tables.TMarketInformation;
+import org.poem.jooq.tables.TMarketInformationAttachment;
 import org.poem.jooq.tables.TMessage;
 import org.poem.jooq.tables.TNews;
+import org.poem.jooq.tables.TNewsAttachment;
+import org.poem.jooq.tables.TNotice;
+import org.poem.jooq.tables.TNoticeAttachment;
 import org.poem.jooq.tables.TOrderingMeals;
 import org.poem.jooq.tables.TParty;
+import org.poem.jooq.tables.TPartyAttachment;
 import org.poem.jooq.tables.TQualityDeal;
 import org.poem.jooq.tables.TQualityEvent;
 import org.poem.jooq.tables.TQualityNotice;
+import org.poem.jooq.tables.TQualityNoticeAttachment;
 import org.poem.jooq.tables.TReports;
 import org.poem.jooq.tables.TRole;
 import org.poem.jooq.tables.TRoomReservation;
 import org.poem.jooq.tables.TSubject;
 import org.poem.jooq.tables.TSupplier;
 import org.poem.jooq.tables.TSupplierType;
+import org.poem.jooq.tables.TSystemNotice;
+import org.poem.jooq.tables.TSystemlog;
 import org.poem.jooq.tables.TTenderOrgation;
 import org.poem.jooq.tables.TUser;
 import org.poem.jooq.tables.TVehiclePick;
 import org.poem.jooq.tables.TWorkDynamics;
+import org.poem.jooq.tables.TWorkDynamicsAttachment;
 
 
 /**
@@ -50,6 +63,11 @@ import org.poem.jooq.tables.TWorkDynamics;
 public class Tables {
 
     /**
+     * 全国地区表
+     */
+    public static final CAdminDivision C_ADMIN_DIVISION = org.poem.jooq.tables.CAdminDivision.C_ADMIN_DIVISION;
+
+    /**
      * The table <code>public.flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = org.poem.jooq.tables.FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
@@ -60,6 +78,11 @@ public class Tables {
     public static final TArms T_ARMS = org.poem.jooq.tables.TArms.T_ARMS;
 
     /**
+     * 强军新闻附件
+     */
+    public static final TArmsAttachment T_ARMS_ATTACHMENT = org.poem.jooq.tables.TArmsAttachment.T_ARMS_ATTACHMENT;
+
+    /**
      * 资料下载
      */
     public static final TDataDownload T_DATA_DOWNLOAD = org.poem.jooq.tables.TDataDownload.T_DATA_DOWNLOAD;
@@ -68,6 +91,11 @@ public class Tables {
      * 部门
      */
     public static final TDepart T_DEPART = org.poem.jooq.tables.TDepart.T_DEPART;
+
+    /**
+     * 区划表
+     */
+    public static final TDivision T_DIVISION = org.poem.jooq.tables.TDivision.T_DIVISION;
 
     /**
      * 设备类型
@@ -100,9 +128,19 @@ public class Tables {
     public static final TManagementRegulation T_MANAGEMENT_REGULATION = org.poem.jooq.tables.TManagementRegulation.T_MANAGEMENT_REGULATION;
 
     /**
+     * 管理规定-附件
+     */
+    public static final TManagementRegulationAttachment T_MANAGEMENT_REGULATION_ATTACHMENT = org.poem.jooq.tables.TManagementRegulationAttachment.T_MANAGEMENT_REGULATION_ATTACHMENT;
+
+    /**
      * 市场信息
      */
     public static final TMarketInformation T_MARKET_INFORMATION = org.poem.jooq.tables.TMarketInformation.T_MARKET_INFORMATION;
+
+    /**
+     * 市场信息-附件
+     */
+    public static final TMarketInformationAttachment T_MARKET_INFORMATION_ATTACHMENT = org.poem.jooq.tables.TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT;
 
     /**
      * 短信
@@ -115,6 +153,21 @@ public class Tables {
     public static final TNews T_NEWS = org.poem.jooq.tables.TNews.T_NEWS;
 
     /**
+     * 新闻-附件
+     */
+    public static final TNewsAttachment T_NEWS_ATTACHMENT = org.poem.jooq.tables.TNewsAttachment.T_NEWS_ATTACHMENT;
+
+    /**
+     * 通知公告
+     */
+    public static final TNotice T_NOTICE = org.poem.jooq.tables.TNotice.T_NOTICE;
+
+    /**
+     * 通知公告-附件
+     */
+    public static final TNoticeAttachment T_NOTICE_ATTACHMENT = org.poem.jooq.tables.TNoticeAttachment.T_NOTICE_ATTACHMENT;
+
+    /**
      * 网上订餐
      */
     public static final TOrderingMeals T_ORDERING_MEALS = org.poem.jooq.tables.TOrderingMeals.T_ORDERING_MEALS;
@@ -123,6 +176,11 @@ public class Tables {
      * 新闻
      */
     public static final TParty T_PARTY = org.poem.jooq.tables.TParty.T_PARTY;
+
+    /**
+     * 党建新闻附件
+     */
+    public static final TPartyAttachment T_PARTY_ATTACHMENT = org.poem.jooq.tables.TPartyAttachment.T_PARTY_ATTACHMENT;
 
     /**
      * 质量处理
@@ -138,6 +196,11 @@ public class Tables {
      * 质量公告
      */
     public static final TQualityNotice T_QUALITY_NOTICE = org.poem.jooq.tables.TQualityNotice.T_QUALITY_NOTICE;
+
+    /**
+     * 质量通知公告-附件
+     */
+    public static final TQualityNoticeAttachment T_QUALITY_NOTICE_ATTACHMENT = org.poem.jooq.tables.TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT;
 
     /**
      * 投诉举报
@@ -170,6 +233,16 @@ public class Tables {
     public static final TSupplierType T_SUPPLIER_TYPE = org.poem.jooq.tables.TSupplierType.T_SUPPLIER_TYPE;
 
     /**
+     * 系统通知
+     */
+    public static final TSystemNotice T_SYSTEM_NOTICE = org.poem.jooq.tables.TSystemNotice.T_SYSTEM_NOTICE;
+
+    /**
+     * 系统日志
+     */
+    public static final TSystemlog T_SYSTEMLOG = org.poem.jooq.tables.TSystemlog.T_SYSTEMLOG;
+
+    /**
      * 投标机构
      */
     public static final TTenderOrgation T_TENDER_ORGATION = org.poem.jooq.tables.TTenderOrgation.T_TENDER_ORGATION;
@@ -188,4 +261,9 @@ public class Tables {
      * 工作动态
      */
     public static final TWorkDynamics T_WORK_DYNAMICS = org.poem.jooq.tables.TWorkDynamics.T_WORK_DYNAMICS;
+
+    /**
+     * 质量通知公告-附件
+     */
+    public static final TWorkDynamicsAttachment T_WORK_DYNAMICS_ATTACHMENT = org.poem.jooq.tables.TWorkDynamicsAttachment.T_WORK_DYNAMICS_ATTACHMENT;
 }

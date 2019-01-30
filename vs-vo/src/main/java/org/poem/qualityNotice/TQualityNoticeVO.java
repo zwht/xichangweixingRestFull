@@ -2,6 +2,9 @@ package org.poem.qualityNotice;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import org.poem.file.TFileVO;
+
+import java.util.List;
 
 /**
  * 质量公告
@@ -42,6 +45,18 @@ public class TQualityNoticeVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+
+    @ApiModelProperty(value = "附件")
+    private List<TFileVO> attachments;
+
+    public List<TFileVO> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<TFileVO> attachments) {
+        this.attachments = attachments;
+    }
 
     public String getId() {
         return id;

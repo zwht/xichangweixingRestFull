@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TRoomReservationRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TRoomReservation extends TableImpl<TRoomReservationRecord> {
 
-    private static final long serialVersionUID = -884884793;
+    private static final long serialVersionUID = -1612091136;
 
     /**
      * The reference instance of <code>public.t_room_reservation</code>
@@ -83,7 +83,7 @@ public class TRoomReservation extends TableImpl<TRoomReservationRecord> {
     /**
      * The column <code>public.t_room_reservation.rooms</code>. 预订房间数
      */
-    public final TableField<TRoomReservationRecord, Integer> ROOMS = createField("rooms", org.jooq.impl.SQLDataType.INTEGER, this, "预订房间数");
+    public final TableField<TRoomReservationRecord, String> ROOMS = createField("rooms", org.jooq.impl.SQLDataType.VARCHAR(50), this, "预订房间数");
 
     /**
      * The column <code>public.t_room_reservation.living_time</code>. 入住时间
@@ -124,6 +124,41 @@ public class TRoomReservation extends TableImpl<TRoomReservationRecord> {
      * The column <code>public.t_room_reservation.flag</code>. 标识
      */
     public final TableField<TRoomReservationRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_room_reservation.leaving_date</code>. 离开时间
+     */
+    public final TableField<TRoomReservationRecord, Timestamp> LEAVING_DATE = createField("leaving_date", org.jooq.impl.SQLDataType.TIMESTAMP, this, "离开时间");
+
+    /**
+     * The column <code>public.t_room_reservation.rooms_type</code>. 住房类型 1 单间 2 标间 3 小套间 4 大套房
+     */
+    public final TableField<TRoomReservationRecord, String> ROOMS_TYPE = createField("rooms_type", org.jooq.impl.SQLDataType.VARCHAR(50), this, "住房类型 1 单间 2 标间 3 小套间 4 大套房");
+
+    /**
+     * The column <code>public.t_room_reservation.is_arm</code>. 是否是军人
+     */
+    public final TableField<TRoomReservationRecord, Short> IS_ARM = createField("is_arm", org.jooq.impl.SQLDataType.SMALLINT, this, "是否是军人");
+
+    /**
+     * The column <code>public.t_room_reservation.arm_num</code>. 军官证
+     */
+    public final TableField<TRoomReservationRecord, String> ARM_NUM = createField("arm_num", org.jooq.impl.SQLDataType.VARCHAR(50), this, "军官证");
+
+    /**
+     * The column <code>public.t_room_reservation.with_arm</code>. 与军人关系
+     */
+    public final TableField<TRoomReservationRecord, String> WITH_ARM = createField("with_arm", org.jooq.impl.SQLDataType.VARCHAR(50), this, "与军人关系");
+
+    /**
+     * The column <code>public.t_room_reservation.allotment</code>. 留房时间
+     */
+    public final TableField<TRoomReservationRecord, String> ALLOTMENT = createField("allotment", org.jooq.impl.SQLDataType.VARCHAR(20), this, "留房时间");
+
+    /**
+     * The column <code>public.t_room_reservation.phone</code>. 手机号
+     */
+    public final TableField<TRoomReservationRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.VARCHAR(50), this, "手机号");
 
     /**
      * Create a <code>public.t_room_reservation</code> table reference

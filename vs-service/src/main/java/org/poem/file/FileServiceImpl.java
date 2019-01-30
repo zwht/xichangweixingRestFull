@@ -1,9 +1,11 @@
 package org.poem.file;
 
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.poem.VoReTraversalUtil;
 import org.poem.common.IDService;
+import org.poem.jooq.tables.TFile;
 import org.poem.jooq.tables.records.TFileRecord;
 import org.poem.authVO.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.poem.jooq.tables.TFile.T_FILE;
 
@@ -179,5 +184,21 @@ public class FileServiceImpl implements FileService {
     @Override
     public String saveFile(InputStream in, String fileExtension) throws Exception {
         return fileIOService.saveFile(in, fileExtension);
+    }
+
+    @Override
+    public List<TFileVO> getByIds(List<Long> ids){
+        if (CollectionUtils.isEmpty(ids)){
+            return Lists.newArrayList();
+        }
+        List<TFileRecord> records = this.fileDao.findByCondition(TFile.T_FILE.ID.in(ids));
+        return records.stream().map(s ->{
+            TFileVO tFileVO = new TFileVO();
+            tFileVO.setId(String.valueOf(s.getId()));
+            tFileVO.setName(s.getName());
+            tFileVO.setFileUrl(s.getFileUrl());
+            tFileVO.setFileSize(String.valueOf(s.getFileSize()));
+            return tFileVO;
+        }).collect(Collectors.toList());
     }
 }

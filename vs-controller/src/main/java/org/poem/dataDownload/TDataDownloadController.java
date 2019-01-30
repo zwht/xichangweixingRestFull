@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * 资料下载
@@ -35,7 +36,7 @@ public class TDataDownloadController {
                                                     @PathVariable(value = "pageSize") Integer pageSize,
                                                     @PathVariable(value = "pageNumber") Integer pageNumber) {
         logger.info("TDataDownloadController:getAll" + JSONObject.toJSONString(tNewQueryVO));
-        return new ResultVO<>(this.tDataDownloadService.getAll(tNewQueryVO, pageSize, pageNumber));
+        return new ResultVO<>(this.tDataDownloadService.getAll(tNewQueryVO, pageNumber,pageSize));
     }
 
     @ApiOperation(value = "根据id查询", httpMethod = "GET")
@@ -49,7 +50,7 @@ public class TDataDownloadController {
     @PostMapping("/line")
     public ResultVO<String> line(Long id, HttpServletRequest request) {
         logger.info("TDataDownloadController:line");
-        return this.tDataDownloadService.line(id, RequestUtil.getUserId(request));
+        return this.tDataDownloadService.line(RequestUtil.getUserId(request),id);
     }
 
 
@@ -57,7 +58,7 @@ public class TDataDownloadController {
     @PostMapping("/push")
     public ResultVO<String> push(Long id, HttpServletRequest request) {
         logger.info("TDataDownloadController:push");
-        return this.tDataDownloadService.push(id, RequestUtil.getUserId(request));
+        return this.tDataDownloadService.push(RequestUtil.getUserId(request), id);
     }
 
 
@@ -65,7 +66,7 @@ public class TDataDownloadController {
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
         logger.info("TDataDownloadController:top");
-        return this.tDataDownloadService.top(id, RequestUtil.getUserId(request));
+        return this.tDataDownloadService.top(RequestUtil.getUserId(request), id );
     }
 
     @ApiOperation(value = "更新/添加", httpMethod = "POST")
@@ -73,5 +74,17 @@ public class TDataDownloadController {
     public ResultVO<String> addAndUpdate(@RequestBody TDataDownloadVO tNewsVO, HttpServletRequest request) {
         logger.info("TDataDownloadController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.tDataDownloadService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
+    }
+
+    /**
+     * @param ids
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "删除", httpMethod = "POST")
+    @PostMapping("/delete")
+    public ResultVO<String> delete(Long[] ids, HttpServletRequest request) {
+        logger.info("TDataDownloadController:delete " + JSONObject.toJSONString(ids));
+        return this.tDataDownloadService.deleteByIDs(Arrays.asList(ids));
     }
 }

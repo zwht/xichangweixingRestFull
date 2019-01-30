@@ -611,8 +611,10 @@ public class ExcelUtils {
         List<Map<String, Object>> readValues = new ArrayList<Map<String, Object>>();
         for (int j = 0; j < i; j++) {
             Map<String, Object> readValue = new HashMap<String, Object>();
-            readValue.put("x", j);//横坐标
-            readValue.put("y", y);//纵坐标
+            //横坐标
+            readValue.put("x", j);
+            //纵坐标
+            readValue.put("y", y);
             readValues.add(readValue);
         }
         return readValues;

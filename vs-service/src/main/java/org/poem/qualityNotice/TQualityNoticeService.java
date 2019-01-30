@@ -10,13 +10,14 @@ import org.poem.authVO.OffsetPagingVO;
 import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
-import org.poem.jooq.tables.TQualityNotice;
-import org.poem.jooq.tables.TUser;
-import org.poem.jooq.tables.records.TQualityNoticeRecord;
-import org.poem.jooq.tables.records.TUserRecord;
+import org.poem.file.FileService;
+import org.poem.file.TFileVO;
+import org.poem.jooq.tables.*;
+import org.poem.jooq.tables.records.*;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -40,6 +41,12 @@ public class TQualityNoticeService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private FileService fileService;
+
+    @Autowired
+    private TQualityNoticeAttachmentDao tQualityNoticeAttachmentDao;
 
     /**
      * 翻译
@@ -89,6 +96,18 @@ public class TQualityNoticeService {
     }
 
     /**
+     * 获取文件附件
+     *
+     * @param newID
+     * @return
+     */
+    private List<TFileVO> getFiles(Long newID) {
+        List<TQualityNoticeAttachmentRecord> records = this.tQualityNoticeAttachmentDao.findByCondition(TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT.QUALITY_NOTICE_ID.eq(newID));
+        List<Long> ids = records.stream().map(s -> s.getId()).collect(Collectors.toList());
+        return fileService.getByIds(ids);
+    }
+
+    /**
      * 根据id查询
      *
      * @param id
@@ -99,7 +118,35 @@ public class TQualityNoticeService {
         if (tSupplierRecord == null) {
             return new ResultVO<>(-1, null, "没记录");
         }
-        return new ResultVO<>(getTSupplierVO(tSupplierRecord, type()));
+        TQualityNoticeVO vo = getTSupplierVO(tSupplierRecord, type());
+        vo.setAttachments(getFiles(id));
+        return new ResultVO<>(vo);
+    }
+
+
+    /**
+     * 保存
+     *
+     * @param tFileVOS
+     */
+    public void saveFile(List<TFileVO> tFileVOS, Long id, Long userId) {
+        this.tQualityNoticeAttachmentDao.deleteByConditions(TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT.QUALITY_NOTICE_ID.eq(id));
+        List<TQualityNoticeAttachmentRecord> records = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(tFileVOS)){
+            return;
+        }
+        for (TFileVO tFileVO : tFileVOS) {
+            TQualityNoticeAttachmentRecord record = new TQualityNoticeAttachmentRecord();
+            record.setId(idService.getId());
+            record.setFileId(tFileVO.getId());
+            record.setQualityNoticeId(id);
+            record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setCreateUser(userId);
+            record.setUpdateUser(userId);
+            records.add(record);
+        }
+        this.tQualityNoticeAttachmentDao.insert(records);
     }
 
     /**
@@ -125,6 +172,7 @@ public class TQualityNoticeService {
             record.setReadCount(0L);
             save = true;
         }
+        record.setStatus(StringUtils.isEmpty(tEquipmentVO.getStatus()) ? 0 : Integer.valueOf(tEquipmentVO.getStatus()) );
         record.setTitle(tEquipmentVO.getTitle());
         record.setTop(false);
         record.setContent(tEquipmentVO.getContent());
@@ -135,6 +183,7 @@ public class TQualityNoticeService {
         } else {
             this.tQualityNoticeDao.update(record);
         }
+        saveFile(tEquipmentVO.getAttachments(), record.getId(), userId);
         return new ResultVO<>("完成");
     }
 
@@ -146,6 +195,7 @@ public class TQualityNoticeService {
      */
     public ResultVO<String> deleteByIDs(List<Long> ids) {
         this.tQualityNoticeDao.deleteById(ids);
+        this.tQualityNoticeAttachmentDao.deleteByConditions(TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT.QUALITY_NOTICE_ID.in(ids));
         return new ResultVO<>("完成");
     }
 
@@ -166,11 +216,11 @@ public class TQualityNoticeService {
             conditions.add(TQualityNotice.T_QUALITY_NOTICE.STATUS.eq(Integer.valueOf(tQualityNoticeQueryVO.getStatus())));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getStartTime() + " 00:00:00");
             conditions.add(TQualityNotice.T_QUALITY_NOTICE.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getEndTime() + " 23:59:59");
             conditions.add(TQualityNotice.T_QUALITY_NOTICE.UPDATE_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> list = Arrays.asList(TQualityNotice.T_QUALITY_NOTICE.CREATE_TIME.asc(), TQualityNotice.T_QUALITY_NOTICE.STATUS.desc());
@@ -182,5 +232,62 @@ public class TQualityNoticeService {
                 }).collect(Collectors.toList())
         );
 
+    }
+
+    /**
+     * 置顶
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> top(Long id, Long userId) {
+        TQualityNoticeRecord record = this.tQualityNoticeDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setFlag(true);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityNoticeDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 发布
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> push(Long id, Long userId) {
+        TQualityNoticeRecord record = this.tQualityNoticeDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(1);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityNoticeDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 下线
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> line(Long id, Long userId) {
+        TQualityNoticeRecord record = this.tQualityNoticeDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(0);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityNoticeDao.update(record);
+        return new ResultVO<>("操作完成");
     }
 }

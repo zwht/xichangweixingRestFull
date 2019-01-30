@@ -25,6 +25,9 @@ public class TDataDownloadVO {
     @ApiModelProperty(value = "下载量")
     private String downloads;
 
+    @ApiModelProperty(value = "附件")
+    private String fileUrl;
+
     @ApiModelProperty(value = "状态 1 已发布 0 没有发布")
     private String status;
 
@@ -42,6 +45,14 @@ public class TDataDownloadVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
 
     public String getId() {
         return id;

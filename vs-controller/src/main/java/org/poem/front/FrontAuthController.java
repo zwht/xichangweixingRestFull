@@ -64,17 +64,17 @@ public class FrontAuthController {
 
     /**
      * 添加房屋预定
-     * @param tUserVO
+     * @param tRoomReservationVO
      * @param request
      * @return
      */
     @ApiOperation(value = "添加房屋预定", httpMethod = "POST")
     @PostMapping("/saveRoomReservation")
-    public ResultVO<String> saveRoomReservation(@RequestBody TRoomReservationVO tUserVO, HttpServletRequest request) {
+    public ResultVO<String> saveRoomReservation(@RequestBody TRoomReservationVO tRoomReservationVO, HttpServletRequest request) {
         logger.info("TRoomReservationController: saveRoomReservation");
-        logger.info("" + JSONObject.toJSONString(tUserVO));
+        logger.info("" + JSONObject.toJSONString(tRoomReservationVO));
         Long userId = RequestUtil.getUserId(request);
-        return tRoomReservationService.saveOrUpdate(tUserVO, userId);
+        return tRoomReservationService.saveOrUpdate(tRoomReservationVO, userId);
     }
 
 

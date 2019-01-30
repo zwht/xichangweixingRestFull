@@ -91,7 +91,8 @@ public class ShiroConfigRealm extends AuthorizingRealm {
       return null;
     }
     //锁住了
-    if (userInfoVO.getLocked() != null && userInfoVO.getLocked()) {
+    if (userInfoVO.getLocked() != null && !userInfoVO.getLocked()) {
+      logger.info("locked this account");
       throw new LockedAccountException("locked this account");
     }
     SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfoVO, accessToken, getName());

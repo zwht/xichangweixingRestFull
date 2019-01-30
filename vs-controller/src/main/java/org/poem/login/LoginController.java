@@ -12,6 +12,7 @@ import org.poem.SpringUtils;
 import org.poem.config.annotation.ShiroOauthodIgnore;
 import org.poem.jwt.JwtHelper;
 import org.poem.login.vo.LoginCodeVO;
+import org.poem.login.vo.LoginVO;
 import org.poem.user.UserInfoService;
 import org.poem.authVO.ResultVO;
 import org.poem.authVO.UserInfoVO;
@@ -46,26 +47,24 @@ public class LoginController {
     /**
      * 登陆
      *
-     * @param userName
-     * @param password
+
      * @param request
      * @return
      */
     @PostMapping("/login")
     @ApiOperation(value = "0101-用户登陆", notes = "01-授权管理", httpMethod = "POST")
-    public ResultVO<LoginSuccessVO> login(@ApiParam("登陆名") String userName,
-                                          @ApiParam("密码") String password,
+    public ResultVO<LoginSuccessVO> login(LoginVO loginVO,
                                           HttpServletRequest request, HttpServletResponse response) {
-        logger.info("find :userName: " + userName + " password:" + password);
+        logger.info("find : " + JSONObject.toJSONString(loginVO));
         String ipAddr = IpUtils.getIpAddr(request);
-        if (StringUtils.isBlank(userName)) {
+        if (StringUtils.isBlank(loginVO.getUserName())) {
             return new ResultVO<>(-9999, null, "用户名不能为空");
         }
-        if (StringUtils.isBlank(password)) {
+        if (StringUtils.isBlank(loginVO.getPassword())) {
             return new ResultVO<>(-9999, null, "密码不能为空。");
         }
         UserInfoService userInfoService = SpringUtils.getBean(UserInfoService.class);
-        ResultVO<UserInfoVO> userInfoVO = userInfoService.login(userName, password, ipAddr);
+        ResultVO<UserInfoVO> userInfoVO = userInfoService.login(loginVO.getUserName(), loginVO.getPassword(), ipAddr);
         if (userInfoVO.getErrorCode() != 0) {
             return new ResultVO<>(-9999, null, userInfoVO.getMsg());
         }
@@ -76,7 +75,7 @@ public class LoginController {
             return new ResultVO<>(-9999, null, "账号被锁定。");
         }
         Map<String, Object> claims = new HashMap<>(0);
-        claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO));
+        claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO.getData()));
         String token = JwtHelper.createJWT(claims, Constant.JWT_TTL);
         LoginSuccessVO loginSuccessVO = new LoginSuccessVO();
         loginSuccessVO.setToken(token);

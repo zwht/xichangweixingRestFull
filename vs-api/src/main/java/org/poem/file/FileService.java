@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  *
@@ -27,8 +28,8 @@ public interface FileService {
      * @return
      */
     ResultVO<FileDetailVo> findById(Long id);
-//
-    /*
+
+    /**
      * 根据fileUrl查询文件详情
      * @param fileUrl
      * @return
@@ -50,4 +51,5 @@ public interface FileService {
 
     boolean deleteFile(String filePath);
 
+    List<TFileVO> getByIds(List<Long> ids);
 }

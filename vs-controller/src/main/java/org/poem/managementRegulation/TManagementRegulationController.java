@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * 管理规定
@@ -49,7 +50,7 @@ public class TManagementRegulationController {
     @PostMapping("/line")
     public ResultVO<String> line(Long id, HttpServletRequest request) {
         logger.info("MarketInformationController:line");
-        return this.marketInformationService.line(id, RequestUtil.getUserId(request));
+        return this.marketInformationService.line(RequestUtil.getUserId(request), id);
     }
 
 
@@ -57,7 +58,7 @@ public class TManagementRegulationController {
     @PostMapping("/push")
     public ResultVO<String> push(Long id, HttpServletRequest request) {
         logger.info("MarketInformationController:push");
-        return this.marketInformationService.push(id, RequestUtil.getUserId(request));
+        return this.marketInformationService.push(RequestUtil.getUserId(request), id);
     }
 
 
@@ -65,7 +66,7 @@ public class TManagementRegulationController {
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
         logger.info("MarketInformationController:top");
-        return this.marketInformationService.top(id, RequestUtil.getUserId(request));
+        return this.marketInformationService.top(RequestUtil.getUserId(request), id);
     }
 
     @ApiOperation(value = "更新/添加", httpMethod = "POST")
@@ -74,4 +75,12 @@ public class TManagementRegulationController {
         logger.info("MarketInformationController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.marketInformationService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
     }
+
+    @ApiOperation(value = "删除", httpMethod = "POST")
+    @PostMapping("/delete")
+    public ResultVO<String> delete(Long[] ids, HttpServletRequest request) {
+        logger.info("MarketInformationController:addAndUpdate :" + JSONObject.toJSONString(ids));
+        return this.marketInformationService.delete(Arrays.asList(ids));
+    }
+
 }

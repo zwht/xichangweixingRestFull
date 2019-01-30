@@ -13,8 +13,10 @@ public class TEquipmentQuery {
     private String equipType;
 
     @ApiModelProperty(value = "供应商")
-    private String supplierId;
+    private String supplierName;
 
+    @ApiModelProperty(value = "采购负责人")
+    private String leadingPerson;
 
     @ApiModelProperty(value = "状态 0库存保管 1 使用中 2 已使用 3 已废弃")
     private String status;
@@ -35,12 +37,12 @@ public class TEquipmentQuery {
         this.equipType = equipType;
     }
 
-    public String getSupplierId() {
-        return supplierId;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     public String getStatus() {
@@ -49,5 +51,13 @@ public class TEquipmentQuery {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLeadingPerson() {
+        return leadingPerson;
+    }
+
+    public void setLeadingPerson(String leadingPerson) {
+        this.leadingPerson = leadingPerson;
     }
 }

@@ -6,7 +6,13 @@ import org.jooq.SortField;
 import org.poem.DateUtils;
 import org.poem.StringUtils;
 import org.poem.common.IDService;
+import org.poem.file.FileService;
+import org.poem.file.TFileVO;
+import org.poem.jooq.tables.TNewsAttachment;
 import org.poem.jooq.tables.TParty;
+import org.poem.jooq.tables.TPartyAttachment;
+import org.poem.jooq.tables.records.TNewsAttachmentRecord;
+import org.poem.jooq.tables.records.TPartyAttachmentRecord;
 import org.poem.jooq.tables.records.TPartyRecord;
 import org.poem.jooq.tables.records.TUserRecord;
 import org.poem.user.UserDao;
@@ -18,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 新闻
@@ -36,6 +43,12 @@ public class TPartyService {
     @Autowired
     private IDService<Long> idService;
 
+    @Autowired
+    private PartyAttachmentDao tPartyAttachmentDao;
+
+    @Autowired
+    private FileService fileService;
+
 
     /**
      * @param tPartQueryVO
@@ -52,11 +65,11 @@ public class TPartyService {
             conditions.add(TParty.T_PARTY.STATUS.eq(Integer.valueOf(tPartQueryVO.getStatus())));
         }
         if (StringUtils.isNotEmpty(tPartQueryVO.getStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tPartQueryVO.getStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tPartQueryVO.getStartTime() + " 00:00:p00");
             conditions.add(TParty.T_PARTY.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tPartQueryVO.getEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tPartQueryVO.getEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tPartQueryVO.getEndTime() + " 23:59:59");
             conditions.add(TParty.T_PARTY.UPDATE_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> fields = Lists.newArrayList();
@@ -64,12 +77,37 @@ public class TPartyService {
         fields.add(TParty.T_PARTY.CREATE_TIME.desc());
         PageVO<TPartyRecord> tPartyRecordPageVO = this.partyDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         PageVO<TPartyVO> partyVOPageVO = new PageVO<>();
-        partyVOPageVO.setTotalCount(tPartyRecordPageVO.getTotalCount());
-        List<TPartyVO> tPartyVOS = Lists.newArrayList();
+        List<TPartyVO> tPartyVOS = tPartyRecordPageVO.getPageData().stream().map(s->{
+            TPartyVO tPartyVO  = new TPartyVO();
+            tPartyVO.setId(String.valueOf(s.getId()));
+            tPartyVO.setTitle(s.getTitle());
+            tPartyVO.setAbstracts("");
+            tPartyVO.setAttachment(String.valueOf(s.getAttachment()));
+            tPartyVO.setContent(s.getContent());
+            tPartyVO.setReadCount(String.valueOf(s.getReadCount()));
+            tPartyVO.setStatus(String.valueOf(s.getStatus()));
+            TUserRecord tUserRecord = this.userDao.findById(s.getUpdateUser());
+            tPartyVO.setUpdateUser(tUserRecord == null ? "" : tUserRecord.getName());
+            tPartyVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
+            tPartyVO.setAttachments(getFiles(s.getId()));
+            return tPartyVO;
+        }).collect(Collectors.toList());
         partyVOPageVO.setPageData(tPartyVOS);
+        partyVOPageVO.setTotalCount(tPartyRecordPageVO.getTotalCount());
         return partyVOPageVO;
     }
 
+    /**
+     * 获取文件附件
+     *
+     * @param newID
+     * @return
+     */
+    private List<TFileVO> getFiles(Long newID) {
+        List<TPartyAttachmentRecord> records = this.tPartyAttachmentDao.findByCondition(TPartyAttachment.T_PARTY_ATTACHMENT.PARTY_ID.eq(newID));
+        List<Long> ids = records.stream().map(s -> s.getId()).collect(Collectors.toList());
+        return fileService.getByIds(ids);
+    }
 
     /**
      * 根据id查询
@@ -89,10 +127,11 @@ public class TPartyService {
             tPartyVO.setReadCount(String.valueOf(s.getReadCount()));
             tPartyVO.setStatus(String.valueOf(s.getStatus()));
             TUserRecord tUserRecord = this.userDao.findById(s.getUpdateUser());
-            tPartyVO.setUpdateUser(tUserRecord.getName());
+            tPartyVO.setUpdateUser(tUserRecord == null ? "" : tUserRecord.getName());
             tPartyVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
-            if (add){
-                s.setReadCount(s.getReadCount() == null ? 1 : s.getReadCount()  + 1L);
+            tPartyVO.setAttachments(getFiles(s.getId()));
+            if (add) {
+                s.setReadCount(s.getReadCount() == null ? 1 : s.getReadCount() + 1L);
                 this.partyDao.update(s);
             }
         }
@@ -180,7 +219,7 @@ public class TPartyService {
         }
         tNewsRecord.setUpdateUser(userId);
         tNewsRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        tNewsRecord.setAttachment(Long.valueOf(tNewsVO.getAttachment()));
+        tNewsRecord.setAttachment(tNewsVO.getAttachment());
         tNewsRecord.setTitle(tNewsVO.getTitle());
         tNewsRecord.setFlag(false);
         tNewsRecord.setContent(tNewsVO.getContent());
@@ -191,5 +230,16 @@ public class TPartyService {
             this.partyDao.update(tNewsRecord);
         }
         return new ResultVO<>(0, "可以了");
+    }
+
+    /**
+     *
+     * @param ids
+     * @return
+     */
+    public ResultVO<String> delete(List<Long> ids){
+        this.partyDao.deleteById(ids);
+        this.tPartyAttachmentDao.deleteByConditions(TPartyAttachment.T_PARTY_ATTACHMENT.PARTY_ID.in(ids));
+        return new ResultVO<>("删除成功");
     }
 }

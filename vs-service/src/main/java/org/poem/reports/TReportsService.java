@@ -11,12 +11,14 @@ import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
 import org.poem.jooq.tables.TReports;
 import org.poem.jooq.tables.records.TReportsRecord;
+import org.poem.systemnotice.SystemNoticeService;
 import org.poem.user.UserDao;
 import org.poem.workDynamics.TWorkDynamicsQueryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,12 +32,15 @@ public class TReportsService {
 
     @Autowired
     private TReportsDao tReportsDao;
-    
+
     @Autowired
     private UserDao userDao;
 
     @Autowired
     private IDService<Long> idService;
+
+    @Autowired
+    private SystemNoticeService systemNoticeService;
 
     /**
      * 翻译
@@ -53,6 +58,7 @@ public class TReportsService {
         tNewsVO.setReportTime(DateUtils.format(s.getReportTime()));
         tNewsVO.setDealTime(DateUtils.format(s.getDealTime()));
         tNewsVO.setStatus(String.valueOf(s.getStatus()));
+        tNewsVO.setContent(s.getContent());
         tNewsVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
         tNewsVO.setUpdateUser(userMap.get(s.getUpdateUser()));
         return tNewsVO;
@@ -74,11 +80,11 @@ public class TReportsService {
             conditions.add(TReports.T_REPORTS.STATUS.eq(tNewQueryVO.getStatus()));
         }
         if (StringUtils.isNotEmpty(tNewQueryVO.getUpdateStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tNewQueryVO.getUpdateStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tNewQueryVO.getUpdateStartTime() + " 00:00:00");
             conditions.add(TReports.T_REPORTS.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tNewQueryVO.getUpdateEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tNewQueryVO.getUpdateEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tNewQueryVO.getUpdateEndTime() + " 23:59:59");
             conditions.add(TReports.T_REPORTS.UPDATE_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> fields = Lists.newArrayList();
@@ -107,62 +113,6 @@ public class TReportsService {
         return getTWorkDynamicsVO(s, userMap);
     }
 
-    /**
-     * 下线
-     *
-     * @param userId
-     * @param id
-     * @return
-     */
-    public ResultVO<String> line(Long userId, Long id) {
-        TReportsRecord s = this.tReportsDao.findById(id);
-        if (s == null) {
-            return new ResultVO<>(-1, "没记录");
-        }
-        s.setStatus(0);
-        s.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        s.setUpdateUser(userId);
-        this.tReportsDao.update(s);
-        return new ResultVO<>(0, "可以了");
-    }
-
-    /**
-     * 发布
-     *
-     * @param userId
-     * @param id
-     * @return
-     */
-    public ResultVO<String> push(Long userId, Long id) {
-        TReportsRecord s = this.tReportsDao.findById(id);
-        if (s == null) {
-            return new ResultVO<>(-1, "没记录");
-        }
-        s.setStatus(1);
-        s.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        s.setUpdateUser(userId);
-        this.tReportsDao.update(s);
-        return new ResultVO<>(0, "可以了");
-    }
-
-    /**
-     * 置顶
-     *
-     * @param userId
-     * @param id
-     * @return
-     */
-    public ResultVO<String> top(Long userId, Long id) {
-        TReportsRecord s = this.tReportsDao.findById(id);
-        if (s == null) {
-            return new ResultVO<>(-1, "没记录");
-        }
-        s.setFlag(true);
-        s.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        s.setUpdateUser(userId);
-        this.tReportsDao.update(s);
-        return new ResultVO<>(0, "可以了");
-    }
 
 
     /**
@@ -183,7 +133,7 @@ public class TReportsService {
             tNewsRecord.setId(idService.getId());
             tNewsRecord.setCreateTime(new Timestamp(System.currentTimeMillis()));
             tNewsRecord.setCreateUser(userId);
-            tNewsRecord.setStatus(0);
+            tNewsRecord.setStatus(1);
             save = true;
         }
         tNewsRecord.setUpdateUser(userId);
@@ -196,10 +146,33 @@ public class TReportsService {
 
         if (save) {
             this.tReportsDao.insert(tNewsRecord);
+            String content = "用户" + userDao.findById(userId).getName() +
+                    "于" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss")
+                    + "新增举报。";
+            systemNoticeService.saveSystemNotice("新增 举报",userId, content);
         } else {
             this.tReportsDao.update(tNewsRecord);
         }
         return new ResultVO<>(0, "可以了");
     }
 
+
+    /**
+     * 处理
+     * @param tNewsVO
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> handl(TReportsHandVO tNewsVO, Long userId) {
+        TReportsRecord s = this.tReportsDao.findById(Long.valueOf(tNewsVO.getId()));
+        if (s == null) {
+            return new ResultVO<>(-1, "没记录");
+        }
+        s.setSuggestion(tNewsVO.getSuggestion());
+        s.setStatus(0);
+        s.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        s.setUpdateUser(userId);
+        this.tReportsDao.update(s);
+        return new ResultVO<>(0, "可以了");
+    }
 }

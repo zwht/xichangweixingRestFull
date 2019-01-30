@@ -25,13 +25,16 @@ public class TReportsVO {
     @ApiModelProperty(value = "标题")
     private String title;
 
+    @ApiModelProperty(value = "举报内容")
+    private String content;
+
     @ApiModelProperty(value = "举报时间")
     private String reportTime;
 
     @ApiModelProperty(value = "处理时间")
     private String dealTime;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态  0 已处理 1 未处理")
     private String status;
 
     @ApiModelProperty(value = "创建人")
@@ -48,6 +51,14 @@ public class TReportsVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getId() {
         return id;

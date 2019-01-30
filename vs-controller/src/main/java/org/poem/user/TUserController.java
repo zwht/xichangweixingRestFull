@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户
@@ -99,7 +100,7 @@ public class TUserController {
      */
     @ApiOperation(value = "02-05-查询", httpMethod = "GET")
     @GetMapping("/getAllUser")
-    public ResultVO<PageVO<TUserVO>> getAllUser(@RequestBody UserQueryVO queryVO, Integer pageSize, Integer pageNumber) {
+    public ResultVO<PageVO<TUserVO>> getAllUser(UserQueryVO queryVO, Integer pageSize, Integer pageNumber) {
         logger.info("TUserController: getAllUser");
         logger.info("" + JSONObject.toJSONString(queryVO));
         return userService.getAllUser(queryVO, pageSize, pageNumber);
@@ -107,15 +108,45 @@ public class TUserController {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */
     @ApiOperation(value = "02-06-根据id查询", httpMethod = "GET")
     @GetMapping("/getById/{id}")
-    public ResultVO<TUserVO> getById(@PathVariable(value = "id")Long id) {
+    public ResultVO<TUserVO> getById(@PathVariable(value = "id") Long id) {
         logger.info("TUserController: getById");
         logger.info("" + JSONObject.toJSONString(id));
         return userService.getById(id);
     }
 
+
+    /**
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "02-07-禁用", httpMethod = "POST")
+    @PostMapping("/disable")
+    public ResultVO<String> disable(Long id, HttpServletRequest request) {
+        logger.info("TUserController: disable");
+        logger.info("" + JSONObject.toJSONString(id));
+        return userService.disable(id, RequestUtil.getUserId(request));
+    }
+
+
+    /**
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "02-08-启用", httpMethod = "POST")
+    @PostMapping("/able")
+    public ResultVO<String> able(Long id, HttpServletRequest request) {
+        logger.info("TUserController: able");
+        logger.info("" + JSONObject.toJSONString(id));
+        return userService.able(id, RequestUtil.getUserId(request));
+    }
 }

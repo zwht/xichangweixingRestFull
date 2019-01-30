@@ -9,6 +9,7 @@ import org.poem.authVO.OffsetPagingVO;
 import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
+import org.poem.jooq.tables.TQualityDeal;
 import org.poem.jooq.tables.TQualityEvent;
 import org.poem.jooq.tables.records.TQualityDealRecord;
 import org.poem.qualityNotice.TQualityNoticeQueryVO;
@@ -146,23 +147,23 @@ public class TQualityDealService {
     public PageVO<TQualityDealVO> getAllByQuery(TQualityDealQueryVO tQualityNoticeQueryVO, Integer pageSize, Integer pageNumber) {
         List<Condition> conditions = Lists.newArrayList();
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getSupplierId())) {
-            conditions.add(TQualityEvent.T_QUALITY_EVENT.SUPPLIER_ID.eq(Long.valueOf(tQualityNoticeQueryVO.getSupplierId())));
+            conditions.add(TQualityDeal.T_QUALITY_DEAL.SUPPLIER_ID.eq(Long.valueOf(tQualityNoticeQueryVO.getSupplierId())));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getMaterials())) {
-            conditions.add(TQualityEvent.T_QUALITY_EVENT.MATERIALS.like("%" + tQualityNoticeQueryVO.getMaterials() + "%"));
+            conditions.add(TQualityDeal.T_QUALITY_DEAL.MATERIALS.like("%" + tQualityNoticeQueryVO.getMaterials() + "%"));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getStatus())) {
-            conditions.add(TQualityEvent.T_QUALITY_EVENT.STATUS.eq(Integer.valueOf(tQualityNoticeQueryVO.getStatus())));
+            conditions.add(TQualityDeal.T_QUALITY_DEAL.STATUS.eq(Integer.valueOf(tQualityNoticeQueryVO.getStatus())));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getDealTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getDealTime());
-            conditions.add(TQualityEvent.T_QUALITY_EVENT.UPDATE_TIME.greaterOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getDealTime() + " 00:00:00");
+            conditions.add(TQualityDeal.T_QUALITY_DEAL.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getDealTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getDealTime());
-            conditions.add(TQualityEvent.T_QUALITY_EVENT.UPDATE_TIME.lessOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getDealTime() + " 23:59:59");
+            conditions.add(TQualityDeal.T_QUALITY_DEAL.UPDATE_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TQualityEvent.T_QUALITY_EVENT.CREATE_TIME.asc(), TQualityEvent.T_QUALITY_EVENT.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TQualityDeal.T_QUALITY_DEAL.CREATE_TIME.asc(), TQualityDeal.T_QUALITY_DEAL.STATUS.desc());
         PageVO<TQualityDealRecord> tSupplierVOPageVO = this.tQualityDealDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         Map<Long, String> stringMap = supplierDao.getTSupplierMap();
@@ -172,5 +173,63 @@ public class TQualityDealService {
                 }).collect(Collectors.toList())
         );
 
+    }
+
+
+    /**
+     * 置顶
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> top(Long id, Long userId) {
+        TQualityDealRecord record = this.tQualityDealDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setFlag(true);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityDealDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 发布
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> push(Long id, Long userId) {
+        TQualityDealRecord record = this.tQualityDealDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(1);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityDealDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 下线
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> line(Long id, Long userId) {
+        TQualityDealRecord record = this.tQualityDealDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(0);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityDealDao.update(record);
+        return new ResultVO<>("操作完成");
     }
 }

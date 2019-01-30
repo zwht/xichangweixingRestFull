@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TDataDownloadRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TDataDownload extends TableImpl<TDataDownloadRecord> {
 
-    private static final long serialVersionUID = -1827408562;
+    private static final long serialVersionUID = -2073144349;
 
     /**
      * The reference instance of <code>public.t_data_download</code>
@@ -104,6 +104,11 @@ public class TDataDownload extends TableImpl<TDataDownloadRecord> {
      * The column <code>public.t_data_download.flag</code>. 标识
      */
     public final TableField<TDataDownloadRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_data_download.file_url</code>. 附件
+     */
+    public final TableField<TDataDownloadRecord, String> FILE_URL = createField("file_url", org.jooq.impl.SQLDataType.VARCHAR(500), this, "附件");
 
     /**
      * Create a <code>public.t_data_download</code> table reference

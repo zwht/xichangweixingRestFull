@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * 强军
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/v1/party")
-@Api(value = "/v1/party",tags = {"07-强军"})
+@Api(value = "/v1/party",tags = {"07-党建"})
 public class TPartyController {
 
     private static final Logger logger = LoggerFactory.getLogger(TNewsController.class);
@@ -48,7 +49,7 @@ public class TPartyController {
     @PostMapping("/line")
     public ResultVO<String> line(Long id, HttpServletRequest request) {
         logger.info("TNewsController:line");
-        return this.tNewsService.line(id, RequestUtil.getUserId(request));
+        return this.tNewsService.line(RequestUtil.getUserId(request), id);
     }
 
 
@@ -56,7 +57,7 @@ public class TPartyController {
     @PostMapping("/push")
     public ResultVO<String> push(Long id, HttpServletRequest request) {
         logger.info("TNewsController:push");
-        return this.tNewsService.push(id, RequestUtil.getUserId(request));
+        return this.tNewsService.push(RequestUtil.getUserId(request),id);
     }
 
 
@@ -64,14 +65,22 @@ public class TPartyController {
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
         logger.info("TNewsController:top");
-        return this.tNewsService.top(id, RequestUtil.getUserId(request));
+        return this.tNewsService.top(RequestUtil.getUserId(request), id);
     }
 
-    @ApiOperation(value = "置顶", httpMethod = "POST")
+    @ApiOperation(value = "修改或者添加", httpMethod = "POST")
     @PostMapping("/addAndUpdate")
     public ResultVO<String> addAndUpdate(@RequestBody TPartyVO tNewsVO, HttpServletRequest request) {
         logger.info("TNewsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.tNewsService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
+    }
+
+
+    @ApiOperation(value = "删除", httpMethod = "POST")
+    @PostMapping("/delete")
+    public ResultVO<String> delete(Long[] ids) {
+        logger.info("TNewsController:addAndUpdate :" + JSONObject.toJSONString(ids));
+        return this.tNewsService.delete(Arrays.asList(ids));
     }
 
 }

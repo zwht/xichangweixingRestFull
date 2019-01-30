@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TSupplierRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TSupplier extends TableImpl<TSupplierRecord> {
 
-    private static final long serialVersionUID = 1370237179;
+    private static final long serialVersionUID = -592201832;
 
     /**
      * The reference instance of <code>public.t_supplier</code>
@@ -118,7 +118,7 @@ public class TSupplier extends TableImpl<TSupplierRecord> {
     /**
      * The column <code>public.t_supplier.logo</code>.
      */
-    public final TableField<TSupplierRecord, Long> LOGO = createField("logo", org.jooq.impl.SQLDataType.BIGINT, this, "");
+    public final TableField<TSupplierRecord, String> LOGO = createField("logo", org.jooq.impl.SQLDataType.VARCHAR(300), this, "");
 
     /**
      * The column <code>public.t_supplier.remark</code>.

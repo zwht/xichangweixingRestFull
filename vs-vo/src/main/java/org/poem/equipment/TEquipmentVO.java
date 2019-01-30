@@ -19,12 +19,15 @@ public class TEquipmentVO {
     @ApiModelProperty(value = "设备名称")
     private String name;
 
+    @ApiModelProperty(value = "型号")
+    private String model;
+
+
     @ApiModelProperty(value = "设备类型")
     private String equipType;
 
     @ApiModelProperty(value = "设备类型")
     private String equipTypeName;
-
 
     @ApiModelProperty(value = "规格")
     private String format;
@@ -49,6 +52,9 @@ public class TEquipmentVO {
 
     @ApiModelProperty(value = "供应商")
     private String supplierName;
+
+    @ApiModelProperty(value = "采购负责人")
+    private String leadingPerson;
 
     @ApiModelProperty(value = "图片")
     private String images;
@@ -240,5 +246,22 @@ public class TEquipmentVO {
 
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName;
+    }
+
+
+    public String getLeadingPerson() {
+        return leadingPerson;
+    }
+
+    public void setLeadingPerson(String leadingPerson) {
+        this.leadingPerson = leadingPerson;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }

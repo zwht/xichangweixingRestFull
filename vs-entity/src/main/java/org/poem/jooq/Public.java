@@ -13,34 +13,47 @@ import javax.annotation.Generated;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
+import org.poem.jooq.tables.CAdminDivision;
 import org.poem.jooq.tables.FlywaySchemaHistory;
 import org.poem.jooq.tables.TArms;
+import org.poem.jooq.tables.TArmsAttachment;
 import org.poem.jooq.tables.TDataDownload;
 import org.poem.jooq.tables.TDepart;
+import org.poem.jooq.tables.TDivision;
 import org.poem.jooq.tables.TEquipType;
 import org.poem.jooq.tables.TEquipment;
 import org.poem.jooq.tables.TFile;
 import org.poem.jooq.tables.TIndustry;
 import org.poem.jooq.tables.TLink;
 import org.poem.jooq.tables.TManagementRegulation;
+import org.poem.jooq.tables.TManagementRegulationAttachment;
 import org.poem.jooq.tables.TMarketInformation;
+import org.poem.jooq.tables.TMarketInformationAttachment;
 import org.poem.jooq.tables.TMessage;
 import org.poem.jooq.tables.TNews;
+import org.poem.jooq.tables.TNewsAttachment;
+import org.poem.jooq.tables.TNotice;
+import org.poem.jooq.tables.TNoticeAttachment;
 import org.poem.jooq.tables.TOrderingMeals;
 import org.poem.jooq.tables.TParty;
+import org.poem.jooq.tables.TPartyAttachment;
 import org.poem.jooq.tables.TQualityDeal;
 import org.poem.jooq.tables.TQualityEvent;
 import org.poem.jooq.tables.TQualityNotice;
+import org.poem.jooq.tables.TQualityNoticeAttachment;
 import org.poem.jooq.tables.TReports;
 import org.poem.jooq.tables.TRole;
 import org.poem.jooq.tables.TRoomReservation;
 import org.poem.jooq.tables.TSubject;
 import org.poem.jooq.tables.TSupplier;
 import org.poem.jooq.tables.TSupplierType;
+import org.poem.jooq.tables.TSystemNotice;
+import org.poem.jooq.tables.TSystemlog;
 import org.poem.jooq.tables.TTenderOrgation;
 import org.poem.jooq.tables.TUser;
 import org.poem.jooq.tables.TVehiclePick;
 import org.poem.jooq.tables.TWorkDynamics;
+import org.poem.jooq.tables.TWorkDynamicsAttachment;
 
 
 /**
@@ -56,12 +69,17 @@ import org.poem.jooq.tables.TWorkDynamics;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -1223235438;
+    private static final long serialVersionUID = -734864148;
 
     /**
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * 全国地区表
+     */
+    public final CAdminDivision C_ADMIN_DIVISION = org.poem.jooq.tables.CAdminDivision.C_ADMIN_DIVISION;
 
     /**
      * The table <code>public.flyway_schema_history</code>.
@@ -74,6 +92,11 @@ public class Public extends SchemaImpl {
     public final TArms T_ARMS = org.poem.jooq.tables.TArms.T_ARMS;
 
     /**
+     * 强军新闻附件
+     */
+    public final TArmsAttachment T_ARMS_ATTACHMENT = org.poem.jooq.tables.TArmsAttachment.T_ARMS_ATTACHMENT;
+
+    /**
      * 资料下载
      */
     public final TDataDownload T_DATA_DOWNLOAD = org.poem.jooq.tables.TDataDownload.T_DATA_DOWNLOAD;
@@ -82,6 +105,11 @@ public class Public extends SchemaImpl {
      * 部门
      */
     public final TDepart T_DEPART = org.poem.jooq.tables.TDepart.T_DEPART;
+
+    /**
+     * 区划表
+     */
+    public final TDivision T_DIVISION = org.poem.jooq.tables.TDivision.T_DIVISION;
 
     /**
      * 设备类型
@@ -114,9 +142,19 @@ public class Public extends SchemaImpl {
     public final TManagementRegulation T_MANAGEMENT_REGULATION = org.poem.jooq.tables.TManagementRegulation.T_MANAGEMENT_REGULATION;
 
     /**
+     * 管理规定-附件
+     */
+    public final TManagementRegulationAttachment T_MANAGEMENT_REGULATION_ATTACHMENT = org.poem.jooq.tables.TManagementRegulationAttachment.T_MANAGEMENT_REGULATION_ATTACHMENT;
+
+    /**
      * 市场信息
      */
     public final TMarketInformation T_MARKET_INFORMATION = org.poem.jooq.tables.TMarketInformation.T_MARKET_INFORMATION;
+
+    /**
+     * 市场信息-附件
+     */
+    public final TMarketInformationAttachment T_MARKET_INFORMATION_ATTACHMENT = org.poem.jooq.tables.TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT;
 
     /**
      * 短信
@@ -129,6 +167,21 @@ public class Public extends SchemaImpl {
     public final TNews T_NEWS = org.poem.jooq.tables.TNews.T_NEWS;
 
     /**
+     * 新闻-附件
+     */
+    public final TNewsAttachment T_NEWS_ATTACHMENT = org.poem.jooq.tables.TNewsAttachment.T_NEWS_ATTACHMENT;
+
+    /**
+     * 通知公告
+     */
+    public final TNotice T_NOTICE = org.poem.jooq.tables.TNotice.T_NOTICE;
+
+    /**
+     * 通知公告-附件
+     */
+    public final TNoticeAttachment T_NOTICE_ATTACHMENT = org.poem.jooq.tables.TNoticeAttachment.T_NOTICE_ATTACHMENT;
+
+    /**
      * 网上订餐
      */
     public final TOrderingMeals T_ORDERING_MEALS = org.poem.jooq.tables.TOrderingMeals.T_ORDERING_MEALS;
@@ -137,6 +190,11 @@ public class Public extends SchemaImpl {
      * 新闻
      */
     public final TParty T_PARTY = org.poem.jooq.tables.TParty.T_PARTY;
+
+    /**
+     * 党建新闻附件
+     */
+    public final TPartyAttachment T_PARTY_ATTACHMENT = org.poem.jooq.tables.TPartyAttachment.T_PARTY_ATTACHMENT;
 
     /**
      * 质量处理
@@ -152,6 +210,11 @@ public class Public extends SchemaImpl {
      * 质量公告
      */
     public final TQualityNotice T_QUALITY_NOTICE = org.poem.jooq.tables.TQualityNotice.T_QUALITY_NOTICE;
+
+    /**
+     * 质量通知公告-附件
+     */
+    public final TQualityNoticeAttachment T_QUALITY_NOTICE_ATTACHMENT = org.poem.jooq.tables.TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT;
 
     /**
      * 投诉举报
@@ -184,6 +247,16 @@ public class Public extends SchemaImpl {
     public final TSupplierType T_SUPPLIER_TYPE = org.poem.jooq.tables.TSupplierType.T_SUPPLIER_TYPE;
 
     /**
+     * 系统通知
+     */
+    public final TSystemNotice T_SYSTEM_NOTICE = org.poem.jooq.tables.TSystemNotice.T_SYSTEM_NOTICE;
+
+    /**
+     * 系统日志
+     */
+    public final TSystemlog T_SYSTEMLOG = org.poem.jooq.tables.TSystemlog.T_SYSTEMLOG;
+
+    /**
      * 投标机构
      */
     public final TTenderOrgation T_TENDER_ORGATION = org.poem.jooq.tables.TTenderOrgation.T_TENDER_ORGATION;
@@ -202,6 +275,11 @@ public class Public extends SchemaImpl {
      * 工作动态
      */
     public final TWorkDynamics T_WORK_DYNAMICS = org.poem.jooq.tables.TWorkDynamics.T_WORK_DYNAMICS;
+
+    /**
+     * 质量通知公告-附件
+     */
+    public final TWorkDynamicsAttachment T_WORK_DYNAMICS_ATTACHMENT = org.poem.jooq.tables.TWorkDynamicsAttachment.T_WORK_DYNAMICS_ATTACHMENT;
 
     /**
      * No further instances allowed
@@ -228,33 +306,46 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            CAdminDivision.C_ADMIN_DIVISION,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             TArms.T_ARMS,
+            TArmsAttachment.T_ARMS_ATTACHMENT,
             TDataDownload.T_DATA_DOWNLOAD,
             TDepart.T_DEPART,
+            TDivision.T_DIVISION,
             TEquipType.T_EQUIP_TYPE,
             TEquipment.T_EQUIPMENT,
             TFile.T_FILE,
             TIndustry.T_INDUSTRY,
             TLink.T_LINK,
             TManagementRegulation.T_MANAGEMENT_REGULATION,
+            TManagementRegulationAttachment.T_MANAGEMENT_REGULATION_ATTACHMENT,
             TMarketInformation.T_MARKET_INFORMATION,
+            TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT,
             TMessage.T_MESSAGE,
             TNews.T_NEWS,
+            TNewsAttachment.T_NEWS_ATTACHMENT,
+            TNotice.T_NOTICE,
+            TNoticeAttachment.T_NOTICE_ATTACHMENT,
             TOrderingMeals.T_ORDERING_MEALS,
             TParty.T_PARTY,
+            TPartyAttachment.T_PARTY_ATTACHMENT,
             TQualityDeal.T_QUALITY_DEAL,
             TQualityEvent.T_QUALITY_EVENT,
             TQualityNotice.T_QUALITY_NOTICE,
+            TQualityNoticeAttachment.T_QUALITY_NOTICE_ATTACHMENT,
             TReports.T_REPORTS,
             TRole.T_ROLE,
             TRoomReservation.T_ROOM_RESERVATION,
             TSubject.T_SUBJECT,
             TSupplier.T_SUPPLIER,
             TSupplierType.T_SUPPLIER_TYPE,
+            TSystemNotice.T_SYSTEM_NOTICE,
+            TSystemlog.T_SYSTEMLOG,
             TTenderOrgation.T_TENDER_ORGATION,
             TUser.T_USER,
             TVehiclePick.T_VEHICLE_PICK,
-            TWorkDynamics.T_WORK_DYNAMICS);
+            TWorkDynamics.T_WORK_DYNAMICS,
+            TWorkDynamicsAttachment.T_WORK_DYNAMICS_ATTACHMENT);
     }
 }

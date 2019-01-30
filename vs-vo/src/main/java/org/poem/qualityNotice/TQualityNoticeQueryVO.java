@@ -18,7 +18,7 @@ public class TQualityNoticeQueryVO {
     private String top;
 
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态 0 未发布 1 发布")
     private String status;
 
 

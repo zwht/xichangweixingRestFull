@@ -11,12 +11,14 @@ import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
 import org.poem.jooq.tables.TOrderingMeals;
 import org.poem.jooq.tables.records.TOrderingMealsRecord;
+import org.poem.systemnotice.SystemNoticeService;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -36,6 +38,9 @@ public class TOrderingMealsService {
 
     @Autowired
     private IDService<Long> idService;
+
+    @Autowired
+    private SystemNoticeService systemNoticeService ;
 
 
     /**
@@ -112,6 +117,11 @@ public class TOrderingMealsService {
         record.setUpdateUser(userId);
         if (save) {
             this.tOrderingMealsDao.insert(record);
+
+            String content = "用户" + userDao.findById(userId).getName() +
+                    "于" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss")
+                    + "新增网上订餐。";
+            systemNoticeService.saveSystemNotice("新增 网上订餐",userId, content);
         } else {
             this.tOrderingMealsDao.update(record);
         }
@@ -146,11 +156,11 @@ public class TOrderingMealsService {
         }
 
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getEatStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getEatStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getEatStartTime() + " 00:00:00");
             conditions.add(TOrderingMeals.T_ORDERING_MEALS.EAT_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getEatEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getEatEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getEatEndTime()+" 23:59:59");
             conditions.add(TOrderingMeals.T_ORDERING_MEALS.EAT_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> list = Arrays.asList(TOrderingMeals.T_ORDERING_MEALS.CREATE_TIME.asc(), TOrderingMeals.T_ORDERING_MEALS.STATUS.desc());

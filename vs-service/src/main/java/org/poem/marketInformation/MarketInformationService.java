@@ -9,12 +9,17 @@ import org.poem.authVO.OffsetPagingVO;
 import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
+import org.poem.file.FileService;
+import org.poem.file.TFileVO;
 import org.poem.industry.TIndustryDao;
-import org.poem.jooq.tables.TWorkDynamics;
+import org.poem.jooq.tables.TMarketInformation;
+import org.poem.jooq.tables.TMarketInformationAttachment;
+import org.poem.jooq.tables.records.TMarketInformationAttachmentRecord;
 import org.poem.jooq.tables.records.TMarketInformationRecord;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -41,6 +46,12 @@ public class MarketInformationService {
 
     @Autowired
     private TIndustryDao industryDao;
+
+    @Autowired
+    private MarketInformationAttachmentDao marketInformationAttachmentDao;
+
+    @Autowired
+    private FileService fileService;
 
     /**
      * 翻译
@@ -74,25 +85,28 @@ public class MarketInformationService {
      * @param pageSize
      * @return
      */
-    public PageVO<MarketInformationVO> getAll(MarketInformationQueryVO tNewQueryVO, Integer pageNumber, Integer pageSize) {
+    public PageVO<MarketInformationVO> getAll(MarketInformationQueryVO tNewQueryVO, Integer pageSize, Integer pageNumber) {
         List<Condition> conditions = Lists.newArrayList();
         if (StringUtils.isNotEmpty(tNewQueryVO.getTitle())) {
-            conditions.add(TWorkDynamics.T_WORK_DYNAMICS.TITLE.like("%" + tNewQueryVO.getTitle() + "%"));
+            conditions.add(TMarketInformation.T_MARKET_INFORMATION.TITLE.like("%" + tNewQueryVO.getTitle() + "%"));
         }
-        if (tNewQueryVO.getStatus() != null) {
-            conditions.add(TWorkDynamics.T_WORK_DYNAMICS.STATUS.eq(Integer.valueOf(tNewQueryVO.getStatus())));
+        if (StringUtils.isNotEmpty(tNewQueryVO.getStatus())) {
+            conditions.add(TMarketInformation.T_MARKET_INFORMATION.STATUS.eq(Integer.valueOf(tNewQueryVO.getStatus())));
         }
         if (StringUtils.isNotEmpty(tNewQueryVO.getUpdateStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tNewQueryVO.getUpdateStartTime());
-            conditions.add(TWorkDynamics.T_WORK_DYNAMICS.UPDATE_TIME.greaterOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tNewQueryVO.getUpdateStartTime() + " 00:00:00");
+            conditions.add(TMarketInformation.T_MARKET_INFORMATION.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tNewQueryVO.getUpdateEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tNewQueryVO.getUpdateEndTime());
-            conditions.add(TWorkDynamics.T_WORK_DYNAMICS.UPDATE_TIME.lessOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tNewQueryVO.getUpdateEndTime() + " 23:59:59");
+            conditions.add(TMarketInformation.T_MARKET_INFORMATION.UPDATE_TIME.lessOrEqual(timestamp));
+        }
+        if (StringUtils.isNotEmpty(tNewQueryVO.getIndustry())) {
+            conditions.add(TMarketInformation.T_MARKET_INFORMATION.INDUSTRY.eq(Long.valueOf(tNewQueryVO.getIndustry())));
         }
         List<SortField<?>> fields = Lists.newArrayList();
-        fields.add(TWorkDynamics.T_WORK_DYNAMICS.TOP.desc());
-        fields.add(TWorkDynamics.T_WORK_DYNAMICS.CREATE_TIME.desc());
+        fields.add(TMarketInformation.T_MARKET_INFORMATION.TOP.desc());
+        fields.add(TMarketInformation.T_MARKET_INFORMATION.CREATE_TIME.desc());
         PageVO<TMarketInformationRecord> tNewsRecordPageVO = this.marketInformationDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         PageVO<MarketInformationVO> tNewsVOPageVO = new PageVO<>();
         tNewsVOPageVO.setTotalCount(tNewsRecordPageVO.getTotalCount());
@@ -104,6 +118,44 @@ public class MarketInformationService {
         tNewsVOPageVO.setPageData(tNewsVOS);
         return tNewsVOPageVO;
 
+    }
+
+    /**
+     * 获取文件附件
+     *
+     * @param newID
+     * @return
+     */
+    private List<TFileVO> getFiles(Long newID) {
+        List<TMarketInformationAttachmentRecord> records = this.marketInformationAttachmentDao
+                .findByCondition(TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT.MARKET_INFORMATION_ID.eq(newID));
+        List<Long> ids = records.stream().map(s -> s.getId()).collect(Collectors.toList());
+        return fileService.getByIds(ids);
+    }
+
+    /**
+     * 保存
+     *
+     * @param tFileVOS
+     */
+    public void saveFile(List<TFileVO> tFileVOS, Long id, Long userId) {
+        this.marketInformationAttachmentDao.deleteByConditions(TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT.MARKET_INFORMATION_ID.eq(id));
+        List<TMarketInformationAttachmentRecord> records = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(tFileVOS)){
+            return;
+        }
+        for (TFileVO tFileVO : tFileVOS) {
+            TMarketInformationAttachmentRecord record = new TMarketInformationAttachmentRecord();
+            record.setId(idService.getId());
+            record.setFileId(tFileVO.getId());
+            record.setMarketInformationId(id);
+            record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setCreateUser(userId);
+            record.setUpdateUser(userId);
+            records.add(record);
+        }
+        this.marketInformationAttachmentDao.insert(records);
     }
 
     /**
@@ -120,7 +172,9 @@ public class MarketInformationService {
             s.setReadCount( s.getReadCount() == null ? 1: s.getReadCount() + 1);
             this.marketInformationDao.update(s);
         }
-        return getTWorkDynamicsVO(s, userMap, tindusMap);
+        MarketInformationVO vo = getTWorkDynamicsVO(s, userMap, tindusMap);
+        vo.setAttachments(getFiles(id));
+        return vo;
     }
 
     /**
@@ -217,6 +271,14 @@ public class MarketInformationService {
         } else {
             this.marketInformationDao.update(tNewsRecord);
         }
+        saveFile(tNewsVO.getAttachments(), tNewsRecord.getId(), userId);
         return new ResultVO<>(0, "可以了");
+    }
+
+
+    public ResultVO<String> delete(List<Long> ids){
+        this.marketInformationDao.deleteById(ids);
+        this.marketInformationAttachmentDao.deleteByConditions(TMarketInformationAttachment.T_MARKET_INFORMATION_ATTACHMENT.MARKET_INFORMATION_ID.in(ids));
+        return new ResultVO<>("删除完成");
     }
 }

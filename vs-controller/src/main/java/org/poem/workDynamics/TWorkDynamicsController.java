@@ -34,7 +34,7 @@ public class TWorkDynamicsController {
                                             @PathVariable(value = "pageSize") Integer pageSize,
                                             @PathVariable(value = "pageNumber") Integer pageNumber) {
         logger.info("TWorkDynamicsController:getAll" + JSONObject.toJSONString(tNewQueryVO));
-        return new ResultVO<>(this.tNewsService.getAll(tNewQueryVO, pageSize, pageNumber));
+        return new ResultVO<>(this.tNewsService.getAll(tNewQueryVO, pageNumber,pageSize));
     }
 
     @ApiOperation(value = "根据id查询", httpMethod = "GET")
@@ -48,7 +48,7 @@ public class TWorkDynamicsController {
     @PostMapping("/line")
     public ResultVO<String> line(Long id, HttpServletRequest request) {
         logger.info("TWorkDynamicsController:line");
-        return this.tNewsService.line(id, RequestUtil.getUserId(request));
+        return this.tNewsService.line(RequestUtil.getUserId(request), id);
     }
 
 
@@ -56,7 +56,7 @@ public class TWorkDynamicsController {
     @PostMapping("/push")
     public ResultVO<String> push(Long id, HttpServletRequest request) {
         logger.info("TWorkDynamicsController:push");
-        return this.tNewsService.push(id, RequestUtil.getUserId(request));
+        return this.tNewsService.push(RequestUtil.getUserId(request), id);
     }
 
 
@@ -64,7 +64,7 @@ public class TWorkDynamicsController {
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
         logger.info("TWorkDynamicsController:top");
-        return this.tNewsService.top(id, RequestUtil.getUserId(request));
+        return this.tNewsService.top(RequestUtil.getUserId(request), id);
     }
 
     @ApiOperation(value = "更新/添加", httpMethod = "POST")
@@ -72,5 +72,12 @@ public class TWorkDynamicsController {
     public ResultVO<String> addAndUpdate(@RequestBody TWorkDynamicsVO tNewsVO, HttpServletRequest request) {
         logger.info("TWorkDynamicsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.tNewsService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
+    }
+
+    @ApiOperation(value = "删除", httpMethod = "POST")
+    @PostMapping("/delete")
+    public ResultVO<String> delete(Long[] ids, HttpServletRequest request) {
+        logger.info("TWorkDynamicsController:addAndUpdate :" + JSONObject.toJSONString(ids));
+        return this.tNewsService.delete(ids);
     }
 }

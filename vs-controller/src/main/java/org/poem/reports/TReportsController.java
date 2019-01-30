@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/v1/reports")
 @Api(value = "/v1/reports",tags = {"23-投诉举报"})
-public class TReportsController {
+public class  TReportsController {
 
     private static final Logger logger = LoggerFactory.getLogger(TReportsController.class);
 
@@ -34,7 +34,7 @@ public class TReportsController {
                                                     @PathVariable(value = "pageSize") Integer pageSize,
                                                     @PathVariable(value = "pageNumber") Integer pageNumber) {
         logger.info("TReportsController:getAll" + JSONObject.toJSONString(tNewQueryVO));
-        return new ResultVO<>(this.tReportsService.getAll(tNewQueryVO, pageSize, pageNumber));
+        return new ResultVO<>(this.tReportsService.getAll(tNewQueryVO, pageNumber,pageSize));
     }
 
     @ApiOperation(value = "根据id查询", httpMethod = "GET")
@@ -44,28 +44,7 @@ public class TReportsController {
         return new ResultVO<>(this.tReportsService.getById(id));
     }
 
-    @ApiOperation(value = "下线", httpMethod = "POST")
-    @PostMapping("/line")
-    public ResultVO<String> line(Long id, HttpServletRequest request) {
-        logger.info("TReportsController:line");
-        return this.tReportsService.line(id, RequestUtil.getUserId(request));
-    }
 
-
-    @ApiOperation(value = "发布", httpMethod = "POST")
-    @PostMapping("/push")
-    public ResultVO<String> push(Long id, HttpServletRequest request) {
-        logger.info("TReportsController:push");
-        return this.tReportsService.push(id, RequestUtil.getUserId(request));
-    }
-
-
-    @ApiOperation(value = "置顶", httpMethod = "POST")
-    @PostMapping("/top")
-    public ResultVO<String> top(Long id, HttpServletRequest request) {
-        logger.info("TReportsController:top");
-        return this.tReportsService.top(id, RequestUtil.getUserId(request));
-    }
 
     @ApiOperation(value = "更新/添加", httpMethod = "POST")
     @PostMapping("/addAndUpdate")
@@ -73,5 +52,12 @@ public class TReportsController {
         logger.info("TReportsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.tReportsService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
     }
+    @ApiOperation(value = "处理", httpMethod = "POST")
+    @PostMapping("/handl")
+    public ResultVO<String> handl(@RequestBody TReportsHandVO tNewsVO, HttpServletRequest request) {
+        logger.info("TReportsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
+        return this.tReportsService.handl(tNewsVO, RequestUtil.getUserId(request));
+    }
+
 
 }

@@ -12,18 +12,21 @@ import org.poem.common.IDService;
 import org.poem.jooq.tables.TRoomReservation;
 import org.poem.jooq.tables.records.TRoomReservationRecord;
 import org.poem.orderingMeals.TOrderingMealsQueryVO;
+import org.poem.systemnotice.SystemNoticeService;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * 客房预订
+ *
  * @author poem
  */
 @Service
@@ -31,12 +34,15 @@ public class TRoomReservationService {
 
     @Autowired
     private TRoomReservationDao tRoomReservationDao;
-    
+
     @Autowired
     private UserDao userDao;
 
     @Autowired
     private IDService<Long> idService;
+
+    @Autowired
+    private SystemNoticeService systemNoticeService;
 
 
     /**
@@ -46,7 +52,7 @@ public class TRoomReservationService {
      * @return
      */
     private static TRoomReservationVO getTSupplierVO(TRoomReservationRecord t,
-                                                   Map<Long, String> userMap) {
+                                                     Map<Long, String> userMap) {
         TRoomReservationVO tSupplierVO = new TRoomReservationVO();
         tSupplierVO.setId(String.valueOf(t.getId()));
         tSupplierVO.setName(t.getName());
@@ -56,12 +62,18 @@ public class TRoomReservationService {
         tSupplierVO.setPersons(String.valueOf(t.getPersons()));
         tSupplierVO.setRooms(String.valueOf(t.getRooms()));
         tSupplierVO.setLivingTime(DateUtils.format(t.getLivingTime()));
-
+        tSupplierVO.setLeavingDate(DateUtils.format(t.getLeavingDate()));
+        tSupplierVO.setRoomsType(t.getRoomsType() == null ? "" : String.valueOf(t.getRoomsType()));
+        tSupplierVO.setArm(t.getIsArm());
+        tSupplierVO.setWithArm(t.getWithArm());
+        tSupplierVO.setAllotment(t.getAllotment());
         tSupplierVO.setUpdateTime(DateUtils.format(t.getUpdateTime()));
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
         tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(userMap.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(userMap.get(t.getCreateUser()));
+        tSupplierVO.setPhone(t.getPhone());
+        tSupplierVO.setArmNum(t.getArmNum());
         return tSupplierVO;
     }
 
@@ -102,17 +114,29 @@ public class TRoomReservationService {
             record.setFlag(true);
             save = true;
         }
+        record.setLeavingDate(DateUtils.formatTimestamp(tEquipmentVO.getLeavingDate()));
+        record.setRoomsType(tEquipmentVO.getRoomsType());
+        record.setIsArm(tEquipmentVO.getArm());
+        record.setWithArm(tEquipmentVO.getWithArm());
+        record.setAllotment(tEquipmentVO.getAllotment());
         record.setName(tEquipmentVO.getName());
         record.setIdnum(tEquipmentVO.getIdnum());
-        record.setRooms(Integer.valueOf(tEquipmentVO.getPersons()));
+        record.setRooms(tEquipmentVO.getRooms());
         record.setWorkers(tEquipmentVO.getWorkers());
-        record.setPersons(Integer.valueOf(tEquipmentVO.getPersons()));
+        record.setPersons(StringUtils.isNotEmpty(tEquipmentVO.getPersons()) ? Integer.valueOf(tEquipmentVO.getPersons()):0 );
         record.setLivingTime(DateUtils.formatTimestamp(tEquipmentVO.getLivingTime()));
         record.setRemark(tEquipmentVO.getRemark());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
+        record.setPhone(tEquipmentVO.getPhone() );
+        record.setArmNum(tEquipmentVO.getArmNum());
         if (save) {
             this.tRoomReservationDao.insert(record);
+
+            String content = "用户" + userDao.findById(userId).getName() +
+                    "于" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss")
+                    + "新增客房预订。";
+            systemNoticeService.saveSystemNotice("新增 客房预订", userId, content);
         } else {
             this.tRoomReservationDao.update(record);
         }
@@ -146,11 +170,11 @@ public class TRoomReservationService {
         }
 
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getLivingStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getLivingStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getLivingStartTime() + " 00:00:00");
             conditions.add(TRoomReservation.T_ROOM_RESERVATION.LIVING_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getLivingEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getLivingEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getLivingEndTime() + " 23:59:59");
             conditions.add(TRoomReservation.T_ROOM_RESERVATION.LIVING_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> list = Arrays.asList(TRoomReservation.T_ROOM_RESERVATION.CREATE_TIME.asc(), TRoomReservation.T_ROOM_RESERVATION.STATUS.desc());

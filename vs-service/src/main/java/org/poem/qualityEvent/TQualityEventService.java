@@ -139,9 +139,9 @@ public class TQualityEventService {
         record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
         record.setMaterials(tEquipmentVO.getMaterials());
         record.setOccurrenceTime(DateUtils.formatTimestamp(tEquipmentVO.getOccurrenceTime()));
-        record.setDepartId(Integer.valueOf(tEquipmentVO.getDepartId()));
         record.setName(tEquipmentVO.getName());
         record.setRemark(tEquipmentVO.getRemark());
+        record.setStatus(StringUtils.isEmpty(tEquipmentVO.getStatus()) ? 0 : Integer.valueOf(tEquipmentVO.getStatus()));
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
         if (save) {
@@ -183,11 +183,11 @@ public class TQualityEventService {
             conditions.add(TQualityEvent.T_QUALITY_EVENT.SUPPLIER_ID.eq(Long.valueOf(tQualityNoticeQueryVO.getSupplierId())));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getOccurrenceTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getOccurrenceTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getOccurrenceTime() + " 00:00:00");
             conditions.add(TQualityEvent.T_QUALITY_EVENT.OCCURRENCE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getOccurrenceTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getOccurrenceTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getOccurrenceTime() + " 23:59:59");
             conditions.add(TQualityEvent.T_QUALITY_EVENT.OCCURRENCE_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> list = Arrays.asList(TQualityEvent.T_QUALITY_EVENT.CREATE_TIME.asc(), TQualityEvent.T_QUALITY_EVENT.STATUS.desc());
@@ -201,6 +201,64 @@ public class TQualityEventService {
                 }).collect(Collectors.toList())
         );
 
+    }
+
+
+    /**
+     * 置顶
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> top(Long id, Long userId) {
+        TQualityEventRecord record = this.tQualityEventDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setFlag(true);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityEventDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 发布
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> push(Long id, Long userId) {
+        TQualityEventRecord record = this.tQualityEventDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(1);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityEventDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
+
+    /**
+     * 下线
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> line(Long id, Long userId) {
+        TQualityEventRecord record = this.tQualityEventDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setStatus(0);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityEventDao.update(record);
+        return new ResultVO<>("操作完成");
     }
 
 }
