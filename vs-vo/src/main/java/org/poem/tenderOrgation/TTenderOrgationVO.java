@@ -22,6 +22,9 @@ public class TTenderOrgationVO {
     @ApiModelProperty(value = "所在地区")
     private String region;
 
+    @ApiModelProperty(value = "logo")
+    private String logo;
+
     @ApiModelProperty(value = "详细地址")
     private String address;
 
@@ -69,6 +72,15 @@ public class TTenderOrgationVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public String getId() {
         return id;

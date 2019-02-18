@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TVehiclePickRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TVehiclePick extends TableImpl<TVehiclePickRecord> {
 
-    private static final long serialVersionUID = 387843515;
+    private static final long serialVersionUID = 1716685052;
 
     /**
      * The reference instance of <code>public.t_vehicle_pick</code>
@@ -61,49 +61,54 @@ public class TVehiclePick extends TableImpl<TVehiclePickRecord> {
     public final TableField<TVehiclePickRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.t_vehicle_pick.name</code>. 房客姓名
+     * The column <code>public.t_vehicle_pick.name</code>. 用车人员姓名/用车单位
      */
-    public final TableField<TVehiclePickRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(200), this, "房客姓名");
+    public final TableField<TVehiclePickRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(200), this, "用车人员姓名/用车单位");
 
     /**
-     * The column <code>public.t_vehicle_pick.idnum</code>. 身份证
+     * The column <code>public.t_vehicle_pick.application_reason</code>. 申请事由
      */
-    public final TableField<TVehiclePickRecord, String> IDNUM = createField("idnum", org.jooq.impl.SQLDataType.VARCHAR(200), this, "身份证");
+    public final TableField<TVehiclePickRecord, String> APPLICATION_REASON = createField("application_reason", org.jooq.impl.SQLDataType.VARCHAR(200), this, "申请事由");
 
     /**
-     * The column <code>public.t_vehicle_pick.phone</code>. 电话号码
+     * The column <code>public.t_vehicle_pick.application_time</code>. 用车时间
      */
-    public final TableField<TVehiclePickRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.VARCHAR(20), this, "电话号码");
+    public final TableField<TVehiclePickRecord, Timestamp> APPLICATION_TIME = createField("application_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "用车时间");
 
     /**
-     * The column <code>public.t_vehicle_pick.workers</code>. 工作单位
+     * The column <code>public.t_vehicle_pick.address</code>. 接送地点
      */
-    public final TableField<TVehiclePickRecord, String> WORKERS = createField("workers", org.jooq.impl.SQLDataType.VARCHAR(200), this, "工作单位");
+    public final TableField<TVehiclePickRecord, String> ADDRESS = createField("address", org.jooq.impl.SQLDataType.VARCHAR(200), this, "接送地点");
 
     /**
-     * The column <code>public.t_vehicle_pick.persons</code>. 乘客总数
+     * The column <code>public.t_vehicle_pick.flight</code>. 航班
      */
-    public final TableField<TVehiclePickRecord, Integer> PERSONS = createField("persons", org.jooq.impl.SQLDataType.INTEGER, this, "乘客总数");
+    public final TableField<TVehiclePickRecord, String> FLIGHT = createField("flight", org.jooq.impl.SQLDataType.VARCHAR(100), this, "航班");
 
     /**
-     * The column <code>public.t_vehicle_pick.departure_place</code>.
+     * The column <code>public.t_vehicle_pick.train_number</code>. 车次
      */
-    public final TableField<TVehiclePickRecord, String> DEPARTURE_PLACE = createField("departure_place", org.jooq.impl.SQLDataType.VARCHAR(200), this, "");
+    public final TableField<TVehiclePickRecord, String> TRAIN_NUMBER = createField("train_number", org.jooq.impl.SQLDataType.VARCHAR(50), this, "车次");
 
     /**
-     * The column <code>public.t_vehicle_pick.destination</code>.
+     * The column <code>public.t_vehicle_pick.train_persons</code>. 用车人数
      */
-    public final TableField<TVehiclePickRecord, String> DESTINATION = createField("destination", org.jooq.impl.SQLDataType.VARCHAR(200), this, "");
+    public final TableField<TVehiclePickRecord, String> TRAIN_PERSONS = createField("train_persons", org.jooq.impl.SQLDataType.VARCHAR(50), this, "用车人数");
 
     /**
-     * The column <code>public.t_vehicle_pick.vehicle_time</code>. 接送时间
+     * The column <code>public.t_vehicle_pick.vehicle_type</code>. 申请车型
      */
-    public final TableField<TVehiclePickRecord, Timestamp> VEHICLE_TIME = createField("vehicle_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "接送时间");
+    public final TableField<TVehiclePickRecord, String> VEHICLE_TYPE = createField("vehicle_type", org.jooq.impl.SQLDataType.VARCHAR(50), this, "申请车型");
 
     /**
-     * The column <code>public.t_vehicle_pick.remark</code>. 备注
+     * The column <code>public.t_vehicle_pick.vehicle_area</code>. 行驶区域
      */
-    public final TableField<TVehiclePickRecord, String> REMARK = createField("remark", org.jooq.impl.SQLDataType.VARCHAR(200), this, "备注");
+    public final TableField<TVehiclePickRecord, String> VEHICLE_AREA = createField("vehicle_area", org.jooq.impl.SQLDataType.VARCHAR(200), this, "行驶区域");
+
+    /**
+     * The column <code>public.t_vehicle_pick.phone</code>. 联系电话
+     */
+    public final TableField<TVehiclePickRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.VARCHAR(50), this, "联系电话");
 
     /**
      * The column <code>public.t_vehicle_pick.status</code>. 状态

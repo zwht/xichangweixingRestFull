@@ -190,7 +190,7 @@ public class TUserService implements UserInfoService{
             tUserVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
             tUserVO.setStatus(String.valueOf(pageDatum.getStatus()));
             TUserRecord updateUser = this.userDao.findById(pageDatum.getUpdateUser());
-            tUserVO.setUpdateUser(updateUser.getName());
+            tUserVO.setUpdateUser(updateUser == null ? "" : updateUser.getName());
             tUserVOS.add(tUserVO);
 
         }
@@ -219,7 +219,7 @@ public class TUserService implements UserInfoService{
         tUserVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
         tUserVO.setStatus(String.valueOf(pageDatum.getStatus()));
         TUserRecord updateUser = this.userDao.findById(pageDatum.getUpdateUser());
-        tUserVO.setUpdateUser(updateUser.getName());
+        tUserVO.setUpdateUser(updateUser == null ? "" : updateUser.getName());
         return new ResultVO<>(tUserVO);
     }
 
@@ -277,5 +277,34 @@ public class TUserService implements UserInfoService{
             return codeR;
         }
         return new ResultVO<>(0,tUserRecord.getPassword(),"找回密码");
+    }
+
+    /**
+     * 禁用
+     * @param id
+     * @return
+     */
+    public ResultVO<String> disable(Long id, Long userId) {
+        TUserRecord tUserRecord = this.userDao.findById(id);
+        tUserRecord.setFlag(false);
+        tUserRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        tUserRecord.setUpdateUser(userId);
+        this.userDao.update(tUserRecord);
+        return new ResultVO<>(0,null,"成功");
+    }
+
+    /**
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
+    public ResultVO<String> able(Long id,Long userId) {
+        TUserRecord tUserRecord = this.userDao.findById(id);
+        tUserRecord.setFlag(true);
+        tUserRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        tUserRecord.setUpdateUser(userId);
+        this.userDao.update(tUserRecord);
+        return new ResultVO<>(0,null,"成功");
     }
 }

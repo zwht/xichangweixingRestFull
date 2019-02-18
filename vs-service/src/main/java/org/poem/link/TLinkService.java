@@ -55,11 +55,11 @@ public class TLinkService {
             conditions.add(TLink.T_LINK.STATUS.eq(Integer.valueOf(tLinkQueryVO.getStatus())));
         }
         if (StringUtils.isNotEmpty(tLinkQueryVO.getStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tLinkQueryVO.getStartTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tLinkQueryVO.getStartTime() + " 00:00:00");
             conditions.add(TLink.T_LINK.UPDATE_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tLinkQueryVO.getEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tLinkQueryVO.getEndTime());
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tLinkQueryVO.getEndTime() + " 23:59:59");
             conditions.add(TLink.T_LINK.UPDATE_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> sortFields = Lists.newArrayList();
@@ -78,7 +78,7 @@ public class TLinkService {
             tLinkVO.setStatus(pageDatum.getStatus() == 0 ? "未发布" : "已发布");
             tLinkVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
             TUserRecord record = this.userDao.findById(pageDatum.getUpdateUser());
-            tLinkVO.setUpdateUser(record.getName());
+            tLinkVO.setUpdateUser(record == null ? "" : record.getName());
             linkVOS.add(tLinkVO);
         }
         pageVO.setPageData(linkVOS);
@@ -213,7 +213,7 @@ public class TLinkService {
         tLinkVO.setStatus(pageDatum.getStatus() == 0 ? "未发布" : "已发布");
         tLinkVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
         TUserRecord record = this.userDao.findById(pageDatum.getUpdateUser());
-        tLinkVO.setUpdateUser(record.getName());
+        tLinkVO.setUpdateUser(record == null ?  "" : record.getName());
         return new ResultVO<>(tLinkVO);
     }
 

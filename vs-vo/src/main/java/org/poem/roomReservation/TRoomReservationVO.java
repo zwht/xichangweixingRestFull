@@ -25,14 +25,35 @@ public class TRoomReservationVO {
     @ApiModelProperty(value = "入住人数")
     private String persons;
 
-    @ApiModelProperty(value = "预订房间数")
-    private String rooms;
-
     @ApiModelProperty(value = "入住时间")
     private String livingTime;
 
+    @ApiModelProperty(value = "离开时间")
+    private String leavingDate;
+
+    @ApiModelProperty(value = "住房类型 1 单间 2 标间 3 小套间 4 大套房")
+    private String roomsType;
+
+    @ApiModelProperty(value = "预订房间数")
+    private String rooms;
+
+    @ApiModelProperty(value = "是否是军人")
+    private Short isArm;
+
+    @ApiModelProperty(value = "军官证")
+    private String armNum ;
+
+    @ApiModelProperty(value = "军官证")
+    private String withArm ;
+
+    @ApiModelProperty(value = "留房时间")
+    private String allotment;
+
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "联系电话")
+    private String phone;
 
     @ApiModelProperty(value = "状态")
     private String status;
@@ -51,6 +72,22 @@ public class TRoomReservationVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+    public Short getIsArm() {
+        return isArm;
+    }
+
+    public void setIsArm(Short isArm) {
+        this.isArm = isArm;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getId() {
         return id;
@@ -162,5 +199,53 @@ public class TRoomReservationVO {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public String getLeavingDate() {
+        return leavingDate;
+    }
+
+    public void setLeavingDate(String leavingDate) {
+        this.leavingDate = leavingDate;
+    }
+
+    public String getRoomsType() {
+        return roomsType;
+    }
+
+    public void setRoomsType(String roomsType) {
+        this.roomsType = roomsType;
+    }
+
+    public Short getArm() {
+        return isArm;
+    }
+
+    public void setArm(Short arm) {
+        isArm = arm;
+    }
+
+    public String getArmNum() {
+        return armNum;
+    }
+
+    public void setArmNum(String armNum) {
+        this.armNum = armNum;
+    }
+
+    public String getWithArm() {
+        return withArm;
+    }
+
+    public void setWithArm(String withArm) {
+        this.withArm = withArm;
+    }
+
+    public String getAllotment() {
+        return allotment;
+    }
+
+    public void setAllotment(String allotment) {
+        this.allotment = allotment;
     }
 }

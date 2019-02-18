@@ -11,12 +11,14 @@ import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
 import org.poem.jooq.tables.TVehiclePick;
 import org.poem.jooq.tables.records.TVehiclePickRecord;
+import org.poem.systemnotice.SystemNoticeService;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,6 +39,9 @@ public class TVehiclePickService {
     @Autowired
     private IDService<Long> idService;
 
+    @Autowired
+    private SystemNoticeService systemNoticeService;
+
 
 
     /**
@@ -50,18 +55,17 @@ public class TVehiclePickService {
         TVehiclePickVO tSupplierVO = new TVehiclePickVO();
         tSupplierVO.setId(String.valueOf(t.getId()));
         tSupplierVO.setName(t.getName());
-        tSupplierVO.setIdnum(t.getIdnum());
+        tSupplierVO.setApplicationReason(t.getApplicationReason());
+        tSupplierVO.setApplicationTime(DateUtils.format(t.getApplicationTime(), "yyyy-MM-dd HH:mm" ));
+        tSupplierVO.setAddress(t.getAddress());
+        tSupplierVO.setFlight(t.getFlight());
+        tSupplierVO.setTrainNumber(t.getTrainNumber());
+        tSupplierVO.setTrainPersons(t.getTrainPersons());
+        tSupplierVO.setVehicleArea(t.getVehicleArea());
+        tSupplierVO.setVehicleType(t.getVehicleType());
         tSupplierVO.setPhone(t.getPhone());
-        tSupplierVO.setRemark(t.getRemark());
-        tSupplierVO.setWorkers(t.getWorkers());
-        tSupplierVO.setPersons(String.valueOf(t.getPersons()));
-        tSupplierVO.setDeparturePlace(t.getDeparturePlace());
-        tSupplierVO.setDestination(t.getDestination());
-        tSupplierVO.setVehicleTime(DateUtils.format(t.getVehicleTime()));
-
         tSupplierVO.setUpdateTime(DateUtils.format(t.getUpdateTime()));
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
-        tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(userMap.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(userMap.get(t.getCreateUser()));
         return tSupplierVO;
@@ -105,18 +109,24 @@ public class TVehiclePickService {
             save = true;
         }
         record.setName(tEquipmentVO.getName());
-        record.setIdnum(tEquipmentVO.getIdnum());
+        record.setName(tEquipmentVO.getName());
+        record.setApplicationReason(tEquipmentVO.getApplicationReason());
+        record.setApplicationTime(DateUtils.formatTimestampM(tEquipmentVO.getApplicationTime()));
+        record.setAddress(tEquipmentVO.getAddress());
+        record.setFlight(tEquipmentVO.getFlight());
+        record.setTrainNumber(tEquipmentVO.getTrainNumber());
+        record.setTrainPersons(tEquipmentVO.getTrainPersons());
+        record.setVehicleArea(tEquipmentVO.getVehicleArea());
+        record.setVehicleType(tEquipmentVO.getVehicleType());
         record.setPhone(tEquipmentVO.getPhone());
-        record.setWorkers(tEquipmentVO.getWorkers());
-        record.setPersons(Integer.valueOf(tEquipmentVO.getPersons()));
-        record.setDeparturePlace(tEquipmentVO.getDeparturePlace());
-        record.setDestination(tEquipmentVO.getDestination());
-        record.setVehicleTime(DateUtils.formatTimestamp(tEquipmentVO.getVehicleTime()));
-        record.setRemark(tEquipmentVO.getRemark());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
         if (save) {
             this.tVehiclePickDao.insert(record);
+            String content = "用户" + userDao.findById(userId).getName() +
+                    "于" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss")
+                    + "新增车辆接送。";
+            systemNoticeService.saveSystemNotice("新增 车辆接送",userId, content);
         } else {
             this.tVehiclePickDao.update(record);
         }
@@ -151,12 +161,12 @@ public class TVehiclePickService {
         }
 
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getVehicleStartTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getVehicleStartTime());
-            conditions.add(TVehiclePick.T_VEHICLE_PICK.VEHICLE_TIME.greaterOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getVehicleStartTime() + " 00:00:00");
+            conditions.add(TVehiclePick.T_VEHICLE_PICK.APPLICATION_TIME.greaterOrEqual(timestamp));
         }
         if (StringUtils.isNotEmpty(tQualityNoticeQueryVO.getVehicleEndTime())) {
-            Timestamp timestamp = DateUtils.formatTimestamp(tQualityNoticeQueryVO.getVehicleEndTime());
-            conditions.add(TVehiclePick.T_VEHICLE_PICK.VEHICLE_TIME.lessOrEqual(timestamp));
+            Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getVehicleEndTime() + " 23:59:59");
+            conditions.add(TVehiclePick.T_VEHICLE_PICK.APPLICATION_TIME.lessOrEqual(timestamp));
         }
         List<SortField<?>> list = Arrays.asList(TVehiclePick.T_VEHICLE_PICK.CREATE_TIME.asc(), TVehiclePick.T_VEHICLE_PICK.STATUS.desc());
         PageVO<TVehiclePickRecord> tSupplierVOPageVO = this.tVehiclePickDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);

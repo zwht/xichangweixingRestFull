@@ -17,6 +17,7 @@ import java.util.List;
  * Created by Administrator on 2017/10/10.
  */
 public class ExportCSV {
+
     private static <T> List<String[]> getStringArrayFromBean(List<T> beans) throws NoSuchMethodException,
             SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (beans.size() < 1) {

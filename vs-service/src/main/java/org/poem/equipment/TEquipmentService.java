@@ -2,6 +2,7 @@ package org.poem.equipment;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
 import org.jooq.Condition;
 import org.jooq.SortField;
 import org.poem.DateUtils;
@@ -12,11 +13,17 @@ import org.poem.authVO.ResultVO;
 import org.poem.common.IDService;
 import org.poem.equipType.TEquipTypeService;
 import org.poem.equipType.TEquipTypeVO;
+import org.poem.equipment.vo.EquipmentDataContainer;
+import org.poem.equipment.vo.TEquipmentExportVO;
+import org.poem.equipment.vo.TEquipmentImportVO;
+import org.poem.equiptype.TEquipTypeDao;
 import org.poem.jooq.tables.TEquipment;
+import org.poem.jooq.tables.TSupplier;
 import org.poem.jooq.tables.records.TEquipmentRecord;
+import org.poem.jooq.tables.records.TSupplierRecord;
+import org.poem.supplier.SupplierDao;
 import org.poem.supplier.TSupplierService;
 import org.poem.supplier.TSupplierVO;
-import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,13 +48,16 @@ public class TEquipmentService {
     private IDService<Long> idService;
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private TEquipTypeService tEquipTypeService;
 
     @Autowired
     private TSupplierService tSupplierService;
+
+    @Autowired
+    private TEquipTypeDao tEquipTypeDao;
+
+    @Autowired
+    private SupplierDao supplierDao;
 
 
     /**
@@ -69,12 +79,14 @@ public class TEquipmentService {
         t.setPackageFormat(tEquipmentRecord.getPackageFormat());
         t.setMeasurement(tEquipmentRecord.getMeasurement());
         t.setStandard(tEquipmentRecord.getStandard());
-        t.setMeasurement(DateUtils.format(tEquipmentRecord.getManufactureDate()));
+        t.setLeadingPerson(tEquipmentRecord.getLeadingPserson());
+        t.setManufactureDate(DateUtils.format(tEquipmentRecord.getManufactureDate()));
         t.setValidity(DateUtils.format(tEquipmentRecord.getValidity()));
         t.setSupplierId(String.valueOf(tEquipmentRecord.getSupplierId()));
         t.setSupplierName(supplierMap.get(t.getSupplierId()));
         t.setImages(String.valueOf(tEquipmentRecord.getImages()));
         t.setRemark(tEquipmentRecord.getRemark());
+        t.setModel(tEquipmentRecord.getModel());
         t.setStatus(String.valueOf(tEquipmentRecord.getStatus()));
         t.setCreateTime(DateUtils.format(tEquipmentRecord.getCreateTime()));
         t.setUpdateTime(DateUtils.format(tEquipmentRecord.getUpdateTime()));
@@ -128,8 +140,10 @@ public class TEquipmentService {
         if (StringUtils.isNotEmpty(tEquipmentQuery.getEquipType())) {
             conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(Long.valueOf(tEquipmentQuery.getEquipType())));
         }
-        if (StringUtils.isNotEmpty(tEquipmentQuery.getSupplierId())) {
-            conditions.add(TEquipment.T_EQUIPMENT.SUPPLIER_ID.eq(Long.valueOf(tEquipmentQuery.getSupplierId())));
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getSupplierName())) {
+            List<TSupplierRecord> records = supplierDao.findByCondition(TSupplier.T_SUPPLIER.NAME.like("%" + tEquipmentQuery.getSupplierName() + "%"));
+            List<Long> ids = records.stream().map(TSupplierRecord::getId).collect(Collectors.toList());
+            conditions.add(TEquipment.T_EQUIPMENT.SUPPLIER_ID.in(ids));
         }
         List<SortField<?>> fields = Lists.newArrayList();
         fields.add(TEquipment.T_EQUIPMENT.STATUS.asc());
@@ -193,12 +207,15 @@ public class TEquipmentService {
         record.setPackageFormat(tEquipmentVO.getPackageFormat());
         record.setMeasurement(tEquipmentVO.getMeasurement());
         record.setStandard(tEquipmentVO.getStandard());
+        record.setLeadingPserson(tEquipmentVO.getLeadingPerson());
         record.setManufactureDate(DateUtils.formatTimestamp(tEquipmentVO.getManufactureDate()));
         record.setValidity(DateUtils.formatTimestamp(tEquipmentVO.getValidity()));
         record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
-        record.setImages(Long.valueOf(tEquipmentVO.getImages()));
+        record.setImages(tEquipmentVO.getImages());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
+        record.setModel(tEquipmentVO.getModel());
+        record.setRemark(tEquipmentVO.getRemark());
         if (save) {
             this.tEquipmentDao.insert(record);
         } else {
@@ -218,4 +235,160 @@ public class TEquipmentService {
         return new ResultVO<>("完成");
     }
 
+    /**
+     * 初始化数据
+     *
+     * @return
+     */
+    private EquipmentDataContainer intData() {
+        EquipmentDataContainer container = new EquipmentDataContainer();
+        Map<Long, String> supplierMap = supplierDao.getTSupplierMap();
+        Map<Long, String> equipTypeMap = tEquipTypeDao.getTEquipTypeMap();
+
+        Map<String, Long> supplierMap_ = Maps.newHashMap();
+        Map<String, Long> equipTypeMap_ = Maps.newHashMap();
+
+        supplierMap.forEach((k, v) -> {
+            supplierMap_.put(v, k);
+        });
+
+        equipTypeMap.forEach((k, v) -> {
+            equipTypeMap_.put(v, k);
+        });
+        container.setEquipTypeMap(equipTypeMap_);
+        container.setSupplierMap(supplierMap_);
+        return container;
+    }
+
+
+    /**
+     * 倒入数据
+     *
+     * @param data
+     * @param userId
+     */
+    public List<String> importData(List<TEquipmentImportVO> data, Long userId) {
+        List<String> strings = Lists.newArrayList();
+        EquipmentDataContainer container = intData();
+        List<TEquipmentRecord> records = Lists.newArrayList();
+        for (TEquipmentImportVO datum : data) {
+            //设备类型
+            List<String> message = Lists.newArrayList();
+            TEquipmentRecord record = new TEquipmentRecord();
+            record.setId(idService.getId());
+            record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            record.setCreateUser(userId);
+            record.setStatus(0);
+            record.setFlag(true);
+            record.setName(datum.getName());
+            record.setLeadingPserson(datum.getLeadingPerson());
+            record.setCode(datum.getCode());
+            record.setFormat(datum.getFormat());
+            record.setPackageFormat(datum.getPackageFormat());
+            record.setMeasurement(datum.getMeasurement());
+            record.setStandard(datum.getStandard());
+            record.setModel(datum.getModel());
+            record.setManufactureDate(DateUtils.formatTimestamp(datum.getManufactureDate()));
+            record.setValidity(DateUtils.formatTimestamp(datum.getValidity()));
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
+            if (container.getEquipTypeMap().get(datum.getEquipTypeName()) == null) {
+                message.add("设备类型 [" + datum.getEquipTypeName() + " ]不存在");
+            } else {
+                record.setEquipType(container.getEquipTypeMap().get(datum.getEquipTypeName()));
+            }
+            if (container.getSupplierMap().get(datum.getSupplierName()) == null) {
+                message.add("供应商 [" + datum.getSupplierName() + " ]不存在");
+            }
+            if (CollectionUtils.isEmpty(message)) {
+                records.add(record);
+            } else {
+                strings.addAll(message);
+            }
+        }
+        if (CollectionUtils.isNotEmpty(records) && CollectionUtils.isEmpty(strings)) {
+            this.tEquipmentDao.insert(records);
+        }
+        return strings;
+    }
+
+    /**
+     * @return
+     */
+    private static TEquipmentExportVO getTEquipmentExportVO(TEquipmentRecord tEquipmentRecord,
+                                                            Map<String, String> tEquipTypeMap,
+                                                            Map<String, String> supplierMap) {
+        TEquipmentExportVO t = new TEquipmentExportVO();
+        t.setCode(tEquipmentRecord.getCode());
+        t.setName(tEquipmentRecord.getName());
+        t.setLeadingPerson(tEquipmentRecord.getLeadingPserson());
+        t.setEquipTypeName(tEquipTypeMap.get(String.valueOf(tEquipmentRecord.getEquipType())));
+        t.setFormat(tEquipmentRecord.getFormat());
+        t.setPackageFormat(tEquipmentRecord.getPackageFormat());
+        t.setMeasurement(tEquipmentRecord.getMeasurement());
+        t.setStandard(tEquipmentRecord.getStandard());
+        t.setModel(tEquipmentRecord.getModel());
+        t.setMeasurement(DateUtils.format(tEquipmentRecord.getManufactureDate()));
+        t.setValidity(DateUtils.format(tEquipmentRecord.getValidity()));
+        t.setSupplierName(supplierMap.get(String.valueOf(tEquipmentRecord.getSupplierId())));
+        t.setRemark(tEquipmentRecord.getRemark());
+        return t;
+    }
+
+
+    /**
+     * 根据条件导出数据
+     *
+     * @param tEquipmentQuery
+     * @return
+     */
+    public List<TEquipmentExportVO> exportByCondition(TEquipmentQuery tEquipmentQuery) {
+        List<Condition> conditions = Lists.newArrayList();
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getName())) {
+            conditions.add(TEquipment.T_EQUIPMENT.NAME.like("%" + tEquipmentQuery.getName() + "%"));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getStatus())) {
+            conditions.add(TEquipment.T_EQUIPMENT.STATUS.eq(Integer.valueOf(tEquipmentQuery.getStatus())));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getEquipType())) {
+            conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(Long.valueOf(tEquipmentQuery.getEquipType())));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getLeadingPerson())){
+            conditions.add(TEquipment.T_EQUIPMENT.LEADING_PSERSON.like("%" + tEquipmentQuery.getLeadingPerson() + "%"));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getSupplierName())) {
+            List<TSupplierRecord> records = supplierDao.findByCondition(TSupplier.T_SUPPLIER.NAME.like("%" + tEquipmentQuery.getSupplierName() + "%"));
+            List<Long> ids = records.stream().map(TSupplierRecord::getId).collect(Collectors.toList());
+            conditions.add(TEquipment.T_EQUIPMENT.SUPPLIER_ID.in(ids));
+        }
+        List<SortField<?>> fields = Lists.newArrayList();
+        fields.add(TEquipment.T_EQUIPMENT.STATUS.asc());
+        fields.add(TEquipment.T_EQUIPMENT.CREATE_TIME.desc());
+        PageVO<TEquipmentRecord> tEquipmentPageVO = this.tEquipmentDao.fetchByPage(conditions, new OffsetPagingVO(1, Integer.MAX_VALUE), fields);
+        PageVO<TEquipmentVO> equipmentVOPageVO = new PageVO<>();
+        equipmentVOPageVO.setTotalCount(tEquipmentPageVO.getTotalCount());
+        Map<String, String> tEquipTypeMap = tEquipTypeMap();
+        Map<String, String> supplierName = getSupplierName();
+        return tEquipmentPageVO.getPageData().stream().map(
+                r -> {
+                    return getTEquipmentExportVO(r, tEquipTypeMap, supplierName);
+                }
+        ).collect(Collectors.toList());
+    }
+
+    /**
+     * 根据id导出
+     *
+     * @param ids
+     * @return
+     */
+    public List<TEquipmentExportVO> exportByIds(List<Long> ids) {
+        List<TEquipmentRecord> records = this.tEquipmentDao.findByCondition(TEquipment.T_EQUIPMENT.ID.in(ids));
+        Map<String, String> tEquipTypeMap = tEquipTypeMap();
+        Map<String, String> supplierName = getSupplierName();
+        return records.stream().map(r -> {
+                    return getTEquipmentExportVO(r, tEquipTypeMap, supplierName);
+                }
+        ).collect(Collectors.toList());
+    }
 }

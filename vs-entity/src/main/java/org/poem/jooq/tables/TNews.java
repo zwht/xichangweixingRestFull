@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TNewsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TNews extends TableImpl<TNewsRecord> {
 
-    private static final long serialVersionUID = -648021819;
+    private static final long serialVersionUID = 932920226;
 
     /**
      * The reference instance of <code>public.t_news</code>
@@ -73,7 +73,7 @@ public class TNews extends TableImpl<TNewsRecord> {
     /**
      * The column <code>public.t_news.face</code>. 封面
      */
-    public final TableField<TNewsRecord, Long> FACE = createField("face", org.jooq.impl.SQLDataType.BIGINT, this, "封面");
+    public final TableField<TNewsRecord, String> FACE = createField("face", org.jooq.impl.SQLDataType.VARCHAR(300), this, "封面");
 
     /**
      * The column <code>public.t_news.top</code>. 置顶

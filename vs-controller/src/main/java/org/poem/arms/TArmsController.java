@@ -32,9 +32,10 @@ public class TArmsController {
 
     @ApiOperation(value = "02-01-查询", httpMethod = "GET")
     @GetMapping("/getArms/{pageSize}/{pageNumber}")
-    public ResultVO<PageVO<TArmsVO>> getArms(@PathVariable(value = "pageSize") Integer pageSize,
+    public ResultVO<PageVO<TArmsVO>> getArms(TArmsQueryVO tArmsQueryVO,
+            @PathVariable(value = "pageSize") Integer pageSize,
                                              @PathVariable(value = "pageNumber") Integer pageNumber) {
-        return new ResultVO<>(this.tArmsService.getArms(pageSize, pageNumber));
+        return new ResultVO<>(this.tArmsService.getArms(tArmsQueryVO,pageSize, pageNumber));
     }
 
     @ApiOperation(value = "02-02-置顶", httpMethod = "POST")
@@ -71,8 +72,8 @@ public class TArmsController {
         return this.tArmsService.getById(id, false);
     }
 
-    @ApiOperation(value = "02-07-保存或者更新", httpMethod = "GET")
-    @GetMapping("/saveOrUpdate")
+    @ApiOperation(value = "02-07-保存或者更新", httpMethod = "POST")
+    @PostMapping("/saveOrUpdate")
     public ResultVO<String> saveOrUpdate(@RequestBody TArmsVO tArmsVO, HttpServletRequest request) {
         return this.tArmsService.saveOrUpdate(tArmsVO, RequestUtil.getUserId(request));
     }

@@ -79,12 +79,12 @@ public class ShiroConfiguration {
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         Set<String> path = OAuthIgnoreUtils.getNoOAthodPath("org.poem");
         for (String s : path) {
-            logger.info("auth  path:" + s);
+//            logger.info("auth  path:" + s);
             filterChainDefinitionMap.put(s, "anon");
         }
         Set<String> oauthPaths = OAuthIgnoreUtils.getOAuthod("org.poem");
         for (String oauthPath : oauthPaths) {
-            logger.info("oauth  path:" + oauthPath);
+//            logger.info("oauth  path:" + oauthPath);
             filterChainDefinitionMap.put(oauthPath, "oauth");
         }
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

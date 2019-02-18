@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TWorkDynamicsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TWorkDynamics extends TableImpl<TWorkDynamicsRecord> {
 
-    private static final long serialVersionUID = -1939267240;
+    private static final long serialVersionUID = -999859813;
 
     /**
      * The reference instance of <code>public.t_work_dynamics</code>
@@ -73,7 +73,7 @@ public class TWorkDynamics extends TableImpl<TWorkDynamicsRecord> {
     /**
      * The column <code>public.t_work_dynamics.face</code>. 封面
      */
-    public final TableField<TWorkDynamicsRecord, Long> FACE = createField("face", org.jooq.impl.SQLDataType.BIGINT, this, "封面");
+    public final TableField<TWorkDynamicsRecord, String> FACE = createField("face", org.jooq.impl.SQLDataType.VARCHAR(300), this, "封面");
 
     /**
      * The column <code>public.t_work_dynamics.top</code>. 置顶

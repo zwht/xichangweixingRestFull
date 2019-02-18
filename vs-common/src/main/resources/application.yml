@@ -14,10 +14,18 @@ spring:
     multipart:
       max-file-size: 50Mb
       max-request-size: 100Mb
+  redis:
+    database: 4
+    host: 192.168.55.105
+    index: 15
+    port: 6379
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5
   jooq:
     sql-dialect: POSTGRES
-  resources:
-    static-locations: classpath:/webapp/
 hdfs:
   ip: 192.168.55.115
   port: 8020
@@ -30,8 +38,8 @@ web:
 
 logging:
   level:
-    root: info
-
+    org:
+      jooq: debug
 
 sms:
   appid: 1400160235

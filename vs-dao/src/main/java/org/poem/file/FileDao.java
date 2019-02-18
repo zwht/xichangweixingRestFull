@@ -8,6 +8,8 @@ import org.poem.jooq.tables.records.TFileRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import static org.poem.jooq.tables.TFile.T_FILE;
 
 

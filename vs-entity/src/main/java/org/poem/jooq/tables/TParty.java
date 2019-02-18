@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TPartyRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TParty extends TableImpl<TPartyRecord> {
 
-    private static final long serialVersionUID = 399005178;
+    private static final long serialVersionUID = -389927491;
 
     /**
      * The reference instance of <code>public.t_party</code>
@@ -68,7 +68,7 @@ public class TParty extends TableImpl<TPartyRecord> {
     /**
      * The column <code>public.t_party.attachment</code>. 封面
      */
-    public final TableField<TPartyRecord, Long> ATTACHMENT = createField("attachment", org.jooq.impl.SQLDataType.BIGINT, this, "封面");
+    public final TableField<TPartyRecord, String> ATTACHMENT = createField("attachment", org.jooq.impl.SQLDataType.VARCHAR(300), this, "封面");
 
     /**
      * The column <code>public.t_party.content</code>. 内容

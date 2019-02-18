@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * 新闻
@@ -34,20 +35,20 @@ public class TNewsController {
                                             @PathVariable(value = "pageSize") Integer pageSize,
                                             @PathVariable(value = "pageNumber") Integer pageNumber) {
         logger.info("TNewsController:getAll" + JSONObject.toJSONString(tNewQueryVO));
-        return new ResultVO<>(this.tNewsService.getAll(tNewQueryVO, pageSize, pageNumber));
+        return new ResultVO<>(this.tNewsService.getAll(tNewQueryVO, pageNumber, pageSize));
     }
 
     @ApiOperation(value = "06-02-根据id查询", httpMethod = "GET")
     @GetMapping("/getById/{id}")
     public ResultVO<TNewsVO> getById(@PathVariable(value = "id") Long id) {
         logger.info("TNewsController:getById" + JSONObject.toJSONString(id));
-        return new ResultVO<>(this.tNewsService.getById(id));
+        return new ResultVO<>(this.tNewsService.getById(id, false));
     }
 
     @ApiOperation(value = "06-03-下线", httpMethod = "POST")
     @PostMapping("/line")
     public ResultVO<String> line(Long id, HttpServletRequest request) {
-        logger.info("TNewsController:line");
+        logger.info("TNewsController:line " + id);
         return this.tNewsService.line(id, RequestUtil.getUserId(request));
     }
 
@@ -55,7 +56,7 @@ public class TNewsController {
     @ApiOperation(value = "06-04-发布", httpMethod = "POST")
     @PostMapping("/push")
     public ResultVO<String> push(Long id, HttpServletRequest request) {
-        logger.info("TNewsController:push");
+        logger.info("TNewsController:push   "  + id );
         return this.tNewsService.push(id, RequestUtil.getUserId(request));
     }
 
@@ -63,15 +64,22 @@ public class TNewsController {
     @ApiOperation(value = "06-05-置顶", httpMethod = "POST")
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
-        logger.info("TNewsController:top");
+        logger.info("TNewsController:top    "  + id );
         return this.tNewsService.top(id, RequestUtil.getUserId(request));
     }
 
-    @ApiOperation(value = "06-06-置顶", httpMethod = "POST")
+    @ApiOperation(value = "06-06-修改或者添加", httpMethod = "POST")
     @PostMapping("/addAndUpdate")
     public ResultVO<String> addAndUpdate(@RequestBody TNewsVO tNewsVO, HttpServletRequest request) {
         logger.info("TNewsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
         return this.tNewsService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
+    }
+
+    @ApiOperation(value = "06-07-删除", httpMethod = "POST")
+    @PostMapping("/delete")
+    public ResultVO<String> delete(Long[] ids, HttpServletRequest request) {
+        logger.info("TNewsController:addAndUpdate :" + JSONObject.toJSONString(ids));
+        return this.tNewsService.delete(Arrays.asList(ids));
     }
 
 }

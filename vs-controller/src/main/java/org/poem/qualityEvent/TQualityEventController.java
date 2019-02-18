@@ -85,4 +85,42 @@ public class TQualityEventController {
         return new ResultVO<>(this.tSupplierService.getAllByQuery(tEquipmentQuery, pageSize, pageNumber));
     }
 
+    /**
+     * 置顶
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "置顶", httpMethod = "POST")
+    @PostMapping("/top")
+    public ResultVO<String> top(Long id, HttpServletRequest request) {
+        logger.info("TQualityEventController:top");
+        return this.tSupplierService.top(id, RequestUtil.getUserId(request));
+    }
+
+    /**
+     * 发布
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "发布", httpMethod = "POST")
+    @PostMapping("/push")
+    public ResultVO<String> push(Long id, HttpServletRequest request) {
+        logger.info("TQualityEventController:push");
+        return this.tSupplierService.push(id, RequestUtil.getUserId(request));
+    }
+
+    /**
+     * 下线
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "下线", httpMethod = "POST")
+    @PostMapping("/line")
+    public ResultVO<String> line(Long id, HttpServletRequest request) {
+        logger.info("TQualityEventController:line");
+        return this.tSupplierService.line(id, RequestUtil.getUserId(request));
+    }
 }

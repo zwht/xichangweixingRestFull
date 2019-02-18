@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TEquipmentRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TEquipment extends TableImpl<TEquipmentRecord> {
 
-    private static final long serialVersionUID = -1104991796;
+    private static final long serialVersionUID = 1492903477;
 
     /**
      * The reference instance of <code>public.t_equipment</code>
@@ -113,7 +113,7 @@ public class TEquipment extends TableImpl<TEquipmentRecord> {
     /**
      * The column <code>public.t_equipment.images</code>. 图片
      */
-    public final TableField<TEquipmentRecord, Long> IMAGES = createField("images", org.jooq.impl.SQLDataType.BIGINT, this, "图片");
+    public final TableField<TEquipmentRecord, String> IMAGES = createField("images", org.jooq.impl.SQLDataType.VARCHAR(300), this, "图片");
 
     /**
      * The column <code>public.t_equipment.remark</code>. 备注
@@ -149,6 +149,16 @@ public class TEquipment extends TableImpl<TEquipmentRecord> {
      * The column <code>public.t_equipment.flag</code>. 标识
      */
     public final TableField<TEquipmentRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_equipment.leading_pserson</code>. 采购负责人
+     */
+    public final TableField<TEquipmentRecord, String> LEADING_PSERSON = createField("leading_pserson", org.jooq.impl.SQLDataType.VARCHAR(50), this, "采购负责人");
+
+    /**
+     * The column <code>public.t_equipment.model</code>. 型号
+     */
+    public final TableField<TEquipmentRecord, String> MODEL = createField("model", org.jooq.impl.SQLDataType.VARCHAR(50), this, "型号");
 
     /**
      * Create a <code>public.t_equipment</code> table reference

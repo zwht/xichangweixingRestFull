@@ -87,6 +87,7 @@ dependencies {
     compile("com.github.xiaoymin:swagger-bootstrap-ui:${swaggerBootstrapVersion}"){
         exclude group:"org.slf4j"
     }
+
     compile("io.springfox:springfox-swagger2:${swagger2Version}")
     compile("org.apache.shiro:shiro-spring:${shiroVersion}")
     compile("org.apache.shiro:shiro-web:${shiroVersion}")
@@ -103,9 +104,13 @@ dependencies {
     compile("org.jooq:jooq:${jooqVersion}")
     compile("org.jooq:jooq-meta:${jooqVersion}")
     compile("org.jooq:jooq-codegen:${jooqVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-jooq:${springBootVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+
     compile("org.apache.commons:commons-lang3:3.0")
     compile("com.alibaba:fastjson:1.2.49")
     compile("org.apache.shiro:shiro-spring:1.4.0")

@@ -3,9 +3,12 @@ package org.poem.vehiclePick;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.CollectionUtils;
 import org.poem.RequestUtil;
 import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
+import org.poem.equipment.vo.TEquipmentImportVO;
+import org.poem.excel.vo.ExcelVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 接送

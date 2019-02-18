@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TReportsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TReports extends TableImpl<TReportsRecord> {
 
-    private static final long serialVersionUID = -1830240162;
+    private static final long serialVersionUID = -1895542072;
 
     /**
      * The reference instance of <code>public.t_reports</code>
@@ -119,6 +119,16 @@ public class TReports extends TableImpl<TReportsRecord> {
      * The column <code>public.t_reports.flag</code>. 标识
      */
     public final TableField<TReportsRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_reports.content</code>. 举报内容
+     */
+    public final TableField<TReportsRecord, String> CONTENT = createField("content", org.jooq.impl.SQLDataType.VARCHAR(1000), this, "举报内容");
+
+    /**
+     * The column <code>public.t_reports.suggestion</code>. 处理意见
+     */
+    public final TableField<TReportsRecord, String> SUGGESTION = createField("suggestion", org.jooq.impl.SQLDataType.VARCHAR(200), this, "处理意见");
 
     /**
      * Create a <code>public.t_reports</code> table reference

@@ -2,6 +2,7 @@ spring:
   devtools: true
   flyway:
     locations: classpath:/db_migrations
+    enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: org.postgresql.Driver
@@ -14,10 +15,24 @@ spring:
     multipart:
       max-file-size: 50Mb
       max-request-size: 100Mb
+  redis:
+    database: 4
+    host: 192.168.55.105
+    index: 15
+    port: 6379
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5
   jooq:
     sql-dialect: POSTGRES
-  resources:
-    static-locations: classpath:/webapp/
+
+logging:
+  level:
+    org:
+      jooq: debug
+
 hdfs:
   ip: 192.168.55.115
   port: 8020
@@ -28,9 +43,6 @@ upload.dir: /uploadfiles
 web:
   localPath: /opt/tempfile/
 
-logging:
-  level:
-    root: info
 
 
 sms:

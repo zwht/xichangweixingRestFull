@@ -1,8 +1,11 @@
 package org.poem.jwt;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import io.jsonwebtoken.*;
 import org.apache.shiro.codec.Base64;
 import org.poem.Constant;
+import org.poem.authVO.UserInfoVO;
 import org.poem.jwt.result.CheckResult;
 
 import javax.crypto.SecretKey;

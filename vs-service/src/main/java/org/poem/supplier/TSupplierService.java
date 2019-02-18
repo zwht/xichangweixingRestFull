@@ -2,6 +2,7 @@ package org.poem.supplier;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
 import org.jooq.Condition;
 import org.jooq.SortField;
 import org.poem.DateUtils;
@@ -11,9 +12,16 @@ import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
 import org.poem.common.CommonVO;
 import org.poem.common.IDService;
+import org.poem.division.AdminDivisionDao;
+import org.poem.jooq.tables.CAdminDivision;
 import org.poem.jooq.tables.TSupplier;
+import org.poem.jooq.tables.records.CAdminDivisionRecord;
 import org.poem.jooq.tables.records.TSupplierRecord;
+import org.poem.supplier.vo.TSupplierDataContainerVO;
+import org.poem.supplier.vo.TSupplierExportVO;
+import org.poem.supplier.vo.TSupplierImportVO;
 import org.poem.suppliertype.SupplierTypeService;
+import org.poem.tenderOrgation.vo.TenderOrgationContainerVO;
 import org.poem.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +49,9 @@ public class TSupplierService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private AdminDivisionDao divisionDao;
 
     @Autowired
     private SupplierTypeService supplierTypeService;
@@ -142,7 +153,7 @@ public class TSupplierService {
         record.setContactsUseIdnum(tEquipmentVO.getContactsUseIdnum());
         record.setContactsUserName(tEquipmentVO.getContactsUserName());
         record.setPhone(tEquipmentVO.getPhone());
-        record.setLogo(Long.valueOf(tEquipmentVO.getLogo()));
+        record.setLogo(tEquipmentVO.getLogo());
         record.setRemark(tEquipmentVO.getRemark());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
@@ -197,4 +208,142 @@ public class TSupplierService {
         );
 
     }
+
+    /**
+     * 类型
+     *
+     * @return
+     */
+    private TSupplierDataContainerVO getTSupplierDataContainerVO() {
+        List<CAdminDivisionRecord> tDivisionRecords = this.divisionDao.findByCondition(CAdminDivision.C_ADMIN_DIVISION.ID.isNotNull());
+        Map<String, Long> map = Maps.newHashMap();
+        for (CAdminDivisionRecord tDivisionRecord : tDivisionRecords) {
+            map.put(tDivisionRecord.getProvinceName() + tDivisionRecord.getCityName(), tDivisionRecord.getCityCode());
+        }
+        TSupplierDataContainerVO vo = new TSupplierDataContainerVO();
+        vo.setRegion(map);
+
+        Map<String, Long> maps = Maps.newHashMap();
+        List<CommonVO> commonVOS = supplierTypeService.getAll();
+        for (CommonVO commonVO : commonVOS) {
+            maps.put(commonVO.getName(), commonVO.getId());
+        }
+        vo.setTypeMap(maps);
+        return vo;
+    }
+
+    /**
+     * 数据验证
+     *
+     * @param data
+     * @param userId
+     * @return
+     */
+    public List<String> importData(List<TSupplierImportVO> data, Long userId) {
+        TSupplierDataContainerVO vo = getTSupplierDataContainerVO();
+        List<String> message = Lists.newArrayList();
+        List<TSupplierRecord> records = Lists.newArrayList();
+        for (TSupplierImportVO tEquipmentVO : data) {
+            TSupplierRecord record = new TSupplierRecord();
+            record.setId(idService.getId());
+            record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            record.setCreateUser(userId);
+            record.setStatus(0);
+            record.setFlag(true);
+            record.setName(tEquipmentVO.getName());
+            record.setAddress(tEquipmentVO.getAddress());
+            record.setSocialCreditCode(tEquipmentVO.getSocialCreditCode());
+            record.setRegistDate(DateUtils.formatTimestamp(tEquipmentVO.getRegistDate()));
+            record.setLegalPerson(tEquipmentVO.getLegalPerson());
+            record.setLegalPersonName(tEquipmentVO.getLegalPersonName());
+            record.setContactsUseIdnum(tEquipmentVO.getContactsUseIdnum());
+            record.setContactsUserName(tEquipmentVO.getContactsUserName());
+            record.setPhone(tEquipmentVO.getPhone());
+            record.setRemark(tEquipmentVO.getRemark());
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
+
+            if (vo.getRegion().containsKey(tEquipmentVO.getRegion())) {
+                record.setRegion(String.valueOf(vo.getRegion().get(tEquipmentVO.getRegion())));
+            } else {
+                message.add(tEquipmentVO.getRegion() + "在系统中不存在。");
+            }
+            if (vo.getTypeMap().containsKey(tEquipmentVO.getTypeName())){
+                record.setType(vo.getTypeMap().get(tEquipmentVO.getTypeName()));
+            }else{
+                message.add(tEquipmentVO.getTypeName() + "在系统中不存在。");
+            }
+            records.add(record);
+        }
+        if (CollectionUtils.isEmpty(message)){
+            this.supplierDao.insert(records);
+        }
+        return null;
+    }
+
+    /**
+     * SHUJU
+     * @param t
+     * @param tSupplierType
+     * @return
+     */
+    private static TSupplierExportVO getTSupplierExportVO(TSupplierRecord t, Map<Long, String> tSupplierType) {
+        TSupplierExportVO tSupplierVO = new TSupplierExportVO();
+        tSupplierVO.setName(t.getName());
+        tSupplierVO.setTypeName(tSupplierType.get(t.getType()));
+        tSupplierVO.setRegion(String.valueOf(t.getRegion()));
+        tSupplierVO.setAddress(t.getAddress());
+        tSupplierVO.setSocialCreditCode(t.getSocialCreditCode());
+        tSupplierVO.setRegistDate(DateUtils.format(t.getRegistDate()));
+        tSupplierVO.setLegalPerson(t.getLegalPerson());
+        tSupplierVO.setLegalPersonName(t.getLegalPersonName());
+        tSupplierVO.setContactsUseIdnum(t.getContactsUseIdnum());
+        tSupplierVO.setContactsUserName(t.getContactsUserName());
+        tSupplierVO.setPhone(t.getPhone());
+        return tSupplierVO;
+    }
+
+    /**
+     * 条件导出
+     * @param tEquipmentQuery
+     * @return
+     */
+    public List<TSupplierExportVO> exportByCondition(TSupplierQueryVO tEquipmentQuery){
+        List<Condition> conditions = Lists.newArrayList();
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getName())) {
+            conditions.add(TSupplier.T_SUPPLIER.NAME.like("%" + tEquipmentQuery.getName() + "%"));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getStatus())) {
+            conditions.add(TSupplier.T_SUPPLIER.STATUS.eq(Integer.valueOf(tEquipmentQuery.getStatus())));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getType())) {
+            conditions.add(TSupplier.T_SUPPLIER.TYPE.eq(Long.valueOf(tEquipmentQuery.getType())));
+        }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getRegion())) {
+            conditions.add(TSupplier.T_SUPPLIER.REGION.eq(tEquipmentQuery.getRegion()));
+        }
+        List<SortField<?>> list = Arrays.asList(TSupplier.T_SUPPLIER.CREATE_TIME.asc(), TSupplier.T_SUPPLIER.STATUS.desc());
+        PageVO<TSupplierRecord> tSupplierVOPageVO = this.supplierDao.fetchByPage(conditions, new OffsetPagingVO(1, Integer.MAX_VALUE), list);
+        Map<Long, String> type = type();
+        return tSupplierVOPageVO.getPageData().stream().map(
+                r -> {
+                    return getTSupplierExportVO(r, type);
+                }).collect(Collectors.toList());
+    }
+
+
+    /**
+     * 按照id导出
+     * @param ids
+     * @return
+     */
+    public List<TSupplierExportVO> exportById(List<Long> ids){
+        List<TSupplierRecord> records = this.supplierDao.findByCondition(TSupplier.T_SUPPLIER.ID.in(ids));
+        Map<Long, String> type = type();
+        return records.stream().map(
+                r -> {
+                    return getTSupplierExportVO(r, type);
+                }).collect(Collectors.toList());
+    }
+
 }

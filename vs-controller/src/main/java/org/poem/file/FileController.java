@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.poem.RequestUtil;
+import org.poem.config.annotation.ShiroOauthodIgnore;
 import org.poem.constant.ErrorCode;
 import org.poem.authVO.ResultVO;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ import java.util.Collection;
  * @author poem
  */
 @Controller
+@ShiroOauthodIgnore
 @RequestMapping("/v1/file")
 @Api(value = "/v1/file", tags = {"00-文件"})
 public class FileController {
