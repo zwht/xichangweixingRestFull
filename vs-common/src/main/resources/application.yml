@@ -31,7 +31,7 @@ hdfs:
   port: 8020
   filePath: /tempFiles/
 
-upload.dir: /uploadfiles
+upload.dir: /opt/uploadfiles
 
 web:
   localPath: /opt/tempfile/

@@ -209,8 +209,12 @@ public class TEquipmentService {
         record.setStandard(tEquipmentVO.getStandard());
         record.setLeadingPserson(tEquipmentVO.getLeadingPerson());
         record.setManufactureDate(DateUtils.formatTimestamp(tEquipmentVO.getManufactureDate()));
-        record.setValidity(DateUtils.formatTimestamp(tEquipmentVO.getValidity()));
-        record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
+        if(StringUtils.isNotEmpty(tEquipmentVO.getValidity())){
+            record.setValidity(DateUtils.formatTimestamp(tEquipmentVO.getValidity()));
+        }
+        if(StringUtils.isNotEmpty(tEquipmentVO.getSupplierId())){
+            record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
+        }
         record.setImages(tEquipmentVO.getImages());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);

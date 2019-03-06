@@ -139,8 +139,8 @@ public class TTenderOrgationService {
         record.setContactsUserName(tEquipmentVO.getContactsUserName());
         record.setPhone(tEquipmentVO.getPhone());
         record.setRemark(tEquipmentVO.getRemark());
-        record.setLogo(StringUtils.isEmpty(tEquipmentVO.getLogo()) ? null : Long.valueOf(tEquipmentVO.getLogo()));
-        record.setGrade(Long.valueOf(tEquipmentVO.getGrade()));
+        record.setLogo(StringUtils.isEmpty(tEquipmentVO.getLogo()) ? null : tEquipmentVO.getLogo());
+        record.setGrade(StringUtils.isEmpty(tEquipmentVO.getGrade()) ? null : Long.valueOf(tEquipmentVO.getGrade()));
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
         if (save) {

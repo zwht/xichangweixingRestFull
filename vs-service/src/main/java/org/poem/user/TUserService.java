@@ -47,34 +47,36 @@ public class TUserService implements UserInfoService{
      */
     public ResultVO<String> AddUser(TUserVO tUserVO, Long user) {
         if (StringUtils.isEmpty(tUserVO.getLoginName())) {
-            return new ResultVO<>("login 不能为空。");
+            return new ResultVO<>(2,null,"login 不能为空。");
         }
         if (StringUtils.isEmpty(tUserVO.getName())) {
-            return new ResultVO<>("name 不能为空");
+            return new ResultVO<>(2,null,"name 不能为空");
         }
         if (StringUtils.isEmpty(tUserVO.getPassword())) {
-            return new ResultVO<>("password不能为空");
+            return new ResultVO<>(2,null,"password不能为空");
         }
         if (StringUtils.isEmpty(tUserVO.getPhone())) {
-            return new ResultVO<>("phone不能为空");
+            return new ResultVO<>(2,null,"phone不能为空");
         }
         Result<TUserRecord> tUserRecords = userDao.findByName(tUserVO.getLoginName());
-        if (tUserRecords != null) {
-            return new ResultVO<>("登陆名已存在");
+        if (tUserRecords.size()!=0) {
+            return new ResultVO<>(2,null,"登陆名已存在");
         }
         TUserRecord tUser = new TUserRecord();
         tUser.setId(idService.getId());
         tUser.setPassword(tUserVO.getPassword());
-        tUser.setDepartId(Long.valueOf(tUserVO.getDepartId()));
+        tUser.setDepartId(null);
         tUser.setName(tUserVO.getName());
-        tUser.setLoginName(tUser.getLoginName());
-        tUser.setRemark(tUser.getRemark());
+        tUser.setLoginName(tUserVO.getLoginName());
+        tUser.setRemark(tUserVO.getRemark());
+        tUser.setPhone(tUserVO.getPhone());
         tUser.setCreateTime(new Timestamp(System.currentTimeMillis()));
         tUser.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         tUser.setCreateUser(user);
         tUser.setUpdateUser(user);
         tUser.setFlag(true);
         tUser.setStatus(1);
+        this.userDao.insert(tUser);
         return new ResultVO<>("添加成功");
     }
 
@@ -90,7 +92,7 @@ public class TUserService implements UserInfoService{
     public ResultVO<String> disableUser(Long userId, Long currentUserId, Integer status) {
         TUserRecord tUserRecord = this.userDao.findById(userId);
         if (tUserRecord == null) {
-            return new ResultVO<>("查无此人。");
+            return new ResultVO<>(2,null,"查无此人。");
         }
         tUserRecord.setStatus(status);
         tUserRecord.setUpdateUser(currentUserId);
@@ -108,25 +110,26 @@ public class TUserService implements UserInfoService{
      */
     public ResultVO<String> updateUser(TUserVO tUserVO, Long userId) {
         if (StringUtils.isEmpty(tUserVO.getLoginName())) {
-            return new ResultVO<>("login 不能为空。");
+            return new ResultVO<>(2,null,"login 不能为空。");
         }
         if (StringUtils.isEmpty(tUserVO.getName())) {
-            return new ResultVO<>("name 不能为空");
+            return new ResultVO<>(2,null,"name 不能为空");
         }
-        if (StringUtils.isEmpty(tUserVO.getPassword())) {
-            return new ResultVO<>("password不能为空");
-        }
+//        if (StringUtils.isEmpty(tUserVO.getPassword())) {
+//            return new ResultVO<>(2,null,"password不能为空");
+//        }
         if (StringUtils.isEmpty(tUserVO.getPhone())) {
-            return new ResultVO<>("phone不能为空");
+            return new ResultVO<>(2,null,"phone不能为空");
         }
         TUserRecord tUser = this.userDao.findById(Long.valueOf(tUserVO.getId()));
         if (tUser == null) {
-            return new ResultVO<>("查无此人。");
+            return new ResultVO<>(2,null,"查无此人。");
         }
-        tUser.setDepartId(Long.valueOf(tUserVO.getDepartId()));
+        // tUser.setDepartId(Long.valueOf(tUserVO.getDepartId()));
         tUser.setName(tUserVO.getName());
-        tUser.setLoginName(tUser.getLoginName());
-        tUser.setRemark(tUser.getRemark());
+        tUser.setPhone(tUserVO.getPhone());
+        tUser.setLoginName(tUserVO.getLoginName());
+        // tUser.setRemark(tUserVO.getRemark());
         tUser.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         tUser.setUpdateUser(userId);
         tUser.setFlag(true);
@@ -145,11 +148,11 @@ public class TUserService implements UserInfoService{
      */
     public ResultVO<String> updatePassword(String password, String userId) {
         if (StringUtils.isEmpty(password)) {
-            return new ResultVO<>("password不能为空");
+            return new ResultVO<>(2,null,"password不能为空");
         }
         TUserRecord tUser = this.userDao.findById(Long.valueOf(userId));
         if (tUser == null) {
-            return new ResultVO<>("查无此人。");
+            return new ResultVO<>(2,null,"查无此人。");
         }
         tUser.setPassword(password);
         this.userDao.update(tUser);
@@ -186,6 +189,7 @@ public class TUserService implements UserInfoService{
             tUserVO.setName(pageDatum.getName());
             tUserVO.setLoginName(pageDatum.getLoginName());
             tUserVO.setRemark(pageDatum.getRemark());
+            tUserVO.setPhone(pageDatum.getPhone());
             tUserVO.setCreateTime(DateUtils.format(pageDatum.getCreateTime()));
             tUserVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
             tUserVO.setStatus(String.valueOf(pageDatum.getStatus()));
@@ -215,6 +219,7 @@ public class TUserService implements UserInfoService{
         tUserVO.setName(pageDatum.getName());
         tUserVO.setLoginName(pageDatum.getLoginName());
         tUserVO.setRemark(pageDatum.getRemark());
+        tUserVO.setPhone(pageDatum.getPhone());
         tUserVO.setCreateTime(DateUtils.format(pageDatum.getCreateTime()));
         tUserVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
         tUserVO.setStatus(String.valueOf(pageDatum.getStatus()));
