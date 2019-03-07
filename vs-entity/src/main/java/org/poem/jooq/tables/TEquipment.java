@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TEquipmentRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TEquipment extends TableImpl<TEquipmentRecord> {
 
-    private static final long serialVersionUID = 1492903477;
+    private static final long serialVersionUID = -1905184882;
 
     /**
      * The reference instance of <code>public.t_equipment</code>
@@ -73,7 +73,7 @@ public class TEquipment extends TableImpl<TEquipmentRecord> {
     /**
      * The column <code>public.t_equipment.equip_type</code>. 设备类型
      */
-    public final TableField<TEquipmentRecord, Long> EQUIP_TYPE = createField("equip_type", org.jooq.impl.SQLDataType.BIGINT, this, "设备类型");
+    public final TableField<TEquipmentRecord, String> EQUIP_TYPE = createField("equip_type", org.jooq.impl.SQLDataType.VARCHAR(50), this, "设备类型");
 
     /**
      * The column <code>public.t_equipment.format</code>. 规格

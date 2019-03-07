@@ -121,6 +121,9 @@ public class TVehiclePickService {
         record.setPhone(tEquipmentVO.getPhone());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
+        if(StringUtils.isNotEmpty(tEquipmentVO.getStatus())){
+            record.setStatus(Integer.parseInt(tEquipmentVO.getStatus()));
+        }
         if (save) {
             this.tVehiclePickDao.insert(record);
             String content = "用户" + userDao.findById(userId).getName() +
@@ -168,7 +171,7 @@ public class TVehiclePickService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getVehicleEndTime() + " 23:59:59");
             conditions.add(TVehiclePick.T_VEHICLE_PICK.APPLICATION_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TVehiclePick.T_VEHICLE_PICK.CREATE_TIME.asc(), TVehiclePick.T_VEHICLE_PICK.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList( TVehiclePick.T_VEHICLE_PICK.STATUS.asc(),TVehiclePick.T_VEHICLE_PICK.CREATE_TIME.desc());
         PageVO<TVehiclePickRecord> tSupplierVOPageVO = this.tVehiclePickDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),

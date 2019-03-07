@@ -115,6 +115,9 @@ public class TOrderingMealsService {
         record.setRemark(tEquipmentVO.getRemark());
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         record.setUpdateUser(userId);
+        if(StringUtils.isNotEmpty(tEquipmentVO.getStatus())){
+            record.setStatus(Integer.parseInt(tEquipmentVO.getStatus()));
+        }
         if (save) {
             this.tOrderingMealsDao.insert(record);
 
@@ -163,7 +166,7 @@ public class TOrderingMealsService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getEatEndTime()+" 23:59:59");
             conditions.add(TOrderingMeals.T_ORDERING_MEALS.EAT_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TOrderingMeals.T_ORDERING_MEALS.CREATE_TIME.asc(), TOrderingMeals.T_ORDERING_MEALS.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TOrderingMeals.T_ORDERING_MEALS.STATUS.asc(),TOrderingMeals.T_ORDERING_MEALS.CREATE_TIME.desc());
         PageVO<TOrderingMealsRecord> tSupplierVOPageVO = this.tOrderingMealsDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),

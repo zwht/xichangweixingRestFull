@@ -103,7 +103,7 @@ public class TWorkDynamicsService {
         }
         List<SortField<?>> fields = Lists.newArrayList();
         fields.add(TWorkDynamics.T_WORK_DYNAMICS.TOP.desc());
-        fields.add(TWorkDynamics.T_WORK_DYNAMICS.CREATE_TIME.desc());
+        fields.add(TWorkDynamics.T_WORK_DYNAMICS.UPDATE_TIME.desc());
         PageVO<TWorkDynamicsRecord> tNewsRecordPageVO = this.tWorkDynamicsDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         PageVO<TWorkDynamicsVO> tNewsVOPageVO = new PageVO<>();
         tNewsVOPageVO.setTotalCount(tNewsRecordPageVO.getTotalCount());
@@ -249,7 +249,10 @@ public class TWorkDynamicsService {
             tNewsRecord.setId(idService.getId());
             tNewsRecord.setCreateTime(new Timestamp(System.currentTimeMillis()));
             tNewsRecord.setCreateUser(userId);
+            tNewsRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            tNewsRecord.setUpdateUser(userId);
             tNewsRecord.setStatus(0);
+            tNewsRecord.setReadCount(0L);
             save = true;
         }
         tNewsRecord.setUpdateUser(userId);

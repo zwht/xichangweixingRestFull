@@ -130,6 +130,9 @@ public class TRoomReservationService {
         record.setUpdateUser(userId);
         record.setPhone(tEquipmentVO.getPhone() );
         record.setArmNum(tEquipmentVO.getArmNum());
+        if(StringUtils.isNotEmpty(tEquipmentVO.getStatus())){
+            record.setStatus(Integer.parseInt(tEquipmentVO.getStatus()));
+        }
         if (save) {
             this.tRoomReservationDao.insert(record);
 
@@ -177,7 +180,8 @@ public class TRoomReservationService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getLivingEndTime() + " 23:59:59");
             conditions.add(TRoomReservation.T_ROOM_RESERVATION.LIVING_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TRoomReservation.T_ROOM_RESERVATION.CREATE_TIME.asc(), TRoomReservation.T_ROOM_RESERVATION.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(
+                 TRoomReservation.T_ROOM_RESERVATION.STATUS.asc(),TRoomReservation.T_ROOM_RESERVATION.CREATE_TIME.desc());
         PageVO<TRoomReservationRecord> tSupplierVOPageVO = this.tRoomReservationDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),

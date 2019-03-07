@@ -66,6 +66,7 @@ public class TTenderOrgationService {
         tSupplierVO.setName(t.getName());
         tSupplierVO.setCode(String.valueOf(t.getCode()));
         tSupplierVO.setRegion(t.getRegion());
+        tSupplierVO.setRemark(t.getRemark());
         tSupplierVO.setAddress(t.getAddress());
         tSupplierVO.setSocialCreditCode(t.getSocialCreditCode());
         tSupplierVO.setRegistDate(DateUtils.format(t.getRegistDate()));
@@ -184,7 +185,7 @@ public class TTenderOrgationService {
         if (StringUtils.isNotEmpty(tEquipmentQuery.getRegion())) {
             conditions.add(TTenderOrgation.T_TENDER_ORGATION.REGION.eq(tEquipmentQuery.getRegion()));
         }
-        List<SortField<?>> list = Arrays.asList(TTenderOrgation.T_TENDER_ORGATION.CREATE_TIME.asc(), TTenderOrgation.T_TENDER_ORGATION.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TTenderOrgation.T_TENDER_ORGATION.UPDATE_TIME.desc(), TTenderOrgation.T_TENDER_ORGATION.STATUS.desc());
         PageVO<TTenderOrgationRecord> tSupplierVOPageVO = this.tTenderOrgationDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),
                 tSupplierVOPageVO.getPageData().stream().map(r -> {

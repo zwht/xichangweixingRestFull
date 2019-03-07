@@ -173,8 +173,10 @@ public class TNoticeService {
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
             record.setStatus(0);
-            record.setFlag(true);
+            record.setFlag(false);
             record.setReadCount(0L);
             save = true;
         }
@@ -185,6 +187,7 @@ public class TNoticeService {
         record.setUpdateUser(userId);
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         if (save) {
+            record.setReadCount((long)0);
             this.tNoticeDao.insert(record);
         } else {
             this.tNoticeDao.update(record);
@@ -230,8 +233,13 @@ public class TNoticeService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(noticeQueryVO.getEndTime() + " 23:59:59");
             conditions.add(TNotice.T_NOTICE.UPDATE_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TNotice.T_NOTICE.CREATE_TIME.asc(), TNotice.T_NOTICE.STATUS.desc());
-        PageVO<TNoticeRecord> tSupplierVOPageVO = this.tNoticeDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
+
+        List<SortField<?>> fields = Lists.newArrayList();
+        fields.add(TNotice.T_NOTICE.FLAG.desc());
+        fields.add(TNotice.T_NOTICE.UPDATE_TIME.desc());
+        fields.add(TNotice.T_NOTICE.CREATE_TIME.desc());
+
+        PageVO<TNoticeRecord> tSupplierVOPageVO = this.tNoticeDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         Map<Long, String> type = type();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),
                 tSupplierVOPageVO.getPageData().stream().map(r -> {

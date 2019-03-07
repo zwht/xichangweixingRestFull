@@ -1,5 +1,7 @@
 package org.poem.equipment;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
@@ -138,7 +140,7 @@ public class TEquipmentService {
             conditions.add(TEquipment.T_EQUIPMENT.STATUS.eq(Integer.valueOf(tEquipmentQuery.getStatus())));
         }
         if (StringUtils.isNotEmpty(tEquipmentQuery.getEquipType())) {
-            conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(Long.valueOf(tEquipmentQuery.getEquipType())));
+            conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(tEquipmentQuery.getEquipType()));
         }
         if (StringUtils.isNotEmpty(tEquipmentQuery.getSupplierName())) {
             List<TSupplierRecord> records = supplierDao.findByCondition(TSupplier.T_SUPPLIER.NAME.like("%" + tEquipmentQuery.getSupplierName() + "%"));
@@ -202,7 +204,7 @@ public class TEquipmentService {
         }
         record.setName(tEquipmentVO.getName());
         record.setCode(tEquipmentVO.getCode());
-        record.setEquipType(Long.valueOf(tEquipmentVO.getEquipType()));
+        record.setEquipType(tEquipmentVO.getEquipType());
         record.setFormat(tEquipmentVO.getFormat());
         record.setPackageFormat(tEquipmentVO.getPackageFormat());
         record.setMeasurement(tEquipmentVO.getMeasurement());
@@ -247,7 +249,7 @@ public class TEquipmentService {
     private EquipmentDataContainer intData() {
         EquipmentDataContainer container = new EquipmentDataContainer();
         Map<Long, String> supplierMap = supplierDao.getTSupplierMap();
-        Map<Long, String> equipTypeMap = tEquipTypeDao.getTEquipTypeMap();
+        //Map<Long, String> equipTypeMap = tEquipTypeDao.getTEquipTypeMap();
 
         Map<String, Long> supplierMap_ = Maps.newHashMap();
         Map<String, Long> equipTypeMap_ = Maps.newHashMap();
@@ -256,9 +258,9 @@ public class TEquipmentService {
             supplierMap_.put(v, k);
         });
 
-        equipTypeMap.forEach((k, v) -> {
-            equipTypeMap_.put(v, k);
-        });
+//        equipTypeMap.forEach((k, v) -> {
+//            equipTypeMap_.put(v, k);
+//        });
         container.setEquipTypeMap(equipTypeMap_);
         container.setSupplierMap(supplierMap_);
         return container;
@@ -271,11 +273,11 @@ public class TEquipmentService {
      * @param data
      * @param userId
      */
-    public List<String> importData(List<TEquipmentImportVO> data, Long userId) {
+    public List<String> importData(List<JSONObject> data, Long userId) {
         List<String> strings = Lists.newArrayList();
         EquipmentDataContainer container = intData();
         List<TEquipmentRecord> records = Lists.newArrayList();
-        for (TEquipmentImportVO datum : data) {
+        for (JSONObject datum : data) {
             //设备类型
             List<String> message = Lists.newArrayList();
             TEquipmentRecord record = new TEquipmentRecord();
@@ -284,25 +286,24 @@ public class TEquipmentService {
             record.setCreateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
-            record.setName(datum.getName());
-            record.setLeadingPserson(datum.getLeadingPerson());
-            record.setCode(datum.getCode());
-            record.setFormat(datum.getFormat());
-            record.setPackageFormat(datum.getPackageFormat());
-            record.setMeasurement(datum.getMeasurement());
-            record.setStandard(datum.getStandard());
-            record.setModel(datum.getModel());
-            record.setManufactureDate(DateUtils.formatTimestamp(datum.getManufactureDate()));
-            record.setValidity(DateUtils.formatTimestamp(datum.getValidity()));
+            record.setName(datum.getString("name"));
+            record.setLeadingPserson(datum.getString("leadingPerson"));
+            record.setCode(datum.getString("code"));
+            record.setFormat(datum.getString("format"));
+            record.setPackageFormat(datum.getString("packageFormat"));
+            record.setMeasurement(datum.getString("measurement"));
+            record.setStandard(datum.getString("standard"));
+            record.setModel(datum.getString("model"));
+            record.setManufactureDate(DateUtils.formatTimestamp(datum.getString("manufactureDate")));
+            record.setValidity(DateUtils.formatTimestamp(datum.getString("validity")));
             record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             record.setUpdateUser(userId);
-            if (container.getEquipTypeMap().get(datum.getEquipTypeName()) == null) {
-                message.add("设备类型 [" + datum.getEquipTypeName() + " ]不存在");
-            } else {
-                record.setEquipType(container.getEquipTypeMap().get(datum.getEquipTypeName()));
-            }
-            if (container.getSupplierMap().get(datum.getSupplierName()) == null) {
-                message.add("供应商 [" + datum.getSupplierName() + " ]不存在");
+            record.setEquipType(datum.getString("equipTypeName"));
+
+            if (container.getSupplierMap().get(datum.getString("supplierName")) == null) {
+                message.add("供应商 [" + datum.getString("supplierName") + " ]不存在");
+            }else {
+                record.setSupplierId(container.getSupplierMap().get(datum.getString("supplierName")));
             }
             if (CollectionUtils.isEmpty(message)) {
                 records.add(record);
@@ -355,7 +356,7 @@ public class TEquipmentService {
             conditions.add(TEquipment.T_EQUIPMENT.STATUS.eq(Integer.valueOf(tEquipmentQuery.getStatus())));
         }
         if (StringUtils.isNotEmpty(tEquipmentQuery.getEquipType())) {
-            conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(Long.valueOf(tEquipmentQuery.getEquipType())));
+            conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(tEquipmentQuery.getEquipType()));
         }
         if (StringUtils.isNotEmpty(tEquipmentQuery.getLeadingPerson())){
             conditions.add(TEquipment.T_EQUIPMENT.LEADING_PSERSON.like("%" + tEquipmentQuery.getLeadingPerson() + "%"));

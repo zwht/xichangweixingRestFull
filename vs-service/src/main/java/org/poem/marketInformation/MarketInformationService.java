@@ -106,7 +106,7 @@ public class MarketInformationService {
         }
         List<SortField<?>> fields = Lists.newArrayList();
         fields.add(TMarketInformation.T_MARKET_INFORMATION.TOP.desc());
-        fields.add(TMarketInformation.T_MARKET_INFORMATION.CREATE_TIME.desc());
+        fields.add(TMarketInformation.T_MARKET_INFORMATION.UPDATE_TIME.desc());
         PageVO<TMarketInformationRecord> tNewsRecordPageVO = this.marketInformationDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         PageVO<MarketInformationVO> tNewsVOPageVO = new PageVO<>();
         tNewsVOPageVO.setTotalCount(tNewsRecordPageVO.getTotalCount());

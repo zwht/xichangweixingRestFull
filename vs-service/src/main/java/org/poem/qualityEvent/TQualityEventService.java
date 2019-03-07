@@ -130,6 +130,8 @@ public class TQualityEventService {
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
             record.setStatus(0);
             record.setFlag(false);
             record.setTop(false);
@@ -190,7 +192,7 @@ public class TQualityEventService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getOccurrenceTime() + " 23:59:59");
             conditions.add(TQualityEvent.T_QUALITY_EVENT.OCCURRENCE_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TQualityEvent.T_QUALITY_EVENT.CREATE_TIME.asc(), TQualityEvent.T_QUALITY_EVENT.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TQualityEvent.T_QUALITY_EVENT.FLAG.desc(),TQualityEvent.T_QUALITY_EVENT.UPDATE_TIME.desc(), TQualityEvent.T_QUALITY_EVENT.STATUS.desc());
         PageVO<TQualityEventRecord> tSupplierVOPageVO = this.tQualityEventDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         Map<Long, String> departMap = tDepartDao.getDepartMap();

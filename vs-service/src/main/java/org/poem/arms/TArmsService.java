@@ -88,7 +88,9 @@ public class TArmsService {
             tArmsRecord = new TArmsRecord();
             tArmsRecord.setId(idService.getId());
             tArmsRecord.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            tArmsRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             tArmsRecord.setCreateUser(userId);
+            tArmsRecord.setUpdateUser(userId);
             tArmsRecord.setFlag(false);
             tArmsRecord.setStatus(1);
             save = true;
@@ -96,6 +98,7 @@ public class TArmsService {
         tArmsRecord.setTitle(tArmsVO.getTitle());
         tArmsRecord.setContent(tArmsVO.getContent());
         if (save) {
+            tArmsRecord.setReadCount((long)0);
             this.tArmsDao.insert(tArmsRecord);
         } else {
             this.tArmsDao.update(tArmsRecord);
@@ -130,6 +133,7 @@ public class TArmsService {
         List<SortField<?>> list = Lists.newArrayList();
         list.add(TArms.T_ARMS.FLAG.desc());
         list.add(TArms.T_ARMS.UPDATE_TIME.desc());
+        list.add(TArms.T_ARMS.CREATE_TIME.desc());
         PageVO<TArmsRecord> tArmsRecordPageVO = this.tArmsDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pagesize), list);
         PageVO<TArmsVO> tArmsVOPageVO = new PageVO<>();
         tArmsVOPageVO.setTotalCount(tArmsRecordPageVO.getTotalCount());

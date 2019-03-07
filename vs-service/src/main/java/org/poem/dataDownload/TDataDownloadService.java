@@ -101,7 +101,8 @@ public class TDataDownloadService {
             conditions.add(TDataDownload.T_DATA_DOWNLOAD.SUBJECT_ID.eq(tNewQueryVO.getSubjectId()));
         }
         List<SortField<?>> fields = Lists.newArrayList();
-        fields.add(TDataDownload.T_DATA_DOWNLOAD.CREATE_TIME.desc());
+        fields.add(TDataDownload.T_DATA_DOWNLOAD.FLAG.desc());
+        fields.add(TDataDownload.T_DATA_DOWNLOAD.UPDATE_TIME.desc());
         PageVO<TDataDownloadRecord> tNewsRecordPageVO = this.tDataDownloadDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), fields);
         PageVO<TDataDownloadVO> tNewsVOPageVO = new PageVO<>();
         tNewsVOPageVO.setTotalCount(tNewsRecordPageVO.getTotalCount());

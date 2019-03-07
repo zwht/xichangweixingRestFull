@@ -106,6 +106,8 @@ public class TQualityDealService {
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
             save = true;
@@ -163,7 +165,7 @@ public class TQualityDealService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getDealTime() + " 23:59:59");
             conditions.add(TQualityDeal.T_QUALITY_DEAL.UPDATE_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TQualityDeal.T_QUALITY_DEAL.CREATE_TIME.asc(), TQualityDeal.T_QUALITY_DEAL.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TQualityDeal.T_QUALITY_DEAL.FLAG.desc(),TQualityDeal.T_QUALITY_DEAL.UPDATE_TIME.desc(), TQualityDeal.T_QUALITY_DEAL.STATUS.desc());
         PageVO<TQualityDealRecord> tSupplierVOPageVO = this.tQualityDealDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> useMap = userDao.getUseRMap();
         Map<Long, String> stringMap = supplierDao.getTSupplierMap();

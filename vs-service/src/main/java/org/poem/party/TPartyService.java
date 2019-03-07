@@ -225,6 +225,7 @@ public class TPartyService {
         tNewsRecord.setContent(tNewsVO.getContent());
         tNewsRecord.setStatus(Integer.valueOf(tNewsVO.getStatus()));
         if (save) {
+            tNewsRecord.setReadCount((long)0);
             this.partyDao.insert(tNewsRecord);
         } else {
             this.partyDao.update(tNewsRecord);

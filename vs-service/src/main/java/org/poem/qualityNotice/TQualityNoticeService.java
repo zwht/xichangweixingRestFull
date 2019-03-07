@@ -167,6 +167,8 @@ public class TQualityNoticeService {
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
             record.setReadCount(0L);
@@ -223,7 +225,7 @@ public class TQualityNoticeService {
             Timestamp timestamp = DateUtils.formatTimestampDateTime(tQualityNoticeQueryVO.getEndTime() + " 23:59:59");
             conditions.add(TQualityNotice.T_QUALITY_NOTICE.UPDATE_TIME.lessOrEqual(timestamp));
         }
-        List<SortField<?>> list = Arrays.asList(TQualityNotice.T_QUALITY_NOTICE.CREATE_TIME.asc(), TQualityNotice.T_QUALITY_NOTICE.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TQualityNotice.T_QUALITY_NOTICE.FLAG.desc(),TQualityNotice.T_QUALITY_NOTICE.UPDATE_TIME.desc(), TQualityNotice.T_QUALITY_NOTICE.STATUS.desc());
         PageVO<TQualityNoticeRecord> tSupplierVOPageVO = this.tQualityNoticeDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> type = type();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),

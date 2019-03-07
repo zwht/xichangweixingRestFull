@@ -185,15 +185,16 @@ public class TEquipmentController {
 
     /**
      * 倒入
-     * @param redisKey
+     * @param redisKeyVO
      * @param request
      * @return
      */
     @ApiOperation(value = "第二步，验证导入数据正确性和导入数据", httpMethod = "POST")
     @PostMapping("/importData")
-    public ResultVO<List<String>> importData(String redisKey, HttpServletRequest request) {
-        ExcelVO<TEquipmentImportVO> excelVO = new ExcelVO<TEquipmentImportVO>();
-        excelVO = redisUtil.get(redisKey, excelVO.getClass());
+    public ResultVO<List<String>> importData(
+            @RequestBody RedisKeyVO redisKeyVO , HttpServletRequest request) {
+        ExcelVO<JSONObject> excelVO = new ExcelVO<JSONObject>();
+        excelVO = redisUtil.get(redisKeyVO.getRedisKey(), excelVO.getClass());
         List<String> message = tEquipmentService.importData(excelVO.getData(), RequestUtil.getUserId(request));
         if (CollectionUtils.isNotEmpty(message)){
             return new ResultVO<>(-1, message, "还有错误。");

@@ -138,6 +138,8 @@ public class TSupplierService {
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
+            record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            record.setUpdateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
             save = true;
@@ -198,7 +200,7 @@ public class TSupplierService {
         if (StringUtils.isNotEmpty(tEquipmentQuery.getRegion())) {
             conditions.add(TSupplier.T_SUPPLIER.REGION.eq(tEquipmentQuery.getRegion()));
         }
-        List<SortField<?>> list = Arrays.asList(TSupplier.T_SUPPLIER.CREATE_TIME.asc(), TSupplier.T_SUPPLIER.STATUS.desc());
+        List<SortField<?>> list = Arrays.asList(TSupplier.T_SUPPLIER.UPDATE_TIME.desc(), TSupplier.T_SUPPLIER.STATUS.desc());
         PageVO<TSupplierRecord> tSupplierVOPageVO = this.supplierDao.fetchByPage(conditions, new OffsetPagingVO(pageNumber, pageSize), list);
         Map<Long, String> type = type();
         return new PageVO<>(tSupplierVOPageVO.getTotalCount(),

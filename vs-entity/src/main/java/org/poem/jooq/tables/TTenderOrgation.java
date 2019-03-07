@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TTenderOrgationRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TTenderOrgation extends TableImpl<TTenderOrgationRecord> {
 
-    private static final long serialVersionUID = -1693477574;
+    private static final long serialVersionUID = 1739986007;
 
     /**
      * The reference instance of <code>public.t_tender_orgation</code>
@@ -158,7 +158,7 @@ public class TTenderOrgation extends TableImpl<TTenderOrgationRecord> {
     /**
      * The column <code>public.t_tender_orgation.logo</code>. logo
      */
-    public final TableField<TTenderOrgationRecord, Long> LOGO = createField("logo", org.jooq.impl.SQLDataType.BIGINT, this, "logo");
+    public final TableField<TTenderOrgationRecord, String> LOGO = createField("logo", org.jooq.impl.SQLDataType.VARCHAR(300), this, "logo");
 
     /**
      * Create a <code>public.t_tender_orgation</code> table reference
