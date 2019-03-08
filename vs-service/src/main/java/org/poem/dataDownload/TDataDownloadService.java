@@ -67,6 +67,7 @@ public class TDataDownloadService {
         tNewsVO.setSubjectName(subjectMap.get(Long.valueOf(s.getSubjectId())));
         tNewsVO.setDownloads(String.valueOf(s.getDownloads()));
         tNewsVO.setStatus(String.valueOf(s.getStatus()));
+        tNewsVO.setFlag(String.valueOf(s.getFlag()));
         tNewsVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));
         tNewsVO.setUpdateUser(userMap.get(s.getUpdateUser()));
         return tNewsVO;

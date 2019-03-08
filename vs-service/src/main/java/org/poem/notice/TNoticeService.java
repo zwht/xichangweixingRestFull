@@ -65,6 +65,7 @@ public class TNoticeService {
         tSupplierVO.setReadCount(String.valueOf(t.getReadCount()));
         tSupplierVO.setUpdateTime(DateUtils.format(t.getUpdateTime()));
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
+        tSupplierVO.setFlag(String.valueOf(t.getFlag()));
         tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(tSupplierType.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(tSupplierType.get(t.getCreateUser()));

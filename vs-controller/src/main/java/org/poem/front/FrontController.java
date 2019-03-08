@@ -3,6 +3,7 @@ package org.poem.front;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.RandomStringUtils;
 import org.poem.RequestUtil;
 import org.poem.arms.TArmsQueryVO;
 import org.poem.arms.TArmsService;
@@ -18,6 +19,7 @@ import org.poem.equipment.TEquipmentService;
 import org.poem.equipment.TEquipmentVO;
 import org.poem.equipment.vo.TEquipmentExportVO;
 import org.poem.excel.NExcelUtils;
+import org.poem.file.FileServiceImpl;
 import org.poem.link.TLinkQueryVO;
 import org.poem.link.TLinkService;
 import org.poem.link.TLinkVO;
@@ -57,6 +59,8 @@ import org.poem.tenderOrgation.TTenderOrgationQueryVO;
 import org.poem.tenderOrgation.TTenderOrgationService;
 import org.poem.tenderOrgation.TTenderOrgationVO;
 import org.poem.tenderOrgation.vo.TenderOrgationExportVO;
+import org.poem.user.TUserService;
+import org.poem.user.TUserVO;
 import org.poem.vehiclePick.TVehiclePickService;
 import org.poem.vehiclePick.TVehiclePickVO;
 import org.poem.workDynamics.TWorkDynamicsQueryVO;
@@ -65,6 +69,7 @@ import org.poem.workDynamics.TWorkDynamicsVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
@@ -141,6 +146,54 @@ public class FrontController {
 
     @Autowired
     private TNoticeService tNoticeService;
+
+    @Autowired
+    private TUserService userService;
+
+    @Autowired
+    private FileServiceImpl fileService;
+
+    /**
+     * 下载头像
+     *
+     * @param fileUrl
+     * @param response
+     * @throws Exception
+     */
+    @GetMapping("/downloadHead")
+    @ApiOperation(value = "下载头像", notes = "下载头像", httpMethod = "GET")
+    public void download(String fileUrl, HttpServletResponse response) throws Exception {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "inline; filename=\"" + new String(RandomStringUtils.random(5, true, true).getBytes("UTF-8"), "ISO8859-1") + "\"");
+        fileService.outPutFile(fileUrl, response.getOutputStream(), false);
+    }
+    /**
+     * 下载文件
+     *
+     * @param fileId
+     * @param fileUrl
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/download")
+    @ApiOperation(value = "下载文件", notes = "下载文件", httpMethod = "GET")
+    public ResponseEntity<byte[]> download(Long fileId, String fileUrl) throws Exception {
+        return fileService.download(fileId, fileUrl);
+    }
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "用户id", httpMethod = "GET")
+    @GetMapping("/getUserById/{id}")
+    public ResultVO<TUserVO> getUserById(@PathVariable(value = "id") Long id) {
+        return userService.getById(id);
+    }
+
 
     /**
      * 党建要闻列表

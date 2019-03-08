@@ -126,6 +126,7 @@ public class TPartyService {
             tPartyVO.setContent(s.getContent());
             tPartyVO.setReadCount(String.valueOf(s.getReadCount()));
             tPartyVO.setStatus(String.valueOf(s.getStatus()));
+            tPartyVO.setFlag(String.valueOf(s.getFlag()));
             TUserRecord tUserRecord = this.userDao.findById(s.getUpdateUser());
             tPartyVO.setUpdateUser(tUserRecord == null ? "" : tUserRecord.getName());
             tPartyVO.setUpdateTime(DateUtils.format(s.getUpdateTime(), "yyyy-MM-dd hh:mm:ss"));

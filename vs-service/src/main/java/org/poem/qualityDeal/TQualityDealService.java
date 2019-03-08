@@ -67,6 +67,7 @@ public class TQualityDealService {
         tSupplierVO.setSupplierName(supplier.get(t.getSupplierId()));
         tSupplierVO.setUpdateTime(DateUtils.format(t.getUpdateTime()));
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
+        tSupplierVO.setFlag(String.valueOf(t.getFlag()));
         tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(userMap.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(userMap.get(t.getCreateUser()));

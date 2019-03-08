@@ -139,6 +139,9 @@ public class TEquipmentService {
         if (StringUtils.isNotEmpty(tEquipmentQuery.getStatus())) {
             conditions.add(TEquipment.T_EQUIPMENT.STATUS.eq(Integer.valueOf(tEquipmentQuery.getStatus())));
         }
+        if (StringUtils.isNotEmpty(tEquipmentQuery.getLeadingPerson())) {
+            conditions.add(TEquipment.T_EQUIPMENT.LEADING_PSERSON.eq(tEquipmentQuery.getLeadingPerson()));
+        }
         if (StringUtils.isNotEmpty(tEquipmentQuery.getEquipType())) {
             conditions.add(TEquipment.T_EQUIPMENT.EQUIP_TYPE.eq(tEquipmentQuery.getEquipType()));
         }

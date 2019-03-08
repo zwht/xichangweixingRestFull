@@ -256,6 +256,7 @@ public class TArmsService {
         tArmsVO.setAttachment(String.valueOf(pageDatum.getAttachment()));
         tArmsVO.setReadCount(String.valueOf(pageDatum.getReadCount()));
         tArmsVO.setStatus(String.valueOf(pageDatum.getStatus()));
+        tArmsVO.setFlag(String.valueOf(pageDatum.getFlag()));
         tArmsVO.setCreateTime(DateUtils.format(pageDatum.getCreateTime()));
         tArmsVO.setUpdateTime(DateUtils.format(pageDatum.getUpdateTime()));
         TUserRecord tUserRecord = this.userDao.findById(pageDatum.getUpdateUser());
