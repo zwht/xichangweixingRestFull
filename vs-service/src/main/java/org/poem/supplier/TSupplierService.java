@@ -1,5 +1,6 @@
 package org.poem.supplier;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
@@ -217,14 +218,7 @@ public class TSupplierService {
      * @return
      */
     private TSupplierDataContainerVO getTSupplierDataContainerVO() {
-        List<CAdminDivisionRecord> tDivisionRecords = this.divisionDao.findByCondition(CAdminDivision.C_ADMIN_DIVISION.ID.isNotNull());
-        Map<String, Long> map = Maps.newHashMap();
-        for (CAdminDivisionRecord tDivisionRecord : tDivisionRecords) {
-            map.put(tDivisionRecord.getProvinceName() + tDivisionRecord.getCityName(), tDivisionRecord.getCityCode());
-        }
         TSupplierDataContainerVO vo = new TSupplierDataContainerVO();
-        vo.setRegion(map);
-
         Map<String, Long> maps = Maps.newHashMap();
         List<CommonVO> commonVOS = supplierTypeService.getAll();
         for (CommonVO commonVO : commonVOS) {
@@ -241,46 +235,48 @@ public class TSupplierService {
      * @param userId
      * @return
      */
-    public List<String> importData(List<TSupplierImportVO> data, Long userId) {
+    public List<String> importData(List<JSONObject> data, Long userId) {
+        List<String> strings = Lists.newArrayList();
         TSupplierDataContainerVO vo = getTSupplierDataContainerVO();
         List<String> message = Lists.newArrayList();
         List<TSupplierRecord> records = Lists.newArrayList();
-        for (TSupplierImportVO tEquipmentVO : data) {
+        for (JSONObject datum : data) {
             TSupplierRecord record = new TSupplierRecord();
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
-            record.setName(tEquipmentVO.getName());
-            record.setAddress(tEquipmentVO.getAddress());
-            record.setSocialCreditCode(tEquipmentVO.getSocialCreditCode());
-            record.setRegistDate(DateUtils.formatTimestamp(tEquipmentVO.getRegistDate()));
-            record.setLegalPerson(tEquipmentVO.getLegalPerson());
-            record.setLegalPersonName(tEquipmentVO.getLegalPersonName());
-            record.setContactsUseIdnum(tEquipmentVO.getContactsUseIdnum());
-            record.setContactsUserName(tEquipmentVO.getContactsUserName());
-            record.setPhone(tEquipmentVO.getPhone());
-            record.setRemark(tEquipmentVO.getRemark());
+            record.setName(datum.getString("name"));
+            record.setAddress(datum.getString("address"));
+            record.setSocialCreditCode(datum.getString("socialCreditCode"));
+            record.setRegistDate(DateUtils.formatTimestamp(datum.getString("registDate")));
+            record.setLegalPerson(datum.getString("legalPerson"));
+            record.setLegalPersonName(datum.getString("legalPersonName"));
+            record.setContactsUseIdnum(datum.getString("contactsUseIdnum"));
+            record.setContactsUserName(datum.getString("contactsUserName"));
+            record.setPhone(datum.getString("phone"));
+            record.setRemark(datum.getString("remark"));
             record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             record.setUpdateUser(userId);
 
-            if (vo.getRegion().containsKey(tEquipmentVO.getRegion())) {
-                record.setRegion(String.valueOf(vo.getRegion().get(tEquipmentVO.getRegion())));
-            } else {
-                message.add(tEquipmentVO.getRegion() + "在系统中不存在。");
-            }
-            if (vo.getTypeMap().containsKey(tEquipmentVO.getTypeName())){
-                record.setType(vo.getTypeMap().get(tEquipmentVO.getTypeName()));
+            record.setRegion(datum.getString("region"));
+            if (vo.getTypeMap().containsKey(datum.getString("typeName"))){
+                record.setType(vo.getTypeMap().get(datum.getString("typeName")));
             }else{
-                message.add(tEquipmentVO.getTypeName() + "在系统中不存在。");
+                message.add(datum.getString("typeName") + "在系统中不存在。");
             }
-            records.add(record);
+            if (CollectionUtils.isEmpty(message)) {
+                records.add(record);
+            } else {
+                strings.addAll(message);
+            }
         }
-        if (CollectionUtils.isEmpty(message)){
+
+        if (CollectionUtils.isNotEmpty(records) && CollectionUtils.isEmpty(strings)) {
             this.supplierDao.insert(records);
         }
-        return null;
+        return strings;
     }
 
     /**

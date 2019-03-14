@@ -83,7 +83,7 @@ public class TDataDownloadController {
      */
     @ApiOperation(value = "删除", httpMethod = "POST")
     @PostMapping("/delete")
-    public ResultVO<String> delete(Long[] ids, HttpServletRequest request) {
+    public ResultVO<String> delete(@RequestBody Long[] ids, HttpServletRequest request) {
         logger.info("TDataDownloadController:delete " + JSONObject.toJSONString(ids));
         return this.tDataDownloadService.deleteByIDs(Arrays.asList(ids));
     }

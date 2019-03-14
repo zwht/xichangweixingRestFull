@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TQualityDealRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TQualityDeal extends TableImpl<TQualityDealRecord> {
 
-    private static final long serialVersionUID = -1655327439;
+    private static final long serialVersionUID = 786160986;
 
     /**
      * The reference instance of <code>public.t_quality_deal</code>
@@ -114,6 +114,11 @@ public class TQualityDeal extends TableImpl<TQualityDealRecord> {
      * The column <code>public.t_quality_deal.flag</code>. 标识
      */
     public final TableField<TQualityDealRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_quality_deal.file_url</code>. 文件
+     */
+    public final TableField<TQualityDealRecord, String> FILE_URL = createField("file_url", org.jooq.impl.SQLDataType.VARCHAR(850), this, "文件");
 
     /**
      * Create a <code>public.t_quality_deal</code> table reference

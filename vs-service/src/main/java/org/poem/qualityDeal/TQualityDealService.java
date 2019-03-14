@@ -68,6 +68,7 @@ public class TQualityDealService {
         tSupplierVO.setUpdateTime(DateUtils.format(t.getUpdateTime()));
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
         tSupplierVO.setFlag(String.valueOf(t.getFlag()));
+        tSupplierVO.setFileUrl(t.getFileUrl());
         tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(userMap.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(userMap.get(t.getCreateUser()));
@@ -115,6 +116,7 @@ public class TQualityDealService {
         }
         record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
         record.setMaterials(tEquipmentVO.getMaterials());
+        record.setFileUrl(tEquipmentVO.getFileUrl());
         record.setDealEndTime(DateUtils.formatTimestamp(tEquipmentVO.getDealEndTime()));
         record.setDealStartTime(DateUtils.formatTimestamp(tEquipmentVO.getDealStartTime()));
         record.setRemark(tEquipmentVO.getRemark());

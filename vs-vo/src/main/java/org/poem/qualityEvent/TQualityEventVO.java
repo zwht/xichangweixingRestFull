@@ -64,6 +64,17 @@ public class TQualityEventVO {
     @ApiModelProperty(value = "标识")
     private String flag;
 
+    @ApiModelProperty(value = "文件")
+    private String fileUrl;
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
     public String getSupplierName() {
         return supplierName;
     }

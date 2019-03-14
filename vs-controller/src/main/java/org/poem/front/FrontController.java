@@ -77,6 +77,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -327,8 +328,13 @@ public class FrontController {
      */
     @ApiOperation(value = "根据id导出装备", httpMethod = "GET")
     @GetMapping("/exportEquipmentById")
-    public void exportEquipmentById(Long[] ids, HttpServletResponse response) {
-        List<TEquipmentExportVO> tEquipmentExportVOS = this.tEquipmentService.exportByIds(Arrays.asList(ids));
+    public void exportEquipmentById(String str1, HttpServletResponse response) {
+        String[] isda=str1.split(",");
+        List<Long> ids = new ArrayList<>();
+        for(int i=0;i<isda.length;i++){
+            ids.add(Long.parseLong(isda[i]));
+        }
+        List<TEquipmentExportVO> tEquipmentExportVOS = this.tEquipmentService.exportByIds(ids);
         exportTEquipmentExportVO(tEquipmentExportVOS, response);
     }
 
@@ -423,9 +429,13 @@ public class FrontController {
      */
     @ApiOperation(value = "根据id导出供应商", httpMethod = "GET")
     @GetMapping("/exportSupplierByIds")
-    public void exportSupplierByIds(Long[] ids, HttpServletResponse response) {
-        logger.info("FrontController:getAllByQuery " + JSONObject.toJSONString(ids));
-        List<TSupplierExportVO> vos = this.tSupplierService.exportById(Arrays.asList(ids));
+    public void exportSupplierByIds(String str1, HttpServletResponse response) {
+        String[] isda=str1.split(",");
+        List<Long> ids = new ArrayList<>();
+        for(int i=0;i<isda.length;i++){
+            ids.add(Long.parseLong(isda[i]));
+        }
+        List<TSupplierExportVO> vos = this.tSupplierService.exportById(ids);
         exportSupplier(vos, response);
     }
 
@@ -503,9 +513,13 @@ public class FrontController {
      */
     @ApiOperation(value = "根据id导出投标机构", httpMethod = "GET")
     @GetMapping("/exportOrgationByIds")
-    public void exportOrgationByIds(Long[] ids, HttpServletResponse response) {
-        logger.info("FrontController:exportOrgationByIds " + JSONObject.toJSONString(ids));
-        List<TenderOrgationExportVO> vos = this.tTenderOrgationService.exportById(Arrays.asList(ids));
+    public void exportOrgationByIds(String  str1, HttpServletResponse response) {
+        String[] isda=str1.split(",");
+        List<Long> ids = new ArrayList<>();
+        for(int i=0;i<isda.length;i++){
+            ids.add(Long.parseLong(isda[i]));
+        }
+        List<TenderOrgationExportVO> vos = this.tTenderOrgationService.exportById(ids);
         exportOrgation(vos, response);
     }
 

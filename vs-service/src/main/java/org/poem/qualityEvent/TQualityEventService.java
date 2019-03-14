@@ -86,6 +86,7 @@ public class TQualityEventService {
         tSupplierVO.setDepartId(String.valueOf(t.getDepartId()));
         tSupplierVO.setDepartName(departMap.get(t.getDepartId()));
         tSupplierVO.setRemark(t.getRemark());
+        tSupplierVO.setFileUrl(t.getFileUrl());
         tSupplierVO.setTop(String.valueOf(t.getTop()));
         tSupplierVO.setSupplierId(String.valueOf(t.getSupplierId()));
         tSupplierVO.setSupplierName(supplier.get(t.getSupplierId()));
@@ -143,6 +144,7 @@ public class TQualityEventService {
         record.setMaterials(tEquipmentVO.getMaterials());
         record.setOccurrenceTime(DateUtils.formatTimestamp(tEquipmentVO.getOccurrenceTime()));
         record.setName(tEquipmentVO.getName());
+        record.setFileUrl(tEquipmentVO.getFileUrl());
         record.setRemark(tEquipmentVO.getRemark());
         record.setStatus(StringUtils.isEmpty(tEquipmentVO.getStatus()) ? 0 : Integer.valueOf(tEquipmentVO.getStatus()));
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));

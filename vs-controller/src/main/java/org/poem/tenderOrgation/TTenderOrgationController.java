@@ -10,6 +10,7 @@ import org.poem.RequestUtil;
 import org.poem.authVO.PageVO;
 import org.poem.authVO.ResultVO;
 import org.poem.constant.ErrorCode;
+import org.poem.equipment.RedisKeyVO;
 import org.poem.excel.NExcelUtils;
 import org.poem.excel.vo.ExcelVO;
 import org.poem.tenderOrgation.vo.TenderOrgationImportVO;
@@ -190,10 +191,12 @@ public class TTenderOrgationController {
      */
     @ApiOperation(value = "第二步，验证导入数据正确性和导入数据", httpMethod = "POST")
     @PostMapping("/importData")
-    public ResultVO<List<String>> importData(String redisKey, HttpServletRequest request) {
-        ExcelVO<TenderOrgationImportVO> excelVO = new ExcelVO<TenderOrgationImportVO>();
-        excelVO = redisUtil.get(redisKey, excelVO.getClass());
-        List<String> message = tSupplierService.importData(excelVO.getData(), RequestUtil.getUserId(request));
+    public ResultVO<List<String>> importData(
+            @RequestBody RedisKeyVO redisKeyVO , HttpServletRequest request) {
+        ExcelVO<JSONObject> excelVO = new ExcelVO<JSONObject>();
+        excelVO = redisUtil.get(redisKeyVO.getRedisKey(), excelVO.getClass());
+        List<String> message = tSupplierService.importData(excelVO.getData(),
+                RequestUtil.getUserId(request));
         if (CollectionUtils.isNotEmpty(message)){
             return new ResultVO<>(-1, message, "还有错误。");
         }

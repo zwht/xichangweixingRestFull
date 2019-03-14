@@ -40,7 +40,7 @@ import org.poem.jooq.tables.records.TQualityEventRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TQualityEvent extends TableImpl<TQualityEventRecord> {
 
-    private static final long serialVersionUID = 649374165;
+    private static final long serialVersionUID = 1643571548;
 
     /**
      * The reference instance of <code>public.t_quality_event</code>
@@ -129,6 +129,11 @@ public class TQualityEvent extends TableImpl<TQualityEventRecord> {
      * The column <code>public.t_quality_event.flag</code>. 标识
      */
     public final TableField<TQualityEventRecord, Boolean> FLAG = createField("flag", org.jooq.impl.SQLDataType.BOOLEAN, this, "标识");
+
+    /**
+     * The column <code>public.t_quality_event.file_url</code>. 文件
+     */
+    public final TableField<TQualityEventRecord, String> FILE_URL = createField("file_url", org.jooq.impl.SQLDataType.VARCHAR(850), this, "文件");
 
     /**
      * Create a <code>public.t_quality_event</code> table reference

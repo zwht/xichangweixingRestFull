@@ -1,5 +1,6 @@
 package org.poem.tenderOrgation;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
@@ -218,42 +219,47 @@ public class TTenderOrgationService {
      * @param userId
      * @return
      */
-    public List<String> importData(List<TenderOrgationImportVO> data, Long userId) {
-        TenderOrgationContainerVO vo = getTenderOrgationContainerVO();
+    public List<String> importData(List<JSONObject> data, Long userId) {
+        List<String> strings = Lists.newArrayList();
         List<String> message = Lists.newArrayList();
         List<TTenderOrgationRecord> records = Lists.newArrayList();
-        for (TenderOrgationImportVO tEquipmentVO : data) {
+        for (JSONObject datum : data) {
             TTenderOrgationRecord record = new TTenderOrgationRecord();
             record.setId(idService.getId());
             record.setCreateTime(new Timestamp(System.currentTimeMillis()));
             record.setCreateUser(userId);
             record.setStatus(0);
             record.setFlag(true);
-            record.setCode(tEquipmentVO.getCode());
-            record.setName(tEquipmentVO.getName());
-            record.setAddress(tEquipmentVO.getAddress());
-            record.setSocialCreditCode(tEquipmentVO.getSocialCreditCode());
-            record.setRegistDate(DateUtils.formatTimestamp(tEquipmentVO.getRegistDate()));
-            record.setLegalPerson(tEquipmentVO.getLegalPerson());
-            record.setLegalPersonName(tEquipmentVO.getLegalPersonName());
-            record.setContactsUseIdnum(tEquipmentVO.getContactsUseIdnum());
-            record.setContactsUserName(tEquipmentVO.getContactsUserName());
-            record.setPhone(tEquipmentVO.getPhone());
-            record.setRemark(tEquipmentVO.getRemark());
-            record.setGrade(Long.valueOf(tEquipmentVO.getGrade()));
+            record.setCode(datum.getString("code"));
+            record.setName(datum.getString("name"));
+            record.setAddress(datum.getString("address"));
+            record.setSocialCreditCode(datum.getString("socialCreditCode"));
+            record.setRegistDate(DateUtils.formatTimestamp(datum.getString("registDate")));
+            record.setLegalPerson(datum.getString("legalPerson"));
+            record.setLegalPersonName(datum.getString("legalPersonName"));
+            record.setContactsUseIdnum(datum.getString("contactsUseIdnum"));
+            record.setContactsUserName(datum.getString("contactsUserName"));
+            record.setPhone(datum.getString("phone"));
+            record.setRemark(datum.getString("remark"));
+            try {
+                record.setGrade(Long.valueOf(datum.getString("grade")));
+            }catch (Exception e){
+
+            }
             record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             record.setUpdateUser(userId);
-            if (vo.getRegion().containsKey(tEquipmentVO.getRegion())) {
-                record.setRegion(String.valueOf(vo.getRegion().get(tEquipmentVO.getRegion())));
+            record.setRegion(datum.getString("region"));
+            if (CollectionUtils.isEmpty(message)) {
+                records.add(record);
             } else {
-                message.add(tEquipmentVO.getRegion() + "在系统中不存在。");
+                strings.addAll(message);
             }
-            records.add(record);
         }
-        if (CollectionUtils.isEmpty(message)) {
+
+        if (CollectionUtils.isNotEmpty(records) && CollectionUtils.isEmpty(strings)) {
             this.tTenderOrgationDao.insert(records);
         }
-        return message;
+        return strings;
     }
 
 

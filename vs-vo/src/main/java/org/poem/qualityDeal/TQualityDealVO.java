@@ -19,6 +19,9 @@ public class TQualityDealVO {
     @ApiModelProperty(value = "供应商")
     private String supplierName;
 
+    @ApiModelProperty(value = "文件")
+    private String fileUrl;
+
     @ApiModelProperty(value = "涉及物料")
     private String materials;
 
@@ -48,6 +51,14 @@ public class TQualityDealVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
 
     public String getId() {
         return id;
