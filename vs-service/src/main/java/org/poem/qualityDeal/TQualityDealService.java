@@ -69,6 +69,7 @@ public class TQualityDealService {
         tSupplierVO.setStatus(String.valueOf(t.getStatus()));
         tSupplierVO.setFlag(String.valueOf(t.getFlag()));
         tSupplierVO.setFileUrl(t.getFileUrl());
+        tSupplierVO.setHandle(t.getHandle());
         tSupplierVO.setCreateTime(DateUtils.format(t.getCreateTime()));
         tSupplierVO.setUpdateUser(userMap.get(t.getUpdateUser()));
         tSupplierVO.setCreateUser(userMap.get(t.getCreateUser()));
@@ -111,12 +112,14 @@ public class TQualityDealService {
             record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             record.setUpdateUser(userId);
             record.setStatus(0);
+            record.setHandle("1");
             record.setFlag(true);
             save = true;
         }
         record.setSupplierId(Long.valueOf(tEquipmentVO.getSupplierId()));
         record.setMaterials(tEquipmentVO.getMaterials());
         record.setFileUrl(tEquipmentVO.getFileUrl());
+        record.setHandle(tEquipmentVO.getHandle());
         record.setDealEndTime(DateUtils.formatTimestamp(tEquipmentVO.getDealEndTime()));
         record.setDealStartTime(DateUtils.formatTimestamp(tEquipmentVO.getDealStartTime()));
         record.setRemark(tEquipmentVO.getRemark());
@@ -178,6 +181,18 @@ public class TQualityDealService {
                 }).collect(Collectors.toList())
         );
 
+    }
+
+    public ResultVO<String> hdSet(Long id, Long userId, String key) {
+        TQualityDealRecord record = this.tQualityDealDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setHandle(key);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityDealDao.update(record);
+        return new ResultVO<>("操作完成");
     }
 
 

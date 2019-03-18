@@ -146,7 +146,7 @@ public class TUserService implements UserInfoService{
      * @param userId   用户id
      * @return
      */
-    public ResultVO<String> updatePassword(String password, String userId) {
+    public ResultVO<String> updatePassword(String password, String userId, String oldPassword) {
         if (StringUtils.isEmpty(password)) {
             return new ResultVO<>(2,null,"password不能为空");
         }
@@ -154,6 +154,10 @@ public class TUserService implements UserInfoService{
         if (tUser == null) {
             return new ResultVO<>(2,null,"查无此人。");
         }
+        if(!tUser.getPassword().equals(oldPassword)){
+            return new ResultVO<>(2,null,"原始密码错误");
+        }
+
         tUser.setPassword(password);
         this.userDao.update(tUser);
         return new ResultVO<>("修改成功");
@@ -170,6 +174,10 @@ public class TUserService implements UserInfoService{
         List<Condition> conditions = Lists.newArrayList();
         if (StringUtils.isNotEmpty(queryVO.getName())) {
             conditions.add(TUser.T_USER.NAME.like("%" + queryVO.getName() + "%"));
+        }
+
+        if (StringUtils.isNotEmpty(queryVO.getPhone())) {
+            conditions.add(TUser.T_USER.PHONE.eq(queryVO.getPhone()));
         }
         if (queryVO.getRoleId() != null) {
             conditions.add(TUser.T_USER.ROLE_ID.eq(queryVO.getRoleId()));

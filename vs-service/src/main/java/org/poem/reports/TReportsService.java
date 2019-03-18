@@ -136,20 +136,19 @@ public class TReportsService {
             tNewsRecord.setStatus(1);
             save = true;
         }
+        tNewsRecord.setContent(tNewsVO.getContent());
+        tNewsRecord.setPhone(tNewsVO.getPhone());
+        tNewsRecord.setWorks(tNewsVO.getWorks());
         tNewsRecord.setUpdateUser(userId);
         tNewsRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         tNewsRecord.setReportName(tNewsVO.getReportName());
-        tNewsRecord.setReportTime(DateUtils.formatTimestamp(tNewsVO.getReportTime()));
-        tNewsRecord.setDealTime(DateUtils.formatTimestamp(tNewsVO.getDealTime()));
+        tNewsRecord.setReportTime(new Timestamp(System.currentTimeMillis()));
+        //tNewsRecord.setDealTime(DateUtils.formatTimestamp(tNewsVO.getDealTime()));
         tNewsRecord.setTitle(tNewsVO.getTitle());
         tNewsRecord.setFlag(true);
 
         if (save) {
             this.tReportsDao.insert(tNewsRecord);
-            String content = "用户" + userDao.findById(userId).getName() +
-                    "于" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss")
-                    + "新增举报。";
-            systemNoticeService.saveSystemNotice("新增 举报",userId, content);
         } else {
             this.tReportsDao.update(tNewsRecord);
         }
@@ -169,7 +168,7 @@ public class TReportsService {
             return new ResultVO<>(-1, "没记录");
         }
         s.setSuggestion(tNewsVO.getSuggestion());
-        s.setStatus(0);
+        s.setStatus(1);
         s.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         s.setUpdateUser(userId);
         this.tReportsDao.update(s);

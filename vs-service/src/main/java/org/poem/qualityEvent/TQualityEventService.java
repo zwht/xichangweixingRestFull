@@ -87,6 +87,7 @@ public class TQualityEventService {
         tSupplierVO.setDepartName(departMap.get(t.getDepartId()));
         tSupplierVO.setRemark(t.getRemark());
         tSupplierVO.setFileUrl(t.getFileUrl());
+        tSupplierVO.setHandle(t.getHandle());
         tSupplierVO.setTop(String.valueOf(t.getTop()));
         tSupplierVO.setSupplierId(String.valueOf(t.getSupplierId()));
         tSupplierVO.setSupplierName(supplier.get(t.getSupplierId()));
@@ -135,6 +136,7 @@ public class TQualityEventService {
             record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             record.setUpdateUser(userId);
             record.setStatus(0);
+            record.setHandle("1");
             record.setFlag(false);
             record.setTop(false);
             save = true;
@@ -145,6 +147,7 @@ public class TQualityEventService {
         record.setOccurrenceTime(DateUtils.formatTimestamp(tEquipmentVO.getOccurrenceTime()));
         record.setName(tEquipmentVO.getName());
         record.setFileUrl(tEquipmentVO.getFileUrl());
+        record.setHandle(tEquipmentVO.getHandle());
         record.setRemark(tEquipmentVO.getRemark());
         record.setStatus(StringUtils.isEmpty(tEquipmentVO.getStatus()) ? 0 : Integer.valueOf(tEquipmentVO.getStatus()));
         record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
@@ -208,7 +211,17 @@ public class TQualityEventService {
 
     }
 
-
+    public ResultVO<String> hdSet(Long id, Long userId, String key) {
+        TQualityEventRecord record = this.tQualityEventDao.findById(id);
+        if (record == null) {
+            return new ResultVO<>(-1, "没有记录");
+        }
+        record.setHandle(key);
+        record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        record.setUpdateUser(userId);
+        this.tQualityEventDao.update(record);
+        return new ResultVO<>("操作完成");
+    }
     /**
      * 置顶
      *

@@ -22,6 +22,9 @@ public class TQualityDealVO {
     @ApiModelProperty(value = "文件")
     private String fileUrl;
 
+    @ApiModelProperty(value = "处理状态")
+    private String handle;
+
     @ApiModelProperty(value = "涉及物料")
     private String materials;
 
@@ -51,6 +54,14 @@ public class TQualityDealVO {
 
     @ApiModelProperty(value = "标识")
     private String flag;
+
+    public String getHandle() {
+        return handle;
+    }
+
+    public void setHandle(String handle) {
+        this.handle = handle;
+    }
 
     public String getFileUrl() {
         return fileUrl;

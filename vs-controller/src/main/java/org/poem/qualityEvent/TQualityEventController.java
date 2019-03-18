@@ -86,6 +86,19 @@ public class TQualityEventController {
     }
 
     /**
+     * 修改处理状态
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "设置处理状态", httpMethod = "POST")
+    @PostMapping("/hdSet")
+    public ResultVO<String> hdSet(Long id, String key, HttpServletRequest request) {
+        logger.info("TQualityDealController:top");
+        return this.tSupplierService.hdSet(id, RequestUtil.getUserId(request), key);
+    }
+
+    /**
      * 置顶
      * @param id
      * @param request

@@ -12,11 +12,22 @@ public class UserQueryVO {
     @ApiModelProperty("名字")
     public String name;
 
+    @ApiModelProperty("电话")
+    public String phone;
+
     @ApiModelProperty(value = "角色")
     private Long roleId;
 
     @ApiModelProperty(value = "状态")
     private Integer status;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getName() {
         return name;

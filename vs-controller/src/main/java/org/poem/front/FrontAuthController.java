@@ -101,9 +101,10 @@ public class FrontAuthController {
      */
     @ApiOperation(value = "修改密码", httpMethod = "POST")
     @PostMapping("/updatePassword")
-    public ResultVO<String> updatePassword(@ApiParam(value = "用户密码") String password, String userId) {
+    public ResultVO<String> updatePassword(@ApiParam(value = "用户密码") String password,
+                                           String userId, String lodPassword) {
         logger.info("TUserController: updatePassword");
         logger.info("" + JSONObject.toJSONString(password));
-        return userService.updatePassword(password, userId);
+        return userService.updatePassword(password, userId, lodPassword);
     }
 }

@@ -93,12 +93,26 @@ public class TQualityDealController {
      * @param request
      * @return
      */
-    @ApiOperation(value = "置顶", httpMethod = "POST")
+    @ApiOperation(value = "设置处理状态", httpMethod = "POST")
     @PostMapping("/top")
     public ResultVO<String> top(Long id, HttpServletRequest request) {
         logger.info("TQualityDealController:top");
         return this.tSupplierService.top(id, RequestUtil.getUserId(request));
     }
+
+    /**
+     * 修改处理状态
+     * @param id
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "置顶", httpMethod = "POST")
+    @PostMapping("/hdSet")
+    public ResultVO<String> hdSet(Long id, String key, HttpServletRequest request) {
+        logger.info("TQualityDealController:top");
+        return this.tSupplierService.hdSet(id, RequestUtil.getUserId(request), key);
+    }
+
 
     /**
      * 发布

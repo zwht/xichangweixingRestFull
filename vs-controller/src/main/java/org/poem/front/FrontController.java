@@ -49,6 +49,8 @@ import org.poem.qualityEvent.TQualityEventVO;
 import org.poem.qualityNotice.TQualityNoticeQueryVO;
 import org.poem.qualityNotice.TQualityNoticeService;
 import org.poem.qualityNotice.TQualityNoticeVO;
+import org.poem.reports.TReportsService;
+import org.poem.reports.TReportsVO;
 import org.poem.roomReservation.TRoomReservationService;
 import org.poem.roomReservation.TRoomReservationVO;
 import org.poem.supplier.TSupplierQueryVO;
@@ -94,6 +96,9 @@ public class FrontController {
 
     @Autowired
     private TNewsService tNewsService;
+
+    @Autowired
+    private TReportsService tReportsService;
 
     @Autowired
     private TPartyService tPartyService;
@@ -503,6 +508,13 @@ public class FrontController {
         logger.info("FrontController:exportOrgationByQuery " + JSONObject.toJSONString(tEquipmentQuery));
         List<TenderOrgationExportVO> vos = this.tTenderOrgationService.exportByCondition(tEquipmentQuery);
         exportOrgation(vos, httpServletResponse);
+    }
+
+    @ApiOperation(value = "更新/添加", httpMethod = "POST")
+    @PostMapping("/reports/addAndUpdate")
+    public ResultVO<String> addAndUpdate(@RequestBody TReportsVO tNewsVO, HttpServletRequest request) {
+        logger.info("TReportsController:addAndUpdate :" + JSONObject.toJSONString(tNewsVO));
+        return this.tReportsService.addAndUpdate(tNewsVO, RequestUtil.getUserId(request));
     }
 
 

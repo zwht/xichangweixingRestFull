@@ -75,9 +75,9 @@ public class FileController {
                 if (file == null || file.isEmpty() || StringUtils.isEmpty(file.getOriginalFilename())) {
                     continue;
                 }
-                if (!(file.getOriginalFilename().endsWith(".xlsx") || file.getOriginalFilename().endsWith(".csv"))) {
-                    return new ResultVO<>(ErrorCode.ParamError.getErrorCode(), null, "上传文件格式不合法！");
-                }
+//                if (!(file.getOriginalFilename().endsWith(".xlsx") || file.getOriginalFilename().endsWith(".csv"))) {
+//                    return new ResultVO<>(ErrorCode.ParamError.getErrorCode(), null, "上传文件格式不合法！");
+//                }
                 if (file.getBytes().length > 10 * 1024 * 1028) {
                     return new ResultVO<>(-1, null, "文件过大， 不能超过10M.");
                 }
